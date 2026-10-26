@@ -1,0 +1,16 @@
+{
+  "url": "http://127.0.0.1:59226",
+  "checks": [
+    "Actual fixed reference loaded:16,384samples",
+    "Actual trained hybrid reconstruction, synchronized traces and selected-target inference",
+    "Mixture/target classification follows trace; residual remains unassigned",
+    "All three actual SigMF+report ZIP exports return200",
+    "Absolute numeric crop and full-source reset recompute correct sample bounds",
+    "Pointer waterfall selection yields valid source sample interval and frequency",
+    "390px mobile layout has no horizontal overflow",
+    "Actual SigMF file/sidecar upload preserves sample count and source SHA256",
+    "Actual raw int16 upload uses explicit rate/frequency/encoding and returns finite measured views"
+  ],
+  "page_errors": [],
+  "ok": true
+}

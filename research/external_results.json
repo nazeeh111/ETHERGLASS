@@ -1,0 +1,960 @@
+{
+  "policy": "External inputs are test-only. No model or threshold changes based on these outcomes.",
+  "radiopile": {
+    "sha256": "01cb034734bf0f4729fb2650486be5149e9e2e4bca1f83146f4d7e582894256e",
+    "windows": 40,
+    "samples_per_window": 500,
+    "independent_sessions": "unknown; adjacent rows may be correlated",
+    "results": [
+      {
+        "index_in_excerpt": 0,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -60.29698899123229
+      },
+      {
+        "index_in_excerpt": 1,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -62.26790689389326
+      },
+      {
+        "index_in_excerpt": 2,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -62.59022542159147
+      },
+      {
+        "index_in_excerpt": 3,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -61.360542798098045
+      },
+      {
+        "index_in_excerpt": 4,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -63.193021077146305
+      },
+      {
+        "index_in_excerpt": 5,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -62.51010178274904
+      },
+      {
+        "index_in_excerpt": 6,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -61.978866120632716
+      },
+      {
+        "index_in_excerpt": 7,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -63.1965654871503
+      },
+      {
+        "index_in_excerpt": 8,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -50.918903032652864
+      },
+      {
+        "index_in_excerpt": 9,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -59.432365940391485
+      },
+      {
+        "index_in_excerpt": 10,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -60.00222322123974
+      },
+      {
+        "index_in_excerpt": 11,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -51.06663373944733
+      },
+      {
+        "index_in_excerpt": 12,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -59.25616719128059
+      },
+      {
+        "index_in_excerpt": 13,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -59.61612966937291
+      },
+      {
+        "index_in_excerpt": 14,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -58.778084896787334
+      },
+      {
+        "index_in_excerpt": 15,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -59.89656241893874
+      },
+      {
+        "index_in_excerpt": 16,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -60.92622384985649
+      },
+      {
+        "index_in_excerpt": 17,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -83.1046477128862
+      },
+      {
+        "index_in_excerpt": 18,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -63.153048063339995
+      },
+      {
+        "index_in_excerpt": 19,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -63.53376018281054
+      },
+      {
+        "index_in_excerpt": 20,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -63.41364588935261
+      },
+      {
+        "index_in_excerpt": 21,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -63.63566946174952
+      },
+      {
+        "index_in_excerpt": 22,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -63.970722121146714
+      },
+      {
+        "index_in_excerpt": 23,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -63.12667532265766
+      },
+      {
+        "index_in_excerpt": 24,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -78.72294193864563
+      },
+      {
+        "index_in_excerpt": 25,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -58.51905063445513
+      },
+      {
+        "index_in_excerpt": 26,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -58.013819533953416
+      },
+      {
+        "index_in_excerpt": 27,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -58.090621415270924
+      },
+      {
+        "index_in_excerpt": 28,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -58.49146362373191
+      },
+      {
+        "index_in_excerpt": 29,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -58.65321594427856
+      },
+      {
+        "index_in_excerpt": 30,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -58.35194893050121
+      },
+      {
+        "index_in_excerpt": 31,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -58.827519924823754
+      },
+      {
+        "index_in_excerpt": 32,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -48.61038762565815
+      },
+      {
+        "index_in_excerpt": 33,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -48.73205642694838
+      },
+      {
+        "index_in_excerpt": 34,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -48.91398787128615
+      },
+      {
+        "index_in_excerpt": 35,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -48.75185008138552
+      },
+      {
+        "index_in_excerpt": 36,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -48.7971604746962
+      },
+      {
+        "index_in_excerpt": 37,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -48.754717632281334
+      },
+      {
+        "index_in_excerpt": 38,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -48.723408578125074
+      },
+      {
+        "index_in_excerpt": 39,
+        "finite_report": true,
+        "classification": {
+          "label": "unknown",
+          "confidence": 0.0,
+          "status": "unknown",
+          "reason": "Supply a symbol-rate prior for supported BPSK/QPSK recognition."
+        },
+        "peak_power_db": -48.804000448585555
+      }
+    ],
+    "scope": "Finite measured DSP and short-record abstention only. 500 samples <2048 classifier minimum; not a learned unknown-detection accuracy test."
+  },
+  "camras": {
+    "sha256": "962a45d420c0a05bbf5cdc7db3f4a1f81a200127028ec84cea41ccafc123b65b",
+    "samples": 65536,
+    "recording_sessions": 1,
+    "analysis_prior": "Hypothesized8samples/symbol, centered0Hz; true modulation and symbol rate unknown.",
+    "whole_capture_report_finite": true,
+    "classification_windows": [
+      {
+        "start_sample": 0,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 4.248354255291589e-18,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 2048,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 1.661604114086406e-14,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 4096,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 9.533165064847103e-13,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 6144,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 4.248354255291589e-18,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 8192,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 1.0560383313791572e-14,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 10240,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 6.599025552258133e-14,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 12288,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 1.2184875643334086e-16,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 14336,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 4.248354255291589e-18,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 16384,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 9.843126062559655e-18,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 18432,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 3.345815110669854e-17,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 20480,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 2.0690318819426898e-17,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 22528,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 4.248354255291589e-18,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 24576,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 3.802377719148773e-14,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 26624,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 1.1363711479942225e-13,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 28672,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 9.376420153646547e-14,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 30720,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 4.706245223291592e-15,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 32768,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 4.2374180345364245e-17,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 34816,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 1.466939615976855e-16,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 36864,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 4.248354255291589e-18,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 38912,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 3.5695104615264795e-17,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 40960,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 4.248354255291589e-18,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 43008,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 1.5798005028306458e-15,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 45056,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 2.0987513099873946e-17,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 47104,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 9.118026732622353e-16,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 49152,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 5.093313633473762e-18,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 51200,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 4.248354255291589e-18,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 53248,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 4.248354255291589e-18,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 55296,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 4.918698445890434e-16,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 57344,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 4.248354255291589e-18,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 59392,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 1.189407602080907e-15,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 61440,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 3.0055403559938106e-13,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      },
+      {
+        "start_sample": 63488,
+        "label": "unknown",
+        "confidence": 0.0,
+        "conditional_confidence": 1.0,
+        "status": "unknown",
+        "reason": "Outside calibrated PSK support or insufficient class certainty; abstaining.",
+        "support_score": 1.818840012596595e-16,
+        "support_threshold": 0.5,
+        "conditional_probabilities": {
+          "BPSK": 0.0,
+          "QPSK": 1.0
+        },
+        "scope": "First 2,048 samples of centered RRC BPSK/QPSK, beta\u22480.35, 6/8/10/12 samples/symbol. Finite synthetic unknown probes only."
+      }
+    ],
+    "accepted_windows": 0,
+    "separation_diagnostics": {
+      "method": "hybrid",
+      "sample_rate": 500000.0,
+      "symbol_rate": 62500.0,
+      "target_center_hz": 0.0,
+      "samples_per_symbol": 8.0,
+      "runtime_ms": 3038.3739579701796,
+      "frames": 67,
+      "mixture_consistency_max_abs": 0.0,
+      "target_power_fraction": 0.2947825624636491,
+      "median_spectral_gain": 0.0,
+      "scope": "Known-rate bandlimited PSK target amid sparse narrowband interference; no message decoding.",
+      "warning": null,
+      "residual_label": "Unassigned residual (interference + noise + reconstruction error)",
+      "uncertainty": "Separation quality is unknown without a clean reference; classification is independently gated.",
+      "end_to_end_runtime_ms": 3350.081874988973
+    },
+    "scope": "Actual-input numerical stability and conditional abstention; no clean reference, no separation quality or classification accuracy asserted."
+  }
+}

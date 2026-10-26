@@ -1,0 +1,31 @@
+{
+  "mixture": {
+    "si_sdr_db": -6.167652653863637,
+    "waveform_evm_pct": 89.74199891494825,
+    "nmse_db": 6.008895099085435,
+    "alignment_gain": 0.19823727836548077,
+    "alignment_phase_rad": -0.007840010817975218
+  },
+  "hybrid": {
+    "si_sdr_db": 15.553494730536581,
+    "waveform_evm_pct": 16.45745814707047,
+    "nmse_db": -15.670446456010636,
+    "alignment_gain": 1.0038408084954986,
+    "alignment_phase_rad": 0.0003128622742875235
+  },
+  "matched": {
+    "si_sdr_db": -2.687295448481954,
+    "waveform_evm_pct": 80.61881630093187,
+    "nmse_db": 2.058272579114558,
+    "alignment_gain": 0.37695144487475307,
+    "alignment_phase_rad": -0.003910979940429442
+  },
+  "notch": {
+    "si_sdr_db": 14.92299923234084,
+    "waveform_evm_pct": 17.65918029683408,
+    "nmse_db": -15.018072983318229,
+    "alignment_gain": 0.9825320785638982,
+    "alignment_phase_rad": -0.0007608524022039129
+  },
+  "demo_seed": 870001
+}

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#edece5">
+  <title>ETHERGLASS · RF Signal Observatory</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23272c2b'/%3E%3Cpath d='M7 8h18M7 16h13M7 24h18M10 4v24' stroke='%23edece5' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="masthead">
+      <a class="wordmark" href="/" aria-label="Etherglass observatory home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>ETHERGLASS<span class="edition">RESEARCH INSTRUMENT / 01</span></a>
+      <div class="masthead-right"><span class="live-dot"></span>OFFLINE REPLAY<span class="masthead-rule"></span><span>COMPLEX I/Q LABORATORY</span></div>
+    </header>
+
+    <div class="title-row">
+      <div><div class="eyebrow">OBSERVATION DESK</div><h1>The structure beneath<br><em>the interference.</em></h1></div>
+      <div class="intro"><p>Inspect a recording. Isolate a hypothesis.<br>Measure what survives.</p><span>LOCAL ANALYSIS · SOURCE-BOUND EVIDENCE</span></div>
+    </div>
+
+    <main class="workbench">
+      <aside class="sidebar">
+        <section class="side-section source-section">
+          <div class="section-index">01 / SOURCE</div>
+          <h2>Open an observation</h2>
+          <p class="side-copy">Replay the reference mixture or bring your own complex samples.</p>
+          <button type="button" id="demo-button" class="button button-primary"><span class="button-icon">↗</span> Load reference capture</button>
+          <div class="or-divider"><span>OR IMPORT A RECORDING</span></div>
+          <form id="import-form">
+            <label class="file-zone" for="data-file"><span class="file-icon" aria-hidden="true">⊕</span><strong id="file-name">Choose I/Q data</strong><span>.sigmf-data · .cf32 · .iq · .bin</span><input id="data-file" name="data_file" type="file" accept=".sigmf-data,.cf32,.iq,.bin,.raw,.c64,.dat" required></label>
+            <label class="field-label" for="meta-file">SigMF metadata <span>optional</span></label>
+            <input id="meta-file" name="meta_file" type="file" accept=".sigmf-meta,.json">
+            <div class="field-pair"><div><label class="field-label" for="sample-rate">Sample rate / Hz</label><input id="sample-rate" name="sample_rate" type="number" min="1" step="any" placeholder="1000000"></div><div><label class="field-label" for="center-frequency">RF center / Hz</label><input id="center-frequency" name="center_frequency" type="number" min="0" step="any" placeholder="0"></div></div>
+            <label class="field-label" for="datatype">Sample encoding</label><select id="datatype" name="datatype"><option value="cf32_le">Complex float32 · little endian</option><option value="cf32_be">Complex float32 · big endian</option><option value="ci16_le">Complex int16 · little endian</option><option value="ci16_be">Complex int16 · big endian</option><option value="ci8">Complex signed int8</option><option value="cu8">Complex unsigned int8</option></select>
+            <button class="button button-secondary" type="submit">Import and inspect <span>→</span></button>
+          </form>
+        </section>
+
+        <section class="side-section hypothesis-section">
+          <div class="section-index">02 / HYPOTHESIS</div>
+          <h2>Recover a component</h2>
+          <p class="side-copy">Specify the target's frequency and symbol rate. Separation relies on this prior.</p>
+          <form id="separate-form">
+            <label class="field-label" for="target-center">Target offset / Hz <span>from RF center</span></label><input id="target-center" type="number" value="0" step="any">
+            <label class="field-label" for="symbol-rate">Target symbol rate / baud</label><input id="symbol-rate" type="number" value="125000" min="1" step="any" required>
+            <label class="field-label" for="method">Reconstruction method</label><select id="method"><option value="hybrid">Hybrid · learned I/Q + DSP</option><option value="matched">Matched filter</option><option value="wiener">PSD Wiener filter</option><option value="notch">Adaptive notch filter</option><option value="unet">Small spectral U-Net baseline</option></select>
+            <button id="separate-button" class="button button-dark" type="submit" disabled>Separate selected interval <span>↗</span></button>
+          </form>
+          <div class="prior-note"><span>↳</span><p>Identifiability is a condition,<br>not a promise of the model.</p></div>
+        </section>
+
+        <section class="side-section provenance-section">
+          <div class="section-index">03 / PROVENANCE</div>
+          <dl id="provenance"><dt>Source</dt><dd>No recording loaded</dd><dt>Analysis</dt><dd>Waiting for samples</dd></dl>
+          <p class="permission-note">Use recordings you are permitted to analyze. This instrument does not decode private messages.</p>
+        </section>
+      </aside>
+
+      <div class="instrument">
+        <div class="capture-strip"><div class="capture-name"><span class="status-dot" id="capture-dot"></span><strong id="capture-name">NO CAPTURE LOADED</strong></div><div id="capture-stats">AWAITING COMPLEX SAMPLES</div><button type="button" id="export-button" class="text-button" disabled>Export evidence <span>↗</span></button></div>
+        <div id="message" class="message" role="status" aria-live="polite" hidden></div>
+        <div id="warnings" class="warnings" hidden></div>
+        <section class="panel spectrogram-panel">
+          <div class="panel-heading"><div><span class="panel-number">A</span><h2>Time–frequency field</h2><span class="panel-subtitle">SPECTRAL POWER</span></div><div class="plot-controls"><span class="legend"><i class="legend-mixture"></i>Mixture</span><button type="button" id="reset-selection" class="text-button" disabled>Reset selection</button></div></div>
+          <div class="axis-top"><span id="frequency-caption">BASEBAND FREQUENCY / Hz</span><span id="power-caption">RELATIVE POWER / dB</span></div>
+          <div class="spectrum-frame"><canvas id="spectrum" aria-label="Power spectrum of the current recording" role="img"></canvas><div id="spectrum-empty" class="empty-plot">SPECTRUM WILL APPEAR HERE</div></div>
+          <div class="waterfall-frame"><canvas id="waterfall" tabindex="0" aria-label="Time-frequency waterfall. Drag to select a time interval and frequency; use numeric selection controls below for keyboard access." role="img"></canvas><div id="waterfall-empty" class="empty-waterfall"><div class="empty-reticle" aria-hidden="true"><i></i><i></i></div><h3>Every signal leaves a structure.</h3><p>Load a capture to reveal its time and frequency signature.</p></div><div class="waterfall-scale"><span>HIGH</span><i></i><span>LOW</span></div></div>
+          <div class="selection-strip"><div><span class="selection-symbol">⌖</span><span id="selection-summary">Drag the field to select an interval and target frequency</span></div><div class="selection-inputs"><label for="start-ms">START / ms</label><input id="start-ms" type="number" step="any" value="0" min="0" disabled><label for="stop-ms">STOP / ms</label><input id="stop-ms" type="number" step="any" value="0" min="0" disabled><button type="button" id="apply-selection" class="text-button" disabled>Apply</button></div></div>
+        </section>
+
+        <div class="lower-grid">
+          <section class="panel waveform-panel"><div class="panel-heading"><div><span class="panel-number">B</span><h2>Complex envelope</h2></div><div class="legend"><i class="legend-i"></i>I <i class="legend-q"></i>Q</div></div><div class="axis-top"><span id="waveform-time-caption">TIME / ms</span><span>SAMPLE AMPLITUDE</span></div><div class="waveform-frame"><canvas id="waveform" aria-label="In-phase and quadrature waveform of selected component" role="img"></canvas><span class="empty-plot" id="waveform-empty">NO SAMPLES</span></div><div class="trace-selector" role="group" aria-label="Displayed component"><button type="button" class="trace-button active" data-trace="mixture" aria-pressed="true">Original mixture</button><button type="button" class="trace-button" data-trace="target" aria-pressed="false" disabled>Recovered target</button><button type="button" class="trace-button" data-trace="residual" aria-pressed="false" disabled>Residual</button></div></section>
+          <section class="panel constellation-panel"><div class="panel-heading"><div><span class="panel-number">C</span><h2>I/Q geometry</h2></div><span class="plot-tag">SAMPLE CLOUD</span></div><div class="constellation-frame"><canvas id="constellation" aria-label="I/Q sample cloud, not symbol-synchronized" role="img"></canvas><span class="empty-plot" id="constellation-empty">NO SAMPLES</span></div><p class="chart-note">Unsynchronized samples. A cloud is not a decoded constellation.</p></section>
+        </div>
+
+        <div class="evidence-grid">
+          <section class="panel inference-panel"><div class="panel-heading"><div><span class="panel-number">D</span><h2>Evidence & abstention</h2></div><span class="badge badge-neutral" id="classification-badge">UNOBSERVED</span></div><div class="inference-content"><div id="classification-source" class="classification-source">NO OBSERVATION</div><div class="inference-label" id="classification-label">No classification</div><div class="confidence-line"><div class="confidence-track"><i id="confidence-fill"></i></div><span id="classification-confidence">—</span></div><p id="classification-reason">The instrument reports supported signal characteristics and abstains when evidence is insufficient.</p></div><div class="inference-footer"><span>KNOWN FAMILIES ≠ UNIVERSAL RECOGNITION</span><span>↳</span></div></section>
+          <section class="panel diagnostics-panel"><div class="panel-heading"><div><span class="panel-number">E</span><h2>Reconstruction log</h2></div><span class="plot-tag" id="method-label">NO ESTIMATE</span></div><div id="diagnostics" class="diagnostics-empty"><span class="log-glyph" aria-hidden="true">∿</span><p>Run a supported separation method to inspect its diagnostics and limitations.</p></div></section>
+        </div>
+        <section class="region-panel"><div class="region-title">OCCUPIED REGIONS<span id="region-count">0 DETECTED</span></div><div id="regions" class="region-list"><p>Frequency occupancy will be estimated from your recording.</p></div></section>
+        <footer class="instrument-footer"><span>ETHERGLASS / RF SIGNAL OBSERVATORY</span><span>OBSERVE → HYPOTHESIZE → RECONSTRUCT → VERIFY</span><a href="/static/api.html" target="_blank" rel="noopener">API reference ↗</a></footer>
+      </div>
+    </main>
+    <footer class="page-footer"><span>Separation is evidence. Interpretation is a responsibility.</span><span>CPU-COMPATIBLE · NO HARDWARE REQUIRED</span></footer>
+  </div>
+
+  <dialog id="export-dialog"><div class="dialog-heading"><span class="eyebrow">REPRODUCIBLE OUTPUTS</span><button type="button" id="close-export" class="icon-button" aria-label="Close export dialog">×</button></div><h2>Take the evidence with you.</h2><p>Each download contains complex I/Q samples, SigMF metadata, and an analysis report tied to this capture.</p><div id="export-links"></div><p class="dialog-note">Reconstructed outputs are estimates. Source attribution and method limitations travel with the export.</p></dialog>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

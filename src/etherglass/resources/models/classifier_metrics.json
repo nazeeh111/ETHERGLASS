@@ -1,0 +1,63 @@
+{
+  "known_class_accuracy_before_abstention": 1.0,
+  "known_coverage": 1.0,
+  "known_accepted_accuracy": 1.0,
+  "unknown_false_accept_rate": 0.0,
+  "unknown_false_accept_wilson95": [
+    0.0,
+    0.0038268985863905225
+  ],
+  "unknown_detection_auroc": 1.0,
+  "known_brier_score": 2.877931480924501e-29,
+  "known_support_brier_score": 1.1154095477754273e-06,
+  "known_support_binary_ece_10_bins": 4.499625979094847e-05,
+  "known_binary_ece_10_bins": 2.4466191908987975e-16,
+  "known_test_n": 1000,
+  "unknown_test_n": 1000,
+  "support_threshold": 0.5,
+  "confidence_threshold": 0.8,
+  "threshold_selected_without_test": true,
+  "unknown_by_family": {
+    "tone": {
+      "n": 100,
+      "false_accept_rate": 0.0
+    },
+    "chirp": {
+      "n": 100,
+      "false_accept_rate": 0.0
+    },
+    "noise": {
+      "n": 100,
+      "false_accept_rate": 0.0
+    },
+    "FSK": {
+      "n": 100,
+      "false_accept_rate": 0.0
+    },
+    "16QAM": {
+      "n": 100,
+      "false_accept_rate": 0.0
+    },
+    "8PSK": {
+      "n": 100,
+      "false_accept_rate": 0.0
+    },
+    "OFDM": {
+      "n": 100,
+      "false_accept_rate": 0.0
+    },
+    "PSK_mixture": {
+      "n": 100,
+      "false_accept_rate": 0.0
+    },
+    "AM": {
+      "n": 100,
+      "false_accept_rate": 0.0
+    },
+    "32QAM": {
+      "n": 100,
+      "false_accept_rate": 0.0
+    }
+  },
+  "model_sha256": "ac184c49def7b52e99b24876176cc68ea88fea8ffef577bc735dc57fb7e526f0"
+}

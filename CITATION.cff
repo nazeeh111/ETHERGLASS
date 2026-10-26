@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: "ETHERGLASS: An evidence-aware RF signal observatory"
+message: "Please cite the version and experiment configuration used. See the research report for scope and limits."
+type: software
+authors:
+  - name: "Nazeeh"
+version: 0.1.0
+date-released: 2026-10-26
+url: "https://github.com/nazeeh111/ETHERGLASS"
+repository-code: "https://github.com/nazeeh111/ETHERGLASS"
+license: MIT
+keywords:
+  - radio-frequency
+  - signal-processing
+  - interference-cancellation
+  - sigmf

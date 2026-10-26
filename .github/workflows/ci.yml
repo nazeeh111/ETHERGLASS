@@ -1,0 +1,31 @@
+name: CPU verification
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch==2.9.1 --index-url https://download.pytorch.org/whl/cpu
+          pip install -e '.[test]'
+      - name: Check numerical, metadata, model and API behavior
+        run: pytest
+      - name: Verify bundled model and recording bytes
+        run: python scripts/verify_artifacts.py
+      - name: Exercise actual CPU demonstration and exports
+        run: etherglass demo --output /tmp/etherglass-ci-demo
+      - name: Retain reproducible demonstration report
+        uses: actions/upload-artifact@v4
+        with:
+          name: cpu-demo-report
+          path: /tmp/etherglass-ci-demo/analysis.json

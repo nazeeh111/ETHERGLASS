@@ -1,0 +1,50 @@
+{
+    "global": {
+        "core:description": "Danuri",
+        "core:author": "Stichting CAMRAS",
+        "core:version": "1.0.0",
+        "core:license": "https://creativecommons.org/licenses/by/4.0/",
+        "core:recorder": "usrp_to_file",
+        "core:dataset": "camras-2022_08_07_08_31_34_2260.830MHz_0.5Msps_ci16_le.sigmf-data",
+        "core:datatype": "ci16_le",
+        "core:sample_rate": 500000.0,
+        "core:hw": "B210 attached to 25m Dwingeloo Radio Telescope",
+        "core:geolocation": [
+            {
+                "type": "Point",
+                "coordinates": [
+                    6.3961694,
+                    52.8120194,
+                    60.0
+                ]
+            }
+        ],
+        "camras:pointing:source": "DT console",
+        "camras:pointing:tracking": "console/j2000tracker",
+        "camras:pointing:az_deg": 111.187,
+        "camras:pointing:el_deg": 18.1043,
+        "camras:pointing:offset:az_deg": 0.0,
+        "camras:pointing:offset:el_deg": 0.0,
+        "camras:focusbox_position_m": 4.025,
+        "camras:pointing:datetime": "2022-08-07T08:32:09.989802",
+        "camras:pointing:ra_deg": 150.8096,
+        "camras:pointing:dec_deg": 1.4181,
+        "camras:pointing:radec_hmsdms": "10h03m14.3s +01d25m05s",
+        "camras:pointing:model_enabled": "True",
+        "camras:pointing:refraction_enabled": "True",
+        "camras:usrp:rx_gain": 50.0,
+        "camras:usrp:bandwidth": 500000.0,
+        "camras:usrp:reference": "gpsdo",
+        "camras:usrp:time_source": "gpsdo",
+        "camras:usrp:antenna": "RX2",
+        "camras:usrp:channel": 0
+    },
+    "annotations": [],
+    "captures": [
+        {
+            "core:sample_start": 0,
+            "core:frequency": 2260830000.0,
+            "core:datetime": "2022-08-07T08:31:47.017724"
+        }
+    ]
+}

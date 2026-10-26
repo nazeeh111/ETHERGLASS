@@ -1,0 +1,7 @@
+# Preserve measured CSV bytes and standard CRLF record terminators.
+*.csv -text whitespace=cr-at-eol
+# Matplotlib emits whitespace inside multiline SVG path attributes.
+*.svg -whitespace
+
+# Keep the separately licensed vendored runtime byte-for-byte.
+assets/launch/composition/assets/gsap.min.js -whitespace

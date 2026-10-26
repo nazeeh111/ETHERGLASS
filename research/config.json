@@ -1,0 +1,28 @@
+{
+  "frame_size": 2048,
+  "samples_per_symbol": 8,
+  "rolloff": 0.35,
+  "training_examples": 1536,
+  "adaptation_examples": 512,
+  "pretrain_steps": 320,
+  "adaptation_steps": 160,
+  "batch_size": 24,
+  "learning_rate": 0.002,
+  "adapt_learning_rate": 0.0008,
+  "train_seed_start": 100000,
+  "adapt_seed_start": 200000,
+  "validation_seed_start": 300000,
+  "test_seed_start": 400000,
+  "demo_seed": 870001,
+  "training_seeds": [
+    0,
+    1,
+    2
+  ],
+  "scope": "Known-rate PSK target + sparse tones/chirps; no blind cochannel source recovery",
+  "hypothesis": "At a fixed 160-example-update adaptation budget, pretraining on stationary tones followed by chirp adaptation reduces held-out chirp waveform error relative to the identical network initialized from scratch. Local multiscale spectral contrasts improve robustness relative to their feature ablation.",
+  "selection": "Fixed step budget, no test selection; released seed 0 is predetermined.",
+  "loss": "Complex frequency MSE normalized by per-example clean-target energy, Hann-windowed frames.",
+  "metric_alignment": "No delay/permutation search. SI-SDR complex projection; EVM is waveform EVM after one scalar gain/phase alignment, NOT symbol EVM/BER.",
+  "baseline_priors": "All methods know target center/rate. U-Net has identical 7 features and support prior; classical methods use rate/support. No method sees clean truth at inference."
+}

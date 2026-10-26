@@ -1,0 +1,16 @@
+{
+  "source_url": "https://data.camras.nl/satellites/raw/camras-2022_08_07_08_31_34_2260.830MHz_0.5Msps_ci16_le.sigmf-data",
+  "source_metadata_url": "https://data.camras.nl/satellites/raw/camras-2022_08_07_08_31_34_2260.830MHz_0.5Msps_ci16_le.sigmf-meta",
+  "source_listing": "https://data.camras.nl/satellites/raw/",
+  "source_author": "Stichting CAMRAS",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "modifications": "First65536 complex samples, original ci16_le bytes, no scaling/filtering. Derived sidecar updated to SigMF1.2.6 and cropped dataset checksum. Original metadata retained separately.",
+  "source_sample_interval": [
+    0,
+    65536
+  ],
+  "content_range": "bytes 0-262143/43400000",
+  "sha256": "962a45d420c0a05bbf5cdc7db3f4a1f81a200127028ec84cea41ccafc123b65b",
+  "clean_reference": false,
+  "use": "External stability and abstention case only, no fitting or threshold changes. One recording session; adjacent windows correlated."
+}

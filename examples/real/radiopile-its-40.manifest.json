@@ -1,0 +1,455 @@
+{
+  "source_doi": "10.5281/zenodo.22877108",
+  "source_url": "https://zenodo.org/records/22877108/files/its_band.h5?download=1",
+  "original_filename": "its_band.h5",
+  "original_size_bytes": 388327096,
+  "original_md5_published": "8eff5d7867ea4823901866852d05b5f2",
+  "original_full_file_checksum_verified": false,
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "M. Girmay et al., Vehicular Communications 39 (2023),100563; processed by Xander Vanparys et al., RadioPile v1.0.",
+  "source_paper_doi": "10.1016/j.vehcom.2022.100563",
+  "modifications": "Selected 8 consecutive windows at each of five 15000-window class blocks; converted selected float32 rows to NPZ. Source already unit-power normalized and augmented with synthetic AWGN. No additional denoising or augmentation.",
+  "use": "Independent external unsupported-input/stability test only. Not used for model training or threshold selection.",
+  "limitations": [
+    "No clean waveform or reference symbols. No ground-truth separation quality, BER or EVM available.",
+    "Neighboring windows can share an observation. file_path/recording_id do not prove independent device/session identities.",
+    "40 selected windows are a convenience subset, not a representative sample of the full dataset."
+  ],
+  "fetched_bytes": 3538944,
+  "range_budget_bytes": 4194304,
+  "subset_file": "radiopile-its-40.npz",
+  "subset_sha256": "01cb034734bf0f4729fb2650486be5149e9e2e4bca1f83146f4d7e582894256e",
+  "shape": [
+    40,
+    2,
+    500
+  ],
+  "dtype": "float32",
+  "rows": [
+    {
+      "window_index": 0,
+      "technology": "LTE",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 0,
+      "recording_id": "LTE_25msps_0",
+      "file_path": "data/its_band/raw/LTE_25msps.mat"
+    },
+    {
+      "window_index": 1,
+      "technology": "LTE",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 0,
+      "recording_id": "LTE_25msps_0",
+      "file_path": "data/its_band/raw/LTE_25msps.mat"
+    },
+    {
+      "window_index": 2,
+      "technology": "LTE",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 1,
+      "recording_id": "LTE_25msps_1",
+      "file_path": "data/its_band/raw/LTE_25msps.mat"
+    },
+    {
+      "window_index": 3,
+      "technology": "LTE",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 1,
+      "recording_id": "LTE_25msps_1",
+      "file_path": "data/its_band/raw/LTE_25msps.mat"
+    },
+    {
+      "window_index": 4,
+      "technology": "LTE",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 2,
+      "recording_id": "LTE_25msps_2",
+      "file_path": "data/its_band/raw/LTE_25msps.mat"
+    },
+    {
+      "window_index": 5,
+      "technology": "LTE",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 2,
+      "recording_id": "LTE_25msps_2",
+      "file_path": "data/its_band/raw/LTE_25msps.mat"
+    },
+    {
+      "window_index": 6,
+      "technology": "LTE",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 3,
+      "recording_id": "LTE_25msps_3",
+      "file_path": "data/its_band/raw/LTE_25msps.mat"
+    },
+    {
+      "window_index": 7,
+      "technology": "LTE",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 3,
+      "recording_id": "LTE_25msps_3",
+      "file_path": "data/its_band/raw/LTE_25msps.mat"
+    },
+    {
+      "window_index": 15000,
+      "technology": "5G NR",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 0,
+      "recording_id": "FiveG_25msps_0",
+      "file_path": "data/its_band/raw/FiveG_25msps.mat"
+    },
+    {
+      "window_index": 15001,
+      "technology": "5G NR",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 0,
+      "recording_id": "FiveG_25msps_0",
+      "file_path": "data/its_band/raw/FiveG_25msps.mat"
+    },
+    {
+      "window_index": 15002,
+      "technology": "5G NR",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 1,
+      "recording_id": "FiveG_25msps_1",
+      "file_path": "data/its_band/raw/FiveG_25msps.mat"
+    },
+    {
+      "window_index": 15003,
+      "technology": "5G NR",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 1,
+      "recording_id": "FiveG_25msps_1",
+      "file_path": "data/its_band/raw/FiveG_25msps.mat"
+    },
+    {
+      "window_index": 15004,
+      "technology": "5G NR",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 2,
+      "recording_id": "FiveG_25msps_2",
+      "file_path": "data/its_band/raw/FiveG_25msps.mat"
+    },
+    {
+      "window_index": 15005,
+      "technology": "5G NR",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 2,
+      "recording_id": "FiveG_25msps_2",
+      "file_path": "data/its_band/raw/FiveG_25msps.mat"
+    },
+    {
+      "window_index": 15006,
+      "technology": "5G NR",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 3,
+      "recording_id": "FiveG_25msps_3",
+      "file_path": "data/its_band/raw/FiveG_25msps.mat"
+    },
+    {
+      "window_index": 15007,
+      "technology": "5G NR",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 3,
+      "recording_id": "FiveG_25msps_3",
+      "file_path": "data/its_band/raw/FiveG_25msps.mat"
+    },
+    {
+      "window_index": 30000,
+      "technology": "ITS-G5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 0,
+      "recording_id": "ITSG5_25msps_0",
+      "file_path": "data/its_band/raw/ITSG5_25msps.mat"
+    },
+    {
+      "window_index": 30001,
+      "technology": "ITS-G5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 0,
+      "recording_id": "ITSG5_25msps_0",
+      "file_path": "data/its_band/raw/ITSG5_25msps.mat"
+    },
+    {
+      "window_index": 30002,
+      "technology": "ITS-G5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 1,
+      "recording_id": "ITSG5_25msps_1",
+      "file_path": "data/its_band/raw/ITSG5_25msps.mat"
+    },
+    {
+      "window_index": 30003,
+      "technology": "ITS-G5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 1,
+      "recording_id": "ITSG5_25msps_1",
+      "file_path": "data/its_band/raw/ITSG5_25msps.mat"
+    },
+    {
+      "window_index": 30004,
+      "technology": "ITS-G5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 2,
+      "recording_id": "ITSG5_25msps_2",
+      "file_path": "data/its_band/raw/ITSG5_25msps.mat"
+    },
+    {
+      "window_index": 30005,
+      "technology": "ITS-G5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 2,
+      "recording_id": "ITSG5_25msps_2",
+      "file_path": "data/its_band/raw/ITSG5_25msps.mat"
+    },
+    {
+      "window_index": 30006,
+      "technology": "ITS-G5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 3,
+      "recording_id": "ITSG5_25msps_3",
+      "file_path": "data/its_band/raw/ITSG5_25msps.mat"
+    },
+    {
+      "window_index": 30007,
+      "technology": "ITS-G5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 3,
+      "recording_id": "ITSG5_25msps_3",
+      "file_path": "data/its_band/raw/ITSG5_25msps.mat"
+    },
+    {
+      "window_index": 45000,
+      "technology": "C-V2X PC5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 0,
+      "recording_id": "CV2X_25msps_0",
+      "file_path": "data/its_band/raw/CV2X_25msps.mat"
+    },
+    {
+      "window_index": 45001,
+      "technology": "C-V2X PC5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 0,
+      "recording_id": "CV2X_25msps_0",
+      "file_path": "data/its_band/raw/CV2X_25msps.mat"
+    },
+    {
+      "window_index": 45002,
+      "technology": "C-V2X PC5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 1,
+      "recording_id": "CV2X_25msps_1",
+      "file_path": "data/its_band/raw/CV2X_25msps.mat"
+    },
+    {
+      "window_index": 45003,
+      "technology": "C-V2X PC5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 1,
+      "recording_id": "CV2X_25msps_1",
+      "file_path": "data/its_band/raw/CV2X_25msps.mat"
+    },
+    {
+      "window_index": 45004,
+      "technology": "C-V2X PC5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 2,
+      "recording_id": "CV2X_25msps_2",
+      "file_path": "data/its_band/raw/CV2X_25msps.mat"
+    },
+    {
+      "window_index": 45005,
+      "technology": "C-V2X PC5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 2,
+      "recording_id": "CV2X_25msps_2",
+      "file_path": "data/its_band/raw/CV2X_25msps.mat"
+    },
+    {
+      "window_index": 45006,
+      "technology": "C-V2X PC5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 3,
+      "recording_id": "CV2X_25msps_3",
+      "file_path": "data/its_band/raw/CV2X_25msps.mat"
+    },
+    {
+      "window_index": 45007,
+      "technology": "C-V2X PC5",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 3,
+      "recording_id": "CV2X_25msps_3",
+      "file_path": "data/its_band/raw/CV2X_25msps.mat"
+    },
+    {
+      "window_index": 60000,
+      "technology": "WiFi",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 0,
+      "recording_id": "WiFi_25msps_0",
+      "file_path": "data/its_band/raw/WiFi_25msps.mat"
+    },
+    {
+      "window_index": 60001,
+      "technology": "WiFi",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 0,
+      "recording_id": "WiFi_25msps_0",
+      "file_path": "data/its_band/raw/WiFi_25msps.mat"
+    },
+    {
+      "window_index": 60002,
+      "technology": "WiFi",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 1,
+      "recording_id": "WiFi_25msps_1",
+      "file_path": "data/its_band/raw/WiFi_25msps.mat"
+    },
+    {
+      "window_index": 60003,
+      "technology": "WiFi",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 1,
+      "recording_id": "WiFi_25msps_1",
+      "file_path": "data/its_band/raw/WiFi_25msps.mat"
+    },
+    {
+      "window_index": 60004,
+      "technology": "WiFi",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 2,
+      "recording_id": "WiFi_25msps_2",
+      "file_path": "data/its_band/raw/WiFi_25msps.mat"
+    },
+    {
+      "window_index": 60005,
+      "technology": "WiFi",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 2,
+      "recording_id": "WiFi_25msps_2",
+      "file_path": "data/its_band/raw/WiFi_25msps.mat"
+    },
+    {
+      "window_index": 60006,
+      "technology": "WiFi",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 3,
+      "recording_id": "WiFi_25msps_3",
+      "file_path": "data/its_band/raw/WiFi_25msps.mat"
+    },
+    {
+      "window_index": 60007,
+      "technology": "WiFi",
+      "modulation": "unknown",
+      "sample_rate_hz": 25000000.0,
+      "center_frequency_hz": 5900000000.0,
+      "sample_index": 3,
+      "recording_id": "WiFi_25msps_3",
+      "file_path": "data/its_band/raw/WiFi_25msps.mat"
+    }
+  ],
+  "original_hdf5_attributes": {
+    "center_frequency_hz": "5900000000.0",
+    "data_dtype": "float32",
+    "dataset": "ITS Band Technology Recognition (Girmay et al.)",
+    "dataset_paper": "https://doi.org/10.1016/j.vehcom.2022.100563",
+    "dataset_url": "https://gitlab.ilabt.imec.be/mgirmay/tech-rec-its-band",
+    "description": "Real over-the-air IQ captures from the Belgian Smart Highway testbed (imec/IDLab), augmented with synthetic AWGN at SNR levels {-10,-5,0,5,10,15,20,25,30} dB (hybrid dataset; Girmay et al., Sec. 4.2). Technologies: LTE (srsRAN, USRP X310), 5G NR (OpenAirInterface, NSA mode), ITS-G5 (Cohda MK5), C-V2X PC5 (Cohda MK6c), WiFi (openwifi SDR, Xilinx Zynq, 802.11n), and Noise. Captured at 25 Msps, 5.9 GHz center frequency. 7500 observations per technology, each split into two 500-sample windows (15000 windows per technology). Note: the original paper uses the FFT of IQ as model input; RadioPile stores raw IQ windows.",
+    "doi": "10.5281/zenodo.22877108",
+    "hop_size": "500",
+    "license": "CC-BY-4.0",
+    "license_note": "License of the original source dataset. This file was processed individually and never mixed, so no other dataset's terms apply to it. See LICENSES.md.",
+    "normalization_mode": "unit_power",
+    "observation_size": "1100",
+    "observations_per_technology": "7500",
+    "pad_last": "False",
+    "related_identifiers": "aggregate=10.5281/zenodo.22876704; code=10.5281/zenodo.23174413",
+    "sample_rate_hz": "25000000.0",
+    "schema_version": "1.0.0",
+    "script_version": "1.0.0",
+    "technology_types": "LTE, 5G NR, ITS-G5, C-V2X PC5, WiFi, Noise",
+    "total_windows": "90000",
+    "window_size": "500",
+    "windows_per_technology": "15000"
+  }
+}

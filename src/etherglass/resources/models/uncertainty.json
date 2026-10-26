@@ -1,0 +1,24 @@
+{
+  "version": "0.1.0",
+  "nominal_coverage": 0.9,
+  "quantile": 5.835943190200677,
+  "calibration_examples": 96,
+  "rank": 88,
+  "calibration_seeds": [
+    900000,
+    900095
+  ],
+  "scope": "Synthetic shifted PSK+chirp distribution: SNR10..30dB, SIR-12..8dB, RRC rolloff.35, 8 samples/symbol, recorded CFO/timing/multipath distributions in synthetic.py. Raw received target waveform error, no alignment.",
+  "scale": "mean per-sample variance across three hybrid training seeds +0.01*mixture power",
+  "inference_source_sha256": {
+    "etherglass/models.py": "a88dd4e1a8b194df64c2831648798cf9b780275244424c004613e2351323765a",
+    "etherglass/separation.py": "f8d90f7c516a6f27a1b947519722e895b8ea49ce3915fecf3a470834e0a032f0",
+    "etherglass/uncertainty.py": "97baa52d3522cc216e6f1aa4693fd8238f093b5f7c28f14cd0e2572daa01ed09",
+    "etherglass/synthetic.py": "505c4a079402d9b6675881706027b653104777ecf34256f9caa14d1f4ce6c06f"
+  },
+  "checkpoint_sha256": {
+    "0": "60acebe7402bed9e6bac740da7f3f73a09b25151037095c9040edfcb310925b6",
+    "1": "571611cd77b6797f442b733a0a9c2c7273eaaad55bb6193e83adcd0c8c015f3a",
+    "2": "8d0ab27f21604508dad13b5b2d6677af81312bbd6c5eaecf0ca1b25de3926c57"
+  }
+}

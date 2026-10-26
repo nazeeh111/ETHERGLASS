@@ -1,0 +1,42 @@
+{
+  "global": {
+    "core:datatype": "ci16_le",
+    "core:sample_rate": 500000.0,
+    "core:version": "1.2.6",
+    "core:description": "Danuri observation excerpt, CAMRAS Dwingeloo radio telescope,2022-08-07. Cropped first65536samples.",
+    "core:author": "Stichting CAMRAS",
+    "core:license": "https://creativecommons.org/licenses/by/4.0/",
+    "core:sha512": "cb80ab2b780b41ad0563481fcf5884789a7ea972e8b3674391294034b5926e252a20d6054835c556e95cd18b7b41da8c41fdca781a6ae4ef8ba4a4e4b1e7b668",
+    "core:extensions": [
+      {
+        "name": "etherglass",
+        "version": "0.1.0",
+        "optional": true
+      }
+    ],
+    "etherglass:provenance": {
+      "source_url": "https://data.camras.nl/satellites/raw/camras-2022_08_07_08_31_34_2260.830MHz_0.5Msps_ci16_le.sigmf-data",
+      "source_metadata_url": "https://data.camras.nl/satellites/raw/camras-2022_08_07_08_31_34_2260.830MHz_0.5Msps_ci16_le.sigmf-meta",
+      "source_listing": "https://data.camras.nl/satellites/raw/",
+      "source_author": "Stichting CAMRAS",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "modifications": "First65536 complex samples, original ci16_le bytes, no scaling/filtering. Derived sidecar updated to SigMF1.2.6 and cropped dataset checksum. Original metadata retained separately.",
+      "source_sample_interval": [
+        0,
+        65536
+      ],
+      "content_range": "bytes 0-262143/43400000",
+      "sha256": "962a45d420c0a05bbf5cdc7db3f4a1f81a200127028ec84cea41ccafc123b65b",
+      "clean_reference": false,
+      "use": "External stability and abstention case only, no fitting or threshold changes. One recording session; adjacent windows correlated."
+    }
+  },
+  "captures": [
+    {
+      "core:sample_start": 0,
+      "core:frequency": 2260830000.0,
+      "core:datetime": "2022-08-07T08:31:47.017724"
+    }
+  ],
+  "annotations": []
+}

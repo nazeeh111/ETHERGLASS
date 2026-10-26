@@ -1,0 +1,393 @@
+{
+  "ok": true,
+  "strict": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "filesScanned": 1
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 9,
+    "infoCount": 1,
+    "findings": [
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 3.25,
+        "selector": "#scene1 > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 99.34,
+          "top": 39.5,
+          "right": 261.52,
+          "bottom": 65.5,
+          "width": 162.18,
+          "height": 26
+        },
+        "containerSelector": "#scene2 > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "text": "E ETHERGLASS",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 99.34,
+          "y": 39.5,
+          "width": 162.18,
+          "height": 26
+        },
+        "firstSeen": 3.25,
+        "lastSeen": 3.375,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 3.25,
+        "selector": "#scene1 > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 65,
+          "top": 35,
+          "right": 85.34,
+          "bottom": 70,
+          "width": 20.34,
+          "height": 35
+        },
+        "containerSelector": "#scene2 > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)",
+        "text": "E",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 65,
+          "y": 35,
+          "width": 20.34,
+          "height": 35
+        },
+        "firstSeen": 3.25,
+        "lastSeen": 3.375,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 3.25,
+        "selector": "#scene1 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1026.36,
+          "top": 47,
+          "right": 1224,
+          "bottom": 59,
+          "width": 197.64,
+          "height": 12
+        },
+        "containerSelector": "#scene2 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)",
+        "text": "RF SIGNAL OBSERVATORY / 01",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1026.36,
+          "y": 47,
+          "width": 197.64,
+          "height": 12
+        },
+        "firstSeen": 3.25,
+        "lastSeen": 3.375,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 9.25,
+        "selector": "#scene2 > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 99.34,
+          "top": 39.5,
+          "right": 261.52,
+          "bottom": 65.5,
+          "width": 162.18,
+          "height": 26
+        },
+        "containerSelector": "#scene3 > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "text": "E ETHERGLASS",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 99.34,
+          "y": 39.5,
+          "width": 162.18,
+          "height": 26
+        },
+        "firstSeen": 9.25,
+        "lastSeen": 9.375,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 9.25,
+        "selector": "#scene2 > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 65,
+          "top": 35,
+          "right": 85.34,
+          "bottom": 70,
+          "width": 20.34,
+          "height": 35
+        },
+        "containerSelector": "#scene3 > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)",
+        "text": "E",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 65,
+          "y": 35,
+          "width": 20.34,
+          "height": 35
+        },
+        "firstSeen": 9.25,
+        "lastSeen": 9.375,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 9.25,
+        "selector": "#scene2 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1003.56,
+          "top": 47,
+          "right": 1224,
+          "bottom": 59,
+          "width": 220.44,
+          "height": 12
+        },
+        "containerSelector": "#scene3 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)",
+        "text": "01 / SOURCE → 02 / HYPOTHESIS",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1003.56,
+          "y": 47,
+          "width": 220.44,
+          "height": 12
+        },
+        "firstSeen": 9.25,
+        "lastSeen": 9.375,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 16.25,
+        "selector": "#scene3 > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 99.34,
+          "top": 39.5,
+          "right": 261.52,
+          "bottom": 65.5,
+          "width": 162.18,
+          "height": 26
+        },
+        "containerSelector": "#scene4 > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "text": "E ETHERGLASS",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 99.34,
+          "y": 39.5,
+          "width": 162.18,
+          "height": 26
+        },
+        "firstSeen": 16.25,
+        "lastSeen": 16.375,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 16.25,
+        "selector": "#scene3 > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 65,
+          "top": 35,
+          "right": 85.34,
+          "bottom": 70,
+          "width": 20.34,
+          "height": 35
+        },
+        "containerSelector": "#scene4 > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)",
+        "text": "E",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 65,
+          "y": 35,
+          "width": 20.34,
+          "height": 35
+        },
+        "firstSeen": 16.25,
+        "lastSeen": 16.375,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 16.25,
+        "selector": "#scene3 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1079.58,
+          "top": 47,
+          "right": 1224,
+          "bottom": 59,
+          "width": 144.42,
+          "height": 12
+        },
+        "containerSelector": "#scene4 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)",
+        "text": "03 / RECONSTRUCTION",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1079.58,
+          "y": 47,
+          "width": 144.42,
+          "height": 12
+        },
+        "firstSeen": 16.25,
+        "lastSeen": 16.375,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "info",
+        "time": 9.375,
+        "selector": "#scene2 > div:nth-of-type(1) > h2:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 56,
+          "top": 106,
+          "right": 613.66,
+          "bottom": 150,
+          "width": 557.66,
+          "height": 44
+        },
+        "containerSelector": "#scene3 > div:nth-of-type(1) > h2:nth-of-type(1)",
+        "text": "A recording. A testable hypothesis.",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 56,
+          "y": 106,
+          "width": 557.66,
+          "height": 44
+        },
+        "firstSeen": 9.375,
+        "lastSeen": 9.375,
+        "occurrences": 1,
+        "heldMs": 0
+      }
+    ],
+    "duration": 20,
+    "samples": [
+      1.8,
+      4.5,
+      7.8,
+      10.5,
+      12.5,
+      14.5,
+      17.8,
+      18.8,
+      19.5
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 10,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "samples": [
+      1.8,
+      7.8,
+      12.5,
+      17.8,
+      19.5
+    ],
+    "checked": 51,
+    "passed": 51
+  },
+  "snapshots": {
+    "enabled": true,
+    "files": [
+      "snapshots/frame-00-at-1.8s.png",
+      "snapshots/frame-01-at-7.8s.png",
+      "snapshots/frame-02-at-12.5s.png",
+      "snapshots/frame-03-at-17.8s.png",
+      "snapshots/frame-04-at-19.5s.png"
+    ],
+    "times": [
+      1.8,
+      7.8,
+      12.5,
+      17.8,
+      19.5
+    ],
+    "findingFiles": []
+  },
+  "_meta": {
+    "version": "0.8.33",
+    "latestVersion": "0.8.200",
+    "updateAvailable": true
+  }
+}

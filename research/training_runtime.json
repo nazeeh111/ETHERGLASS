@@ -1,0 +1,74 @@
+{
+  "0": {
+    "torch": "2.9.1",
+    "numpy": "2.5.4",
+    "threads": 4,
+    "convolution": "native torch.nn.Conv1d",
+    "floating_point": "float32 weights/features; initial float32 RMS accumulation before numerically stable float64 equivalent was introduced",
+    "note": "Seed0 started before equivalent CPU GEMM optimization. Outputs and all convolution gradients are regression-tested against native torch.nn.Conv1d. No bitwise cross-backend reproducibility is claimed. Architecture and fixed training budgets are identical.",
+    "architecture_backends": {
+      "hybrid": {
+        "convolution": "native torch.nn.Conv1d",
+        "floating_point": "float32 weights/features; initial float32 RMS accumulation before numerically stable float64 equivalent was introduced"
+      },
+      "no_dsp": {
+        "convolution": "native torch.nn.Conv1d",
+        "floating_point": "float32 weights/features; initial float32 RMS accumulation before numerically stable float64 equivalent was introduced"
+      },
+      "unet": {
+        "convolution": "CPU unfold+GEMM (same kernels/weights)",
+        "floating_point": "float32 weights/features; complex128 RMS accumulation before normalization"
+      },
+      "scratch": {
+        "convolution": "CPU unfold+GEMM (same kernels/weights)",
+        "floating_point": "float32 weights/features; complex128 RMS accumulation before normalization"
+      }
+    }
+  },
+  "1": {
+    "torch": "2.9.1",
+    "numpy": "2.5.4",
+    "threads": 4,
+    "architecture_backends": {
+      "hybrid": {
+        "convolution": "CPU unfold+GEMM (same kernels/weights)",
+        "floating_point": "float32 weights/features; complex128 RMS accumulation before normalization"
+      },
+      "no_dsp": {
+        "convolution": "CPU unfold+GEMM (same kernels/weights)",
+        "floating_point": "float32 weights/features; complex128 RMS accumulation before normalization"
+      },
+      "unet": {
+        "convolution": "CPU unfold+GEMM (same kernels/weights)",
+        "floating_point": "float32 weights/features; complex128 RMS accumulation before normalization"
+      },
+      "scratch": {
+        "convolution": "CPU unfold+GEMM (same kernels/weights)",
+        "floating_point": "float32 weights/features; complex128 RMS accumulation before normalization"
+      }
+    }
+  },
+  "2": {
+    "torch": "2.9.1",
+    "numpy": "2.5.4",
+    "threads": 4,
+    "architecture_backends": {
+      "hybrid": {
+        "convolution": "CPU unfold+GEMM (same kernels/weights)",
+        "floating_point": "float32 weights/features; complex128 RMS accumulation before normalization"
+      },
+      "no_dsp": {
+        "convolution": "CPU unfold+GEMM (same kernels/weights)",
+        "floating_point": "float32 weights/features; complex128 RMS accumulation before normalization"
+      },
+      "unet": {
+        "convolution": "CPU unfold+GEMM (same kernels/weights)",
+        "floating_point": "float32 weights/features; complex128 RMS accumulation before normalization"
+      },
+      "scratch": {
+        "convolution": "CPU unfold+GEMM (same kernels/weights)",
+        "floating_point": "float32 weights/features; complex128 RMS accumulation before normalization"
+      }
+    }
+  }
+}

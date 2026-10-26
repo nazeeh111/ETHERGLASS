@@ -1,0 +1,2641 @@
+{
+  "config": {
+    "frame_size": 2048,
+    "samples_per_symbol": 8,
+    "rolloff": 0.35,
+    "training_examples": 1536,
+    "adaptation_examples": 512,
+    "pretrain_steps": 320,
+    "adaptation_steps": 160,
+    "batch_size": 24,
+    "learning_rate": 0.002,
+    "adapt_learning_rate": 0.0008,
+    "train_seed_start": 100000,
+    "adapt_seed_start": 200000,
+    "validation_seed_start": 300000,
+    "test_seed_start": 400000,
+    "demo_seed": 870001,
+    "training_seeds": [
+      0,
+      1,
+      2
+    ],
+    "scope": "Known-rate PSK target + sparse tones/chirps; no blind cochannel source recovery",
+    "hypothesis": "At a fixed 160-example-update adaptation budget, pretraining on stationary tones followed by chirp adaptation reduces held-out chirp waveform error relative to the identical network initialized from scratch. Local multiscale spectral contrasts improve robustness relative to their feature ablation.",
+    "selection": "Fixed step budget, no test selection; released seed 0 is predetermined.",
+    "loss": "Complex frequency MSE normalized by per-example clean-target energy, Hann-windowed frames.",
+    "metric_alignment": "No delay/permutation search. SI-SDR complex projection; EVM is waveform EVM after one scalar gain/phase alignment, NOT symbol EVM/BER.",
+    "baseline_priors": "All methods know target center/rate. U-Net has identical 7 features and support prior; classical methods use rate/support. No method sees clean truth at inference."
+  },
+  "rows": 8640,
+  "examples_per_cell": 24,
+  "methods": {
+    "carrier": {
+      "mixture": {
+        "si_sdr_db": -2.1855128680922653,
+        "waveform_evm_pct": 74.73294568718231,
+        "nmse_db": 2.1240037419042523,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 72.35282109540712,
+        "oracle_ser": 0.27185792349726773,
+        "oracle_ber": 0.19894125683060113,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -2.1855128680922653
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": -2.030315252361673,
+        "waveform_evm_pct": 74.10441592051326,
+        "nmse_db": 1.9684996760687896,
+        "runtime_ms": 2.522084968707835,
+        "oracle_symbol_evm_pct": 72.35334674747962,
+        "oracle_ser": 0.27185792349726773,
+        "oracle_ber": 0.19894125683060113,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -2.030315252361673
+        }
+      },
+      "matched": {
+        "si_sdr_db": -1.957225111401071,
+        "waveform_evm_pct": 73.83717050774405,
+        "nmse_db": 1.4675655501764504,
+        "runtime_ms": 3.345425420169098,
+        "oracle_symbol_evm_pct": 72.60472929149581,
+        "oracle_ser": 0.27578551912568305,
+        "oracle_ber": 0.20099043715846995,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -1.957225111401071
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 3.7636875452733687,
+        "waveform_evm_pct": 53.19341359717358,
+        "nmse_db": -4.85745512389963,
+        "runtime_ms": 3.3977690764004365,
+        "oracle_symbol_evm_pct": 49.834489294075354,
+        "oracle_ser": 0.0743681693989071,
+        "oracle_ber": 0.050759904371584695,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 3.7636875452733687
+        }
+      },
+      "notch": {
+        "si_sdr_db": 8.751563125135922,
+        "waveform_evm_pct": 34.81899936843488,
+        "nmse_db": -9.095368217381521,
+        "runtime_ms": 3.8930452089213454,
+        "oracle_symbol_evm_pct": 30.933426550530907,
+        "oracle_ser": 0.0033299180327868855,
+        "oracle_ber": 0.0017076502732240439,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 8.751563125135922
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 7.390821258691815,
+        "waveform_evm_pct": 40.342928669046174,
+        "nmse_db": -7.707438079328544,
+        "runtime_ms": 30.892622099296812,
+        "oracle_symbol_evm_pct": 35.72851593770562,
+        "oracle_ser": 0.019495673952641165,
+        "oracle_ber": 0.012408925318761385,
+        "training_seed_mean_si_sdr_db": {
+          "0": 7.6619253119655895,
+          "1": 6.791311982318891,
+          "2": 7.719226481790966
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 10.29388555401826,
+        "waveform_evm_pct": 29.515052311523643,
+        "nmse_db": -10.682560727878386,
+        "runtime_ms": 28.609460654681445,
+        "oracle_symbol_evm_pct": 27.96356233400835,
+        "oracle_ser": 0.00034153005464480874,
+        "oracle_ber": 0.00017076502732240437,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.286862838347403,
+          "1": 10.206792594122946,
+          "2": 10.388001229584432
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 10.384755655127925,
+        "waveform_evm_pct": 29.267065385042834,
+        "nmse_db": -10.718300238856873,
+        "runtime_ms": 34.766615153380876,
+        "oracle_symbol_evm_pct": 27.108677215670824,
+        "oracle_ser": 0.00031306921675774133,
+        "oracle_ber": 0.00015653460837887067,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.30894357646448,
+          "1": 10.48571306082991,
+          "2": 10.35961032808938
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 9.558590430148096,
+        "waveform_evm_pct": 31.985947569795524,
+        "nmse_db": -9.650747573875224,
+        "runtime_ms": 31.432441448689335,
+        "oracle_symbol_evm_pct": 30.205092950453505,
+        "oracle_ser": 0.0019353369763205827,
+        "oracle_ber": 0.0010245901639344263,
+        "training_seed_mean_si_sdr_db": {
+          "0": 8.833142485995223,
+          "1": 9.762811139076744,
+          "2": 10.079817665372321
+        }
+      },
+      "unet": {
+        "si_sdr_db": 10.389467862020235,
+        "waveform_evm_pct": 29.218307754113297,
+        "nmse_db": -10.75900058880474,
+        "runtime_ms": 40.33429862627398,
+        "oracle_symbol_evm_pct": 27.281910411622242,
+        "oracle_ser": 0.00025614754098360657,
+        "oracle_ber": 0.00012807377049180329,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.601459649672801,
+          "1": 10.393475873960243,
+          "2": 10.173468062427661
+        }
+      }
+    },
+    "flat": {
+      "mixture": {
+        "si_sdr_db": -1.0916458944809864,
+        "waveform_evm_pct": 71.34899761645676,
+        "nmse_db": 1.2487710914393135,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 63.228687054096675,
+        "oracle_ser": 0.19629439890710385,
+        "oracle_ber": 0.13806352459016394,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -1.0916458944809864
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": -0.9280594642307817,
+        "waveform_evm_pct": 70.69522812932509,
+        "nmse_db": 1.085048337616641,
+        "runtime_ms": 5.21024134165297,
+        "oracle_symbol_evm_pct": 63.228873948115165,
+        "oracle_ser": 0.19629439890710385,
+        "oracle_ber": 0.13806352459016394,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -0.9280594642307817
+        }
+      },
+      "matched": {
+        "si_sdr_db": 0.15963888512684876,
+        "waveform_evm_pct": 66.33793793911725,
+        "nmse_db": -0.41868377228448583,
+        "runtime_ms": 4.302720388902041,
+        "oracle_symbol_evm_pct": 64.055072898277,
+        "oracle_ser": 0.20056352459016394,
+        "oracle_ber": 0.140411543715847,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 0.15963888512684876
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 3.4181351716175548,
+        "waveform_evm_pct": 54.53305975627294,
+        "nmse_db": -4.500813192973265,
+        "runtime_ms": 4.798456652982471,
+        "oracle_symbol_evm_pct": 49.66313666353307,
+        "oracle_ser": 0.07624658469945356,
+        "oracle_ber": 0.052894467213114756,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 3.4181351716175548
+        }
+      },
+      "notch": {
+        "si_sdr_db": 8.964630558510889,
+        "waveform_evm_pct": 34.64838680923776,
+        "nmse_db": -9.305968027836192,
+        "runtime_ms": 4.648659746938695,
+        "oracle_symbol_evm_pct": 29.30470763855911,
+        "oracle_ser": 0.0030737704918032786,
+        "oracle_ber": 0.0019637978142076503,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 8.964630558510889
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 7.295596814456546,
+        "waveform_evm_pct": 41.17192029962525,
+        "nmse_db": -7.588198297893781,
+        "runtime_ms": 31.65131540218782,
+        "oracle_symbol_evm_pct": 34.49879165189865,
+        "oracle_ser": 0.029912340619307833,
+        "oracle_ber": 0.019353369763205827,
+        "training_seed_mean_si_sdr_db": {
+          "0": 7.594873121093209,
+          "1": 6.597270242958861,
+          "2": 7.6946470793175665
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 11.59267734704698,
+        "waveform_evm_pct": 26.35881756112875,
+        "nmse_db": -11.910905421477999,
+        "runtime_ms": 32.4413038534759,
+        "oracle_symbol_evm_pct": 22.354893808431857,
+        "oracle_ser": 0.0010245901639344263,
+        "oracle_ber": 0.0005265255009107468,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.668593464138782,
+          "1": 11.482909425209968,
+          "2": 11.626529151792196
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 11.537703887738658,
+        "waveform_evm_pct": 26.5192387464637,
+        "nmse_db": -11.783189860438817,
+        "runtime_ms": 31.712579235318117,
+        "oracle_symbol_evm_pct": 22.004016325362073,
+        "oracle_ser": 0.0009676684881602914,
+        "oracle_ber": 0.0004838342440801457,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.541104108904639,
+          "1": 11.576624519029826,
+          "2": 11.495383035281511
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 10.763891426325948,
+        "waveform_evm_pct": 28.765036961617934,
+        "nmse_db": -10.597882775582308,
+        "runtime_ms": 26.205019640555193,
+        "oracle_symbol_evm_pct": 24.6112067089635,
+        "oracle_ser": 0.0009392076502732239,
+        "oracle_ber": 0.000611908014571949,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.212076606150458,
+          "1": 10.829474503126633,
+          "2": 11.250123169700752
+        }
+      },
+      "unet": {
+        "si_sdr_db": 11.555453165917365,
+        "waveform_evm_pct": 26.36654913188419,
+        "nmse_db": -11.873911400899841,
+        "runtime_ms": 46.36570309715656,
+        "oracle_symbol_evm_pct": 22.010019950296446,
+        "oracle_ser": 0.00065459927140255,
+        "oracle_ber": 0.00034153005464480874,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.659520641958101,
+          "1": 11.495474528756697,
+          "2": 11.511364327037304
+        }
+      }
+    },
+    "multipath": {
+      "mixture": {
+        "si_sdr_db": -1.3727178763855854,
+        "waveform_evm_pct": 72.79208387158857,
+        "nmse_db": 1.502300791221102,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 69.15932308156187,
+        "oracle_ser": 0.25017076502732244,
+        "oracle_ber": 0.18566427595628418,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -1.3727178763855854
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": -1.2871687649391028,
+        "waveform_evm_pct": 72.45376559505233,
+        "nmse_db": 1.4163216328656005,
+        "runtime_ms": 2.4718768399907276,
+        "oracle_symbol_evm_pct": 69.15970073396628,
+        "oracle_ser": 0.25017076502732244,
+        "oracle_ber": 0.18566427595628418,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -1.2871687649391028
+        }
+      },
+      "matched": {
+        "si_sdr_db": -0.743143745025448,
+        "waveform_evm_pct": 70.31621372975428,
+        "nmse_db": 0.3862042120293138,
+        "runtime_ms": 5.218197916595575,
+        "oracle_symbol_evm_pct": 68.83916022070984,
+        "oracle_ser": 0.24871926229508193,
+        "oracle_ber": 0.18434084699453548,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -0.743143745025448
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 4.09308180810756,
+        "waveform_evm_pct": 53.058431092885684,
+        "nmse_db": -5.2601234872699125,
+        "runtime_ms": 3.6538195078416416,
+        "oracle_symbol_evm_pct": 49.72513806847123,
+        "oracle_ser": 0.05652322404371585,
+        "oracle_ber": 0.03573258196721312,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 4.09308180810756
+        }
+      },
+      "notch": {
+        "si_sdr_db": 9.126991568728839,
+        "waveform_evm_pct": 33.51922170289733,
+        "nmse_db": -9.4425177898907,
+        "runtime_ms": 3.8627795729553327,
+        "oracle_symbol_evm_pct": 30.169968942594778,
+        "oracle_ser": 0.0034153005464480873,
+        "oracle_ber": 0.0017076502732240437,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 9.126991568728839
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 7.511055835879353,
+        "waveform_evm_pct": 39.71899162146433,
+        "nmse_db": -7.798872882268603,
+        "runtime_ms": 23.33028192192109,
+        "oracle_symbol_evm_pct": 35.07548843978588,
+        "oracle_ser": 0.016791894353369766,
+        "oracle_ber": 0.009747836976320583,
+        "training_seed_mean_si_sdr_db": {
+          "0": 7.887495677780666,
+          "1": 6.771228212313541,
+          "2": 7.874443617543854
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 11.086056853489007,
+        "waveform_evm_pct": 27.429057204556628,
+        "nmse_db": -11.421495805659362,
+        "runtime_ms": 24.42867472968323,
+        "oracle_symbol_evm_pct": 25.875454414783285,
+        "oracle_ser": 0.00011384335154826958,
+        "oracle_ber": 5.692167577413479e-05,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.169879525557405,
+          "1": 10.942064995909172,
+          "2": 11.146226039000444
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 11.004009349994524,
+        "waveform_evm_pct": 27.64060492252338,
+        "nmse_db": -11.272402690448963,
+        "runtime_ms": 23.135901035857387,
+        "oracle_symbol_evm_pct": 25.635356209970475,
+        "oracle_ser": 0.000142304189435337,
+        "oracle_ber": 7.11520947176685e-05,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.961959752307715,
+          "1": 11.119546738204171,
+          "2": 10.930521559471686
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 9.986873046560534,
+        "waveform_evm_pct": 30.916555753675375,
+        "nmse_db": -9.939157468636028,
+        "runtime_ms": 25.859740734126213,
+        "oracle_symbol_evm_pct": 29.017024719843,
+        "oracle_ser": 0.00677367941712204,
+        "oracle_ber": 0.004012978142076503,
+        "training_seed_mean_si_sdr_db": {
+          "0": 9.009284465271522,
+          "1": 10.227416748132667,
+          "2": 10.723917926277414
+        }
+      },
+      "unet": {
+        "si_sdr_db": 11.118591913061234,
+        "waveform_evm_pct": 27.248842580766805,
+        "nmse_db": -11.45086997240237,
+        "runtime_ms": 35.977010489053406,
+        "oracle_symbol_evm_pct": 25.475640390058587,
+        "oracle_ser": 0.00019922586520947178,
+        "oracle_ber": 9.961293260473589e-05,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.241261564911127,
+          "1": 11.077207215140694,
+          "2": 11.03730695913188
+        }
+      }
+    },
+    "nominal": {
+      "mixture": {
+        "si_sdr_db": -0.2914258258516786,
+        "waveform_evm_pct": 68.78383881127556,
+        "nmse_db": 0.41021595265934313,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 60.370325610054294,
+        "oracle_ser": 0.1455771857923497,
+        "oracle_ber": 0.09985484972677595,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -0.2914258258516786
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": -0.17638605703641833,
+        "waveform_evm_pct": 68.34983437578806,
+        "nmse_db": 0.29519672259789403,
+        "runtime_ms": 2.952861221274361,
+        "oracle_symbol_evm_pct": 60.370735581257684,
+        "oracle_ser": 0.1455771857923497,
+        "oracle_ber": 0.09985484972677595,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -0.17638605703641833
+        }
+      },
+      "matched": {
+        "si_sdr_db": 1.4379634198085096,
+        "waveform_evm_pct": 63.05941957341324,
+        "nmse_db": -1.7723255497211692,
+        "runtime_ms": 6.268232600026143,
+        "oracle_symbol_evm_pct": 60.38328803729339,
+        "oracle_ser": 0.14566256830601096,
+        "oracle_ber": 0.09998292349726774,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 1.4379634198085096
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 6.354904978416518,
+        "waveform_evm_pct": 43.54156903423791,
+        "nmse_db": -6.452419300690635,
+        "runtime_ms": 11.423298502146887,
+        "oracle_symbol_evm_pct": 38.56472467670434,
+        "oracle_ser": 0.010928961748633878,
+        "oracle_ber": 0.007300204918032786,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 6.354904978416518
+        }
+      },
+      "notch": {
+        "si_sdr_db": 11.43419917236845,
+        "waveform_evm_pct": 26.874975878768083,
+        "nmse_db": -11.650122883660396,
+        "runtime_ms": 7.177019220155974,
+        "oracle_symbol_evm_pct": 20.196380195048647,
+        "oracle_ser": 0.0018784153005464482,
+        "oracle_ber": 0.0011099726775956286,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 11.43419917236845
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 11.529864647194175,
+        "waveform_evm_pct": 26.818934617682643,
+        "nmse_db": -11.719123407807576,
+        "runtime_ms": 47.99372221977036,
+        "oracle_symbol_evm_pct": 18.711912576223718,
+        "oracle_ser": 0.0017645719489981786,
+        "oracle_ber": 0.0010388205828779599,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.631209859867836,
+          "1": 11.319311806005928,
+          "2": 11.639072275708768
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 10.901582258137344,
+        "waveform_evm_pct": 28.391694557888272,
+        "nmse_db": -11.191535316255239,
+        "runtime_ms": 54.11348727809835,
+        "oracle_symbol_evm_pct": 22.166863348723602,
+        "oracle_ser": 0.002163023679417122,
+        "oracle_ber": 0.0011526639344262295,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.404666903146405,
+          "1": 11.867818734853435,
+          "2": 10.432261136412189
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 11.140072421245051,
+        "waveform_evm_pct": 27.696437632910246,
+        "nmse_db": -11.364896012915628,
+        "runtime_ms": 45.263269131990256,
+        "oracle_symbol_evm_pct": 20.591732611693512,
+        "oracle_ser": 0.002248406193078324,
+        "oracle_ber": 0.0012095856102003642,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.75606971083053,
+          "1": 10.220883934948615,
+          "2": 11.443263617956012
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 1.3554980423672285,
+        "waveform_evm_pct": 63.16273079196915,
+        "nmse_db": -2.113215681437543,
+        "runtime_ms": 46.46701162467556,
+        "oracle_symbol_evm_pct": 54.830129263353165,
+        "oracle_ser": 0.09989754098360656,
+        "oracle_ber": 0.06888945810564663,
+        "training_seed_mean_si_sdr_db": {
+          "0": 0.14121150698548432,
+          "1": 0.9487639589051025,
+          "2": 2.9765186612110983
+        }
+      },
+      "unet": {
+        "si_sdr_db": 10.336807304582008,
+        "waveform_evm_pct": 30.425482447131806,
+        "nmse_db": -10.590648763630451,
+        "runtime_ms": 63.02701681852341,
+        "oracle_symbol_evm_pct": 23.466173002644965,
+        "oracle_ser": 0.005834471766848817,
+        "oracle_ber": 0.003529143897996357,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.305880832180728,
+          "1": 10.792203969871997,
+          "2": 8.912337111693295
+        }
+      }
+    },
+    "overlapping_digital_stress": {
+      "mixture": {
+        "si_sdr_db": -5.079579936758949,
+        "waveform_evm_pct": 87.31579306753416,
+        "nmse_db": 5.042604676177234,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 87.38322040382259,
+        "oracle_ser": 0.4538934426229508,
+        "oracle_ber": 0.33990778688524587,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -5.079579936758949
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": -5.041747459259381,
+        "waveform_evm_pct": 87.2242202804495,
+        "nmse_db": 5.004344613635935,
+        "runtime_ms": 2.2890625114087015,
+        "oracle_symbol_evm_pct": 87.38345130491113,
+        "oracle_ser": 0.4538934426229508,
+        "oracle_ber": 0.33990778688524587,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -5.041747459259381
+        }
+      },
+      "matched": {
+        "si_sdr_db": -5.185208803465272,
+        "waveform_evm_pct": 87.56689723767433,
+        "nmse_db": 4.628047308902021,
+        "runtime_ms": 2.86936984048225,
+        "oracle_symbol_evm_pct": 87.40166568941798,
+        "oracle_ser": 0.45432035519125674,
+        "oracle_ber": 0.3406335382513661,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -5.185208803465272
+        }
+      },
+      "wiener": {
+        "si_sdr_db": -5.850018128785642,
+        "waveform_evm_pct": 89.03243446072368,
+        "nmse_db": 2.3936783255432137,
+        "runtime_ms": 3.109675206360407,
+        "oracle_symbol_evm_pct": 89.08706645767153,
+        "oracle_ser": 0.4397199453551912,
+        "oracle_ber": 0.32850922131147536,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -5.850018128785642
+        }
+      },
+      "notch": {
+        "si_sdr_db": -5.068062693751248,
+        "waveform_evm_pct": 87.28707744737311,
+        "nmse_db": 4.979866693169222,
+        "runtime_ms": 3.4008021757472306,
+        "oracle_symbol_evm_pct": 87.44010816841256,
+        "oracle_ser": 0.4538934426229508,
+        "oracle_ber": 0.34054815573770486,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -5.068062693751248
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": -5.059295678503009,
+        "waveform_evm_pct": 87.26541842514878,
+        "nmse_db": 4.854982803593284,
+        "runtime_ms": 20.783887194637728,
+        "oracle_symbol_evm_pct": 87.41503599490753,
+        "oracle_ser": 0.45471880692167566,
+        "oracle_ber": 0.34042008196721313,
+        "training_seed_mean_si_sdr_db": {
+          "0": -5.069685490784669,
+          "1": -5.056548514375868,
+          "2": -5.051653030348488
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": -5.063576409903233,
+        "waveform_evm_pct": 87.27539281105798,
+        "nmse_db": 4.782109661934211,
+        "runtime_ms": 20.944128524408573,
+        "oracle_symbol_evm_pct": 87.42758136152581,
+        "oracle_ser": 0.4533811475409835,
+        "oracle_ber": 0.33962317850637525,
+        "training_seed_mean_si_sdr_db": {
+          "0": -5.053156966999969,
+          "1": -5.077165855654889,
+          "2": -5.060406407054841
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": -5.09375635699236,
+        "waveform_evm_pct": 87.34553277128674,
+        "nmse_db": 4.418807435595245,
+        "runtime_ms": 21.30837615146043,
+        "oracle_symbol_evm_pct": 87.49401845795495,
+        "oracle_ser": 0.45352345173041897,
+        "oracle_ber": 0.3398366347905282,
+        "training_seed_mean_si_sdr_db": {
+          "0": -5.094324838530997,
+          "1": -5.078075628048034,
+          "2": -5.108868604398047
+        }
+      },
+      "scratch": {
+        "si_sdr_db": -5.060065000469256,
+        "waveform_evm_pct": 87.26907802795255,
+        "nmse_db": 3.9618810251020813,
+        "runtime_ms": 22.290057286025128,
+        "oracle_symbol_evm_pct": 87.42453581100278,
+        "oracle_ser": 0.45372267759562845,
+        "oracle_ber": 0.33982240437158473,
+        "training_seed_mean_si_sdr_db": {
+          "0": -5.0559207361158425,
+          "1": -5.059129738793692,
+          "2": -5.065144526498233
+        }
+      },
+      "unet": {
+        "si_sdr_db": -5.051731351056988,
+        "waveform_evm_pct": 87.24697744979787,
+        "nmse_db": 4.934619826342459,
+        "runtime_ms": 26.804107141086003,
+        "oracle_symbol_evm_pct": 87.4071501040575,
+        "oracle_ser": 0.4534665300546448,
+        "oracle_ber": 0.339537795992714,
+        "training_seed_mean_si_sdr_db": {
+          "0": -5.051829443570106,
+          "1": -5.056958152777848,
+          "2": -5.04640645682301
+        }
+      }
+    },
+    "rate_10_samples_per_symbol": {
+      "mixture": {
+        "si_sdr_db": -0.27291647317429435,
+        "waveform_evm_pct": 68.61421552933002,
+        "nmse_db": 0.1739705812880441,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 45.039522054211865,
+        "oracle_ser": 0.14556277056277056,
+        "oracle_ber": 0.0900974025974026,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -0.27291647317429435
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": 1.5572296441546947,
+        "waveform_evm_pct": 63.04072018036799,
+        "nmse_db": -1.657434713049355,
+        "runtime_ms": 2.6093262907428048,
+        "oracle_symbol_evm_pct": 45.02602689523167,
+        "oracle_ser": 0.14556277056277056,
+        "oracle_ber": 0.0900974025974026,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 1.5572296441546947
+        }
+      },
+      "matched": {
+        "si_sdr_db": 5.5114194409457475,
+        "waveform_evm_pct": 48.66159021146677,
+        "nmse_db": -5.9603264420562025,
+        "runtime_ms": 3.2953419625603906,
+        "oracle_symbol_evm_pct": 45.043611988151405,
+        "oracle_ser": 0.14556277056277056,
+        "oracle_ber": 0.0900974025974026,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 5.5114194409457475
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 3.613633325996878,
+        "waveform_evm_pct": 54.03162037839845,
+        "nmse_db": -4.699315842096305,
+        "runtime_ms": 3.4044409112539142,
+        "oracle_symbol_evm_pct": 47.60720114818946,
+        "oracle_ser": 0.05541125541125541,
+        "oracle_ber": 0.04134199134199134,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 3.613633325996878
+        }
+      },
+      "notch": {
+        "si_sdr_db": 10.10244014456237,
+        "waveform_evm_pct": 32.83888358442999,
+        "nmse_db": -10.509783222635559,
+        "runtime_ms": 3.850402878015302,
+        "oracle_symbol_evm_pct": 29.26964206827999,
+        "oracle_ser": 0.01406926406926407,
+        "oracle_ber": 0.008982683982683983,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 10.10244014456237
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 8.417743856851153,
+        "waveform_evm_pct": 37.2288960430005,
+        "nmse_db": -8.749650331769793,
+        "runtime_ms": 22.446443913698506,
+        "oracle_symbol_evm_pct": 28.894511698174103,
+        "oracle_ser": 0.016053391053391056,
+        "oracle_ber": 0.012463924963924964,
+        "training_seed_mean_si_sdr_db": {
+          "0": 8.650956132631778,
+          "1": 7.781398534347834,
+          "2": 8.820876903573845
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 12.703709450770434,
+        "waveform_evm_pct": 24.775387941873774,
+        "nmse_db": -12.96856704590592,
+        "runtime_ms": 22.730278391261688,
+        "oracle_symbol_evm_pct": 21.873019726830464,
+        "oracle_ser": 0.0009018759018759018,
+        "oracle_ber": 0.000523088023088023,
+        "training_seed_mean_si_sdr_db": {
+          "0": 12.880045100499524,
+          "1": 12.530980007826608,
+          "2": 12.70010324398517
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 12.244924633876122,
+        "waveform_evm_pct": 25.64883772771919,
+        "nmse_db": -12.402785616111856,
+        "runtime_ms": 23.944410823686567,
+        "oracle_symbol_evm_pct": 22.293461267095132,
+        "oracle_ser": 0.0011183261183261182,
+        "oracle_ber": 0.0006854256854256853,
+        "training_seed_mean_si_sdr_db": {
+          "0": 12.254591913637972,
+          "1": 12.371197639251557,
+          "2": 12.108984348738836
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 12.223904034496513,
+        "waveform_evm_pct": 26.232008609167913,
+        "nmse_db": -11.58420797084127,
+        "runtime_ms": 20.762426513505893,
+        "oracle_symbol_evm_pct": 22.870228838494754,
+        "oracle_ser": 0.00468975468975469,
+        "oracle_ber": 0.002362914862914863,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.859767859194058,
+          "1": 12.203705856095723,
+          "2": 12.60823838819976
+        }
+      },
+      "unet": {
+        "si_sdr_db": 12.498123047633122,
+        "waveform_evm_pct": 25.178216763390935,
+        "nmse_db": -12.804492647339357,
+        "runtime_ms": 33.18756245425902,
+        "oracle_symbol_evm_pct": 21.940312705420567,
+        "oracle_ser": 0.0007936507936507937,
+        "oracle_ber": 0.00048701298701298696,
+        "training_seed_mean_si_sdr_db": {
+          "0": 12.461340796861256,
+          "1": 12.479393161333396,
+          "2": 12.553635184704717
+        }
+      }
+    },
+    "rate_6_samples_per_symbol": {
+      "mixture": {
+        "si_sdr_db": -2.630194225069532,
+        "waveform_evm_pct": 76.66745203323829,
+        "nmse_db": 2.63534940145504,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 76.96278070569116,
+        "oracle_ser": 0.364741641337386,
+        "oracle_ber": 0.24224290780141844,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -2.630194225069532
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": -2.5720005784033257,
+        "waveform_evm_pct": 76.43778184232893,
+        "nmse_db": 2.576354408382222,
+        "runtime_ms": 2.3695105531563363,
+        "oracle_symbol_evm_pct": 76.9632998792203,
+        "oracle_ser": 0.36480496453900707,
+        "oracle_ber": 0.242274569402229,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -2.5720005784033257
+        }
+      },
+      "matched": {
+        "si_sdr_db": -2.969703271349129,
+        "waveform_evm_pct": 77.74624853570367,
+        "nmse_db": 2.479058677669846,
+        "runtime_ms": 2.790418453514576,
+        "oracle_symbol_evm_pct": 76.9639376172788,
+        "oracle_ser": 0.36480496453900707,
+        "oracle_ber": 0.242274569402229,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -2.969703271349129
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 2.194660861659654,
+        "waveform_evm_pct": 59.89739529850275,
+        "nmse_db": -3.8204743417804004,
+        "runtime_ms": 3.026256871332104,
+        "oracle_symbol_evm_pct": 58.55637373908494,
+        "oracle_ser": 0.12531661600810537,
+        "oracle_ber": 0.08659447821681865,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 2.194660861659654
+        }
+      },
+      "notch": {
+        "si_sdr_db": 8.100026788966018,
+        "waveform_evm_pct": 37.246914341033424,
+        "nmse_db": -8.496902665117306,
+        "runtime_ms": 3.6990208366963393,
+        "oracle_symbol_evm_pct": 35.10859854238603,
+        "oracle_ser": 0.008421985815602837,
+        "oracle_ber": 0.004939209726443769,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 8.100026788966018
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 6.396059904606533,
+        "waveform_evm_pct": 44.208781525741706,
+        "nmse_db": -6.672374420265539,
+        "runtime_ms": 25.71887149760086,
+        "oracle_symbol_evm_pct": 42.59708835498698,
+        "oracle_ser": 0.03552431610942249,
+        "oracle_ber": 0.02159321175278622,
+        "training_seed_mean_si_sdr_db": {
+          "0": 6.761155360379395,
+          "1": 5.638811375869384,
+          "2": 6.7882129775708195
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 10.76931602191011,
+        "waveform_evm_pct": 28.070974560029356,
+        "nmse_db": -11.116329659042618,
+        "runtime_ms": 23.132278800605693,
+        "oracle_symbol_evm_pct": 28.3524005199426,
+        "oracle_ser": 0.0005065856129685916,
+        "oracle_ber": 0.0003166160081053698,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.784788427964328,
+          "1": 10.694747576524465,
+          "2": 10.828412061241536
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 10.721928513900188,
+        "waveform_evm_pct": 28.251870727335568,
+        "nmse_db": -11.043549075268611,
+        "runtime_ms": 24.233993044213598,
+        "oracle_symbol_evm_pct": 28.000109406988347,
+        "oracle_ser": 0.000527693346842283,
+        "oracle_ber": 0.0002849544072948328,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.680255614525999,
+          "1": 10.767289088560625,
+          "2": 10.718240838613937
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 10.026729351478329,
+        "waveform_evm_pct": 30.550305939216944,
+        "nmse_db": -10.044720347254106,
+        "runtime_ms": 21.842013942659833,
+        "oracle_symbol_evm_pct": 30.741436049410407,
+        "oracle_ser": 0.0054035798716649775,
+        "oracle_ber": 0.002986744343127322,
+        "training_seed_mean_si_sdr_db": {
+          "0": 9.136306541351845,
+          "1": 10.2600485385336,
+          "2": 10.683832974549537
+        }
+      },
+      "unet": {
+        "si_sdr_db": 10.83558953431993,
+        "waveform_evm_pct": 27.87842039742132,
+        "nmse_db": -11.168542740338829,
+        "runtime_ms": 33.18188203168878,
+        "oracle_symbol_evm_pct": 27.73972930168397,
+        "oracle_ser": 0.0006121242823370483,
+        "oracle_ber": 0.0003588314758527524,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.899053326642226,
+          "1": 10.889801053872851,
+          "2": 10.717914222444705
+        }
+      }
+    },
+    "shift": {
+      "mixture": {
+        "si_sdr_db": -4.350597510548883,
+        "waveform_evm_pct": 82.3579285966444,
+        "nmse_db": 4.511113738888246,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 76.59362552634839,
+        "oracle_ser": 0.34451844262295084,
+        "oracle_ber": 0.2509392076502732,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -4.350597510548883
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": -4.183498996246011,
+        "waveform_evm_pct": 81.8388220780582,
+        "nmse_db": 4.3438093509228795,
+        "runtime_ms": 2.962286482215859,
+        "oracle_symbol_evm_pct": 76.59308451685895,
+        "oracle_ser": 0.344603825136612,
+        "oracle_ber": 0.2509818989071038,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -4.183498996246011
+        }
+      },
+      "matched": {
+        "si_sdr_db": -3.291144994262062,
+        "waveform_evm_pct": 78.04726706678552,
+        "nmse_db": 2.9860158858500028,
+        "runtime_ms": 10.041684043244459,
+        "oracle_symbol_evm_pct": 76.6408862664171,
+        "oracle_ser": 0.34366461748633875,
+        "oracle_ber": 0.24995730874316938,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -3.291144994262062
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 1.3164518861094534,
+        "waveform_evm_pct": 63.18599137780681,
+        "nmse_db": -3.1935570493386756,
+        "runtime_ms": 6.350114538993997,
+        "oracle_symbol_evm_pct": 59.27828122847961,
+        "oracle_ser": 0.1407957650273224,
+        "oracle_ber": 0.09477459016393443,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 1.3164518861094534
+        }
+      },
+      "notch": {
+        "si_sdr_db": 7.787015614359845,
+        "waveform_evm_pct": 38.849163825858746,
+        "nmse_db": -8.254224897735872,
+        "runtime_ms": 5.757008659808586,
+        "oracle_symbol_evm_pct": 34.874295006139995,
+        "oracle_ser": 0.011526639344262296,
+        "oracle_ber": 0.006830601092896175,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 7.787015614359845
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 5.174308759367252,
+        "waveform_evm_pct": 48.842822497458236,
+        "nmse_db": -5.512940389746546,
+        "runtime_ms": 53.35814700972858,
+        "oracle_symbol_evm_pct": 43.60718768554635,
+        "oracle_ser": 0.053164845173041896,
+        "oracle_ber": 0.03191882969034608,
+        "training_seed_mean_si_sdr_db": {
+          "0": 5.579599024858581,
+          "1": 4.303961809996709,
+          "2": 5.639365443246466
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 10.111192799291754,
+        "waveform_evm_pct": 30.568889144487414,
+        "nmse_db": -10.548039982798002,
+        "runtime_ms": 51.19412787866572,
+        "oracle_symbol_evm_pct": 28.344109689051912,
+        "oracle_ser": 0.0015938069216757742,
+        "oracle_ber": 0.0010957422586520948,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.158376147110326,
+          "1": 10.03424939239538,
+          "2": 10.140952858369557
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 10.017568065125014,
+        "waveform_evm_pct": 30.80978964563756,
+        "nmse_db": -10.425465121875156,
+        "runtime_ms": 48.964235006779845,
+        "oracle_symbol_evm_pct": 28.200335487443645,
+        "oracle_ser": 0.001223816029143898,
+        "oracle_ber": 0.0007542122040072861,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.00347059019579,
+          "1": 10.0366695361261,
+          "2": 10.012564069053154
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 9.890658557118812,
+        "waveform_evm_pct": 31.34049283158521,
+        "nmse_db": -9.924736711242755,
+        "runtime_ms": 41.91864523454569,
+        "oracle_symbol_evm_pct": 29.091836438715323,
+        "oracle_ser": 0.002163023679417122,
+        "oracle_ber": 0.001366120218579235,
+        "training_seed_mean_si_sdr_db": {
+          "0": 9.646310221997885,
+          "1": 9.952691538077714,
+          "2": 10.072973911280837
+        }
+      },
+      "unet": {
+        "si_sdr_db": 10.193246886982145,
+        "waveform_evm_pct": 30.214163311935586,
+        "nmse_db": -10.612672738704113,
+        "runtime_ms": 70.02574185349255,
+        "oracle_symbol_evm_pct": 27.581847409175126,
+        "oracle_ser": 0.0008822859744990893,
+        "oracle_ber": 0.0005549863387978143,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.185094198887613,
+          "1": 10.255873312944926,
+          "2": 10.1387731491139
+        }
+      }
+    },
+    "sir_-15": {
+      "mixture": {
+        "si_sdr_db": -14.831772897996515,
+        "waveform_evm_pct": 98.29718466328164,
+        "nmse_db": 15.002565179304925,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 94.69388348170418,
+        "oracle_ser": 0.5361168032786886,
+        "oracle_ber": 0.4033469945355191,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -14.831772897996515
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": -14.710989673126846,
+        "waveform_evm_pct": 98.24241997768068,
+        "nmse_db": 14.882054339906594,
+        "runtime_ms": 2.5603924829435223,
+        "oracle_symbol_evm_pct": 94.69158522053748,
+        "oracle_ser": 0.5361168032786886,
+        "oracle_ber": 0.4033469945355191,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -14.710989673126846
+        }
+      },
+      "matched": {
+        "si_sdr_db": -13.11208899744164,
+        "waveform_evm_pct": 95.48267684039119,
+        "nmse_db": 12.757682008527203,
+        "runtime_ms": 3.747102411580272,
+        "oracle_symbol_evm_pct": 94.8307176268642,
+        "oracle_ser": 0.5363729508196721,
+        "oracle_ber": 0.4034750683060109,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -13.11208899744164
+        }
+      },
+      "wiener": {
+        "si_sdr_db": -7.10122257688932,
+        "waveform_evm_pct": 86.28620179501621,
+        "nmse_db": 3.7272629849159826,
+        "runtime_ms": 3.457116244438415,
+        "oracle_symbol_evm_pct": 74.01854099455115,
+        "oracle_ser": 0.28671448087431695,
+        "oracle_ber": 0.20521687158469945,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -7.10122257688932
+        }
+      },
+      "notch": {
+        "si_sdr_db": 4.550050744588575,
+        "waveform_evm_pct": 51.112216146314665,
+        "nmse_db": -5.160422822631463,
+        "runtime_ms": 3.68529154608647,
+        "oracle_symbol_evm_pct": 33.926611033089294,
+        "oracle_ser": 0.01801571038251366,
+        "oracle_ber": 0.010715505464480876,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 4.550050744588575
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": -1.9570737903245516,
+        "waveform_evm_pct": 76.33878098202119,
+        "nmse_db": 1.477946552041232,
+        "runtime_ms": 23.476243020720883,
+        "oracle_symbol_evm_pct": 61.8912514691114,
+        "oracle_ser": 0.16063296903460836,
+        "oracle_ber": 0.1063012295081967,
+        "training_seed_mean_si_sdr_db": {
+          "0": -1.5004735137390757,
+          "1": -3.1167278815417716,
+          "2": -1.254019975692807
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 6.787079602537319,
+        "waveform_evm_pct": 41.848374643225256,
+        "nmse_db": -7.411440301635874,
+        "runtime_ms": 22.75122685306188,
+        "oracle_symbol_evm_pct": 28.04641028525544,
+        "oracle_ser": 0.0032729963570127503,
+        "oracle_ber": 0.0016934198542805099,
+        "training_seed_mean_si_sdr_db": {
+          "0": 6.773092872470959,
+          "1": 6.87911498740483,
+          "2": 6.70903094773617
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 6.199348514516091,
+        "waveform_evm_pct": 44.17308486004437,
+        "nmse_db": -6.915297878589693,
+        "runtime_ms": 21.021361692368778,
+        "oracle_symbol_evm_pct": 27.75999283693382,
+        "oracle_ser": 0.0035576047358834247,
+        "oracle_ber": 0.0019353369763205831,
+        "training_seed_mean_si_sdr_db": {
+          "0": 6.378862718091875,
+          "1": 5.846888315882598,
+          "2": 6.372294509573798
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 6.478371508526728,
+        "waveform_evm_pct": 43.10943067674208,
+        "nmse_db": -7.285309518443209,
+        "runtime_ms": 20.124275453983703,
+        "oracle_symbol_evm_pct": 30.574209721364394,
+        "oracle_ser": 0.01810109289617486,
+        "oracle_ber": 0.010260132058287796,
+        "training_seed_mean_si_sdr_db": {
+          "0": 5.838454158788626,
+          "1": 6.64344033022893,
+          "2": 6.953220036562629
+        }
+      },
+      "unet": {
+        "si_sdr_db": 6.521055126121977,
+        "waveform_evm_pct": 42.89067131844359,
+        "nmse_db": -7.111232811940521,
+        "runtime_ms": 26.38148323684517,
+        "oracle_symbol_evm_pct": 27.159755701906327,
+        "oracle_ser": 0.0026753187613843352,
+        "oracle_ber": 0.0013803506375227688,
+        "training_seed_mean_si_sdr_db": {
+          "0": 5.928559623726984,
+          "1": 6.641544909948635,
+          "2": 6.993060844690315
+        }
+      }
+    },
+    "sir_-5": {
+      "mixture": {
+        "si_sdr_db": -5.005634288318139,
+        "waveform_evm_pct": 87.14960905859645,
+        "nmse_db": 5.035828436872383,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 74.56374912526144,
+        "oracle_ser": 0.366547131147541,
+        "oracle_ber": 0.24013831967213115,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -5.005634288318139
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": -4.886427907145042,
+        "waveform_evm_pct": 86.84853063133669,
+        "nmse_db": 4.915936771008188,
+        "runtime_ms": 2.742984375800006,
+        "oracle_symbol_evm_pct": 74.56299977137019,
+        "oracle_ser": 0.366547131147541,
+        "oracle_ber": 0.24013831967213115,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -4.886427907145042
+        }
+      },
+      "matched": {
+        "si_sdr_db": -2.059209158552545,
+        "waveform_evm_pct": 76.56648028777158,
+        "nmse_db": 1.6389951440096642,
+        "runtime_ms": 3.186180673462028,
+        "oracle_symbol_evm_pct": 74.75706222357951,
+        "oracle_ser": 0.368254781420765,
+        "oracle_ber": 0.24133367486338794,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -2.059209158552545
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 2.463130065292813,
+        "waveform_evm_pct": 58.78570165798023,
+        "nmse_db": -3.8984534575711707,
+        "runtime_ms": 3.3716840019527203,
+        "oracle_symbol_evm_pct": 52.40422788645552,
+        "oracle_ser": 0.10749658469945356,
+        "oracle_ber": 0.07206284153005464,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 2.463130065292813
+        }
+      },
+      "notch": {
+        "si_sdr_db": 9.989532327969085,
+        "waveform_evm_pct": 31.182635846367685,
+        "nmse_db": -10.305776244543218,
+        "runtime_ms": 3.4320782530509555,
+        "oracle_symbol_evm_pct": 26.366842976067932,
+        "oracle_ser": 0.00589139344262295,
+        "oracle_ber": 0.003287226775956284,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 9.989532327969085
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 6.990504398247712,
+        "waveform_evm_pct": 42.07208092450058,
+        "nmse_db": -7.231795986642548,
+        "runtime_ms": 22.322005204235513,
+        "oracle_symbol_evm_pct": 33.733862916725585,
+        "oracle_ser": 0.03469376138433515,
+        "oracle_ber": 0.02154485428051002,
+        "training_seed_mean_si_sdr_db": {
+          "0": 7.413366296090352,
+          "1": 6.124256905314835,
+          "2": 7.433889993337947
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 12.029346095264486,
+        "waveform_evm_pct": 25.18438719701717,
+        "nmse_db": -12.329366186887514,
+        "runtime_ms": 21.38497335868629,
+        "oracle_symbol_evm_pct": 23.75412571497642,
+        "oracle_ser": 0.0006261384335154827,
+        "oracle_ber": 0.00031306921675774133,
+        "training_seed_mean_si_sdr_db": {
+          "0": 12.064813210724585,
+          "1": 11.946776717422805,
+          "2": 12.076448357646072
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 11.953639420897575,
+        "waveform_evm_pct": 25.28820573840009,
+        "nmse_db": -12.216933963345529,
+        "runtime_ms": 30.084266775197143,
+        "oracle_symbol_evm_pct": 23.35501717818282,
+        "oracle_ser": 0.0006261384335154828,
+        "oracle_ber": 0.0003130692167577414,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.928977596621033,
+          "1": 11.963436930359777,
+          "2": 11.968503735711915
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 11.372300663129254,
+        "waveform_evm_pct": 27.16441450077663,
+        "nmse_db": -11.1119193146315,
+        "runtime_ms": 21.486570486255612,
+        "oracle_symbol_evm_pct": 24.947328454476107,
+        "oracle_ser": 0.009164389799635702,
+        "oracle_ber": 0.004752959927140255,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.58359981460297,
+          "1": 11.61921053271204,
+          "2": 11.914091642072746
+        }
+      },
+      "unet": {
+        "si_sdr_db": 12.09960851872939,
+        "waveform_evm_pct": 24.89504510742988,
+        "nmse_db": -12.381901239861495,
+        "runtime_ms": 30.14208219085251,
+        "oracle_symbol_evm_pct": 23.105873473429977,
+        "oracle_ser": 0.00042691256830601097,
+        "oracle_ber": 0.00021345628415300548,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.949732954368443,
+          "1": 12.24070746114385,
+          "2": 12.108385140675873
+        }
+      }
+    },
+    "sir_15": {
+      "mixture": {
+        "si_sdr_db": 13.142191650953997,
+        "waveform_evm_pct": 21.89712242149489,
+        "nmse_db": -13.130655405483338,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 19.03070398701034,
+        "oracle_ser": 0.0,
+        "oracle_ber": 0.0,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 13.142191650953997
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": 14.673684616461472,
+        "waveform_evm_pct": 18.237496076814846,
+        "nmse_db": -14.661181404357023,
+        "runtime_ms": 2.7280242065899074,
+        "oracle_symbol_evm_pct": 19.030903751272973,
+        "oracle_ser": 0.0,
+        "oracle_ber": 0.0,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 14.673684616461472
+        }
+      },
+      "matched": {
+        "si_sdr_db": 13.141546069405445,
+        "waveform_evm_pct": 21.71298568668236,
+        "nmse_db": -13.32313031426711,
+        "runtime_ms": 3.5410660833197958,
+        "oracle_symbol_evm_pct": 19.17020920795596,
+        "oracle_ser": 0.0,
+        "oracle_ber": 0.0,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 13.141546069405445
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 7.5411823824461885,
+        "waveform_evm_pct": 38.73132614732878,
+        "nmse_db": -7.012191067997512,
+        "runtime_ms": 3.678305593590873,
+        "oracle_symbol_evm_pct": 38.87450418034674,
+        "oracle_ser": 0.012465846994535517,
+        "oracle_ber": 0.006702527322404371,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 7.5411823824461885
+        }
+      },
+      "notch": {
+        "si_sdr_db": 14.150833542036466,
+        "waveform_evm_pct": 19.339395794275685,
+        "nmse_db": -14.20582204808534,
+        "runtime_ms": 3.664883527865944,
+        "oracle_symbol_evm_pct": 19.863198685769103,
+        "oracle_ser": 0.0,
+        "oracle_ber": 0.0,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 14.150833542036466
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 14.203445010636436,
+        "waveform_evm_pct": 19.22939090328241,
+        "nmse_db": -14.336789287703876,
+        "runtime_ms": 22.83331649636643,
+        "oracle_symbol_evm_pct": 19.73103695605457,
+        "oracle_ser": 0.0,
+        "oracle_ber": 0.0,
+        "training_seed_mean_si_sdr_db": {
+          "0": 13.974012792248175,
+          "1": 14.28821325098474,
+          "2": 14.348108988676392
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 14.092730942511478,
+        "waveform_evm_pct": 19.446490450364244,
+        "nmse_db": -14.235500676779035,
+        "runtime_ms": 24.28956245421432,
+        "oracle_symbol_evm_pct": 19.501582033630534,
+        "oracle_ser": 0.0,
+        "oracle_ber": 0.0,
+        "training_seed_mean_si_sdr_db": {
+          "0": 14.444920464965742,
+          "1": 13.722903600672709,
+          "2": 14.11036876189599
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 13.578387253967529,
+        "waveform_evm_pct": 20.6037554817292,
+        "nmse_db": -13.543849730008352,
+        "runtime_ms": 27.129705995321274,
+        "oracle_symbol_evm_pct": 20.25050899436805,
+        "oracle_ser": 0.0,
+        "oracle_ber": 0.0,
+        "training_seed_mean_si_sdr_db": {
+          "0": 13.61447103448311,
+          "1": 13.678976212129617,
+          "2": 13.44171451528986
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 14.674203534671348,
+        "waveform_evm_pct": 18.23273656132501,
+        "nmse_db": -13.685740610418549,
+        "runtime_ms": 23.003894069309656,
+        "oracle_symbol_evm_pct": 18.705513511257326,
+        "oracle_ser": 0.0,
+        "oracle_ber": 0.0,
+        "training_seed_mean_si_sdr_db": {
+          "0": 14.687240310722084,
+          "1": 14.712837806825446,
+          "2": 14.62253248646652
+        }
+      },
+      "unet": {
+        "si_sdr_db": 14.007461040333107,
+        "waveform_evm_pct": 19.645275021013624,
+        "nmse_db": -14.113677258895827,
+        "runtime_ms": 30.774476299282266,
+        "oracle_symbol_evm_pct": 19.88663265464615,
+        "oracle_ser": 0.0,
+        "oracle_ber": 0.0,
+        "training_seed_mean_si_sdr_db": {
+          "0": 14.090949952442713,
+          "1": 13.708203396635634,
+          "2": 14.22322977192097
+        }
+      }
+    },
+    "sir_5": {
+      "mixture": {
+        "si_sdr_db": 4.699247325499151,
+        "waveform_evm_pct": 50.316209810496794,
+        "nmse_db": -4.676061533919711,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 49.61513017321469,
+        "oracle_ser": 0.01596653005464481,
+        "oracle_ber": 0.007983265027322405,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 4.699247325499151
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": 4.960690282596436,
+        "waveform_evm_pct": 49.18551212695336,
+        "nmse_db": -4.937563152696242,
+        "runtime_ms": 2.555677133689945,
+        "oracle_symbol_evm_pct": 49.615744590161604,
+        "oracle_ser": 0.01605191256830601,
+        "oracle_ber": 0.008025956284153006,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 4.960690282596436
+        }
+      },
+      "matched": {
+        "si_sdr_db": 4.442726122833823,
+        "waveform_evm_pct": 51.43527583995982,
+        "nmse_db": -4.895044283448326,
+        "runtime_ms": 2.9202030952243754,
+        "oracle_symbol_evm_pct": 49.65886681379612,
+        "oracle_ser": 0.01605191256830601,
+        "oracle_ber": 0.008025956284153006,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 4.442726122833823
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 5.273900720332591,
+        "waveform_evm_pct": 47.969308822156194,
+        "nmse_db": -5.986035452921108,
+        "runtime_ms": 3.4622741756417477,
+        "oracle_symbol_evm_pct": 48.39153980649407,
+        "oracle_ser": 0.05276639344262296,
+        "oracle_ber": 0.02962773224043716,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 5.273900720332591
+        }
+      },
+      "notch": {
+        "si_sdr_db": 7.068616486896263,
+        "waveform_evm_pct": 40.88213979602517,
+        "nmse_db": -7.340464287052785,
+        "runtime_ms": 3.579998330678791,
+        "oracle_symbol_evm_pct": 41.786198791878824,
+        "oracle_ser": 0.01767418032786885,
+        "oracle_ber": 0.008879781420765029,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 7.068616486896263
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 8.027712510824948,
+        "waveform_evm_pct": 37.34088621505943,
+        "nmse_db": -8.324690892568311,
+        "runtime_ms": 21.37627541701982,
+        "oracle_symbol_evm_pct": 38.08231392772626,
+        "oracle_ser": 0.007997495446265938,
+        "oracle_ber": 0.003998747723132969,
+        "training_seed_mean_si_sdr_db": {
+          "0": 8.201128110439715,
+          "1": 7.597487544222221,
+          "2": 8.284521877812907
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 11.341904334416318,
+        "waveform_evm_pct": 26.355349899739778,
+        "nmse_db": -11.611330750444822,
+        "runtime_ms": 21.644084387743433,
+        "oracle_symbol_evm_pct": 27.83329336900262,
+        "oracle_ser": 0.00022768670309653916,
+        "oracle_ber": 0.00011384335154826958,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.415266433605774,
+          "1": 11.322596480845775,
+          "2": 11.287850088797398
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 11.338227982500408,
+        "waveform_evm_pct": 26.415219619551344,
+        "nmse_db": -11.488816521606784,
+        "runtime_ms": 20.641243618835386,
+        "oracle_symbol_evm_pct": 27.756710596241252,
+        "oracle_ser": 0.0005407559198542805,
+        "oracle_ber": 0.00027037795992714025,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.448610318584079,
+          "1": 11.318274924048595,
+          "2": 11.247798704868556
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 10.383666498326567,
+        "waveform_evm_pct": 29.254146428781343,
+        "nmse_db": -10.325327788175532,
+        "runtime_ms": 19.406663232883957,
+        "oracle_symbol_evm_pct": 30.41610874777386,
+        "oracle_ser": 0.0006261384335154827,
+        "oracle_ber": 0.00031306921675774133,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.06254020411612,
+          "1": 10.277520692557014,
+          "2": 10.810938598306564
+        }
+      },
+      "unet": {
+        "si_sdr_db": 11.089137183683635,
+        "waveform_evm_pct": 27.067575508702735,
+        "nmse_db": -11.394738933112372,
+        "runtime_ms": 28.525743108022855,
+        "oracle_symbol_evm_pct": 28.564311015879575,
+        "oracle_ser": 0.0005122950819672131,
+        "oracle_ber": 0.00025614754098360657,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.414470534891834,
+          "1": 10.824752708891898,
+          "2": 11.028188307267172
+        }
+      }
+    },
+    "snr_0": {
+      "mixture": {
+        "si_sdr_db": -4.72738248269937,
+        "waveform_evm_pct": 84.42248647257628,
+        "nmse_db": 4.749432780611567,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 69.00724847936249,
+        "oracle_ser": 0.23471653005464485,
+        "oracle_ber": 0.15975068306010928,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -4.72738248269937
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": -2.4830100973096987,
+        "waveform_evm_pct": 76.12447969372072,
+        "nmse_db": 2.507435943694619,
+        "runtime_ms": 2.878197808361923,
+        "oracle_symbol_evm_pct": 69.00793287517416,
+        "oracle_ser": 0.23488729508196723,
+        "oracle_ber": 0.1598360655737705,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -2.4830100973096987
+        }
+      },
+      "matched": {
+        "si_sdr_db": -0.7195154150846057,
+        "waveform_evm_pct": 70.8499943585595,
+        "nmse_db": 0.2996307580343431,
+        "runtime_ms": 4.496775970134574,
+        "oracle_symbol_evm_pct": 69.10891156593446,
+        "oracle_ser": 0.235228825136612,
+        "oracle_ber": 0.15979337431693988,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -0.7195154150846057
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 0.46615153900807665,
+        "waveform_evm_pct": 66.41256004575912,
+        "nmse_db": -2.632682063438706,
+        "runtime_ms": 3.9089756222286574,
+        "oracle_symbol_evm_pct": 60.10084507914303,
+        "oracle_ser": 0.11654713114754099,
+        "oracle_ber": 0.08307718579234973,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 0.46615153900807665
+        }
+      },
+      "notch": {
+        "si_sdr_db": 4.933658364251677,
+        "waveform_evm_pct": 49.36240622216129,
+        "nmse_db": -5.283759062682187,
+        "runtime_ms": 4.5184184273239225,
+        "oracle_symbol_evm_pct": 43.58053329624005,
+        "oracle_ser": 0.024760928961748637,
+        "oracle_ber": 0.013661202185792351,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 4.933658364251677
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 3.272807844988163,
+        "waveform_evm_pct": 56.388432730943705,
+        "nmse_db": -3.53056194460471,
+        "runtime_ms": 23.32393916407859,
+        "oracle_symbol_evm_pct": 48.63964276977627,
+        "oracle_ser": 0.04764344262295082,
+        "oracle_ber": 0.029442736794171222,
+        "training_seed_mean_si_sdr_db": {
+          "0": 3.4703183266942026,
+          "1": 2.79522588124388,
+          "2": 3.5528793270264045
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 5.804938765495685,
+        "waveform_evm_pct": 45.663625014342294,
+        "nmse_db": -6.333683976570757,
+        "runtime_ms": 33.67169675604802,
+        "oracle_symbol_evm_pct": 40.66551533914479,
+        "oracle_ser": 0.013348132969034608,
+        "oracle_ber": 0.00727174408014572,
+        "training_seed_mean_si_sdr_db": {
+          "0": 5.791983588559639,
+          "1": 5.805191436605327,
+          "2": 5.817641271322088
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 5.777904803484977,
+        "waveform_evm_pct": 45.771361339476925,
+        "nmse_db": -6.378102367200585,
+        "runtime_ms": 30.089652707425152,
+        "oracle_symbol_evm_pct": 40.51235938464258,
+        "oracle_ser": 0.013405054644808744,
+        "oracle_ber": 0.007371357012750456,
+        "training_seed_mean_si_sdr_db": {
+          "0": 5.780491318536722,
+          "1": 5.768582643334196,
+          "2": 5.784640448584013
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 5.308530385082657,
+        "waveform_evm_pct": 47.78381894857054,
+        "nmse_db": -6.200551775377651,
+        "runtime_ms": 27.660478567769232,
+        "oracle_symbol_evm_pct": 42.76019476467965,
+        "oracle_ser": 0.020520264116575593,
+        "oracle_ber": 0.011057035519125683,
+        "training_seed_mean_si_sdr_db": {
+          "0": 4.924481006623596,
+          "1": 5.365405393973302,
+          "2": 5.63570475465107
+        }
+      },
+      "unet": {
+        "si_sdr_db": 5.72392490931877,
+        "waveform_evm_pct": 46.00047551390152,
+        "nmse_db": -6.221256086300083,
+        "runtime_ms": 42.4854681946777,
+        "oracle_symbol_evm_pct": 40.819781351621565,
+        "oracle_ser": 0.013718123861566485,
+        "oracle_ber": 0.0073571265938069215,
+        "training_seed_mean_si_sdr_db": {
+          "0": 5.725243309809758,
+          "1": 5.74123787094003,
+          "2": 5.70529354720652
+        }
+      }
+    },
+    "snr_10": {
+      "mixture": {
+        "si_sdr_db": -2.5069599229436696,
+        "waveform_evm_pct": 75.40206093421682,
+        "nmse_db": 2.5252876825254718,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 62.610484088276564,
+        "oracle_ser": 0.23958333333333334,
+        "oracle_ber": 0.17614412568306012,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -2.5069599229436696
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": -1.8247195428518623,
+        "waveform_evm_pct": 72.78254775197503,
+        "nmse_db": 1.843460585979857,
+        "runtime_ms": 3.032767393354637,
+        "oracle_symbol_evm_pct": 62.60926934300818,
+        "oracle_ser": 0.23958333333333334,
+        "oracle_ber": 0.17614412568306012,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -1.8247195428518623
+        }
+      },
+      "matched": {
+        "si_sdr_db": 0.3151964590972088,
+        "waveform_evm_pct": 64.8853234451608,
+        "nmse_db": -0.7278409739172207,
+        "runtime_ms": 6.058543406349297,
+        "oracle_symbol_evm_pct": 63.27322310149774,
+        "oracle_ser": 0.24188866120218577,
+        "oracle_ber": 0.17780908469945356,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 0.3151964590972088
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 2.0610529505772694,
+        "waveform_evm_pct": 59.9572010528205,
+        "nmse_db": -3.5862443146850382,
+        "runtime_ms": 4.630956629019541,
+        "oracle_symbol_evm_pct": 53.396561933098745,
+        "oracle_ser": 0.11330259562841531,
+        "oracle_ber": 0.07368510928961748,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 2.0610529505772694
+        }
+      },
+      "notch": {
+        "si_sdr_db": 9.113256599869686,
+        "waveform_evm_pct": 34.22130184431458,
+        "nmse_db": -9.439352769534093,
+        "runtime_ms": 5.105784764358153,
+        "oracle_symbol_evm_pct": 29.783745570506312,
+        "oracle_ser": 0.008111338797814206,
+        "oracle_ber": 0.004610655737704918,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 9.113256599869686
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 6.503003231992899,
+        "waveform_evm_pct": 43.988590109029445,
+        "nmse_db": -6.781184902643739,
+        "runtime_ms": 40.533399872300734,
+        "oracle_symbol_evm_pct": 36.2054888789664,
+        "oracle_ser": 0.040841302367941715,
+        "oracle_ber": 0.02404940801457195,
+        "training_seed_mean_si_sdr_db": {
+          "0": 6.819450232766218,
+          "1": 5.7558160929503615,
+          "2": 6.93374337026212
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 10.863333637427095,
+        "waveform_evm_pct": 28.587697915031427,
+        "nmse_db": -11.246144707069933,
+        "runtime_ms": 32.51593351241253,
+        "oracle_symbol_evm_pct": 25.9381585170568,
+        "oracle_ser": 0.0012522768670309653,
+        "oracle_ber": 0.0006261384335154827,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.862360104479942,
+          "1": 10.809887791648691,
+          "2": 10.91775301615265
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 10.733333075861905,
+        "waveform_evm_pct": 28.89653326493226,
+        "nmse_db": -11.095157905282608,
+        "runtime_ms": 38.3920011162344,
+        "oracle_symbol_evm_pct": 25.65997627957255,
+        "oracle_ser": 0.0011953551912568306,
+        "oracle_ber": 0.0005976775956284153,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.721502264410054,
+          "1": 10.757559045232803,
+          "2": 10.720937917942853
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 10.25604916508117,
+        "waveform_evm_pct": 30.319148511487974,
+        "nmse_db": -10.318429766410324,
+        "runtime_ms": 42.58436581423868,
+        "oracle_symbol_evm_pct": 27.428245178384216,
+        "oracle_ser": 0.0018784153005464478,
+        "oracle_ber": 0.0009392076502732239,
+        "training_seed_mean_si_sdr_db": {
+          "0": 9.973041189518415,
+          "1": 10.256334164622613,
+          "2": 10.538772141102477
+        }
+      },
+      "unet": {
+        "si_sdr_db": 10.77439548243302,
+        "waveform_evm_pct": 28.721301520392924,
+        "nmse_db": -11.135381449473162,
+        "runtime_ms": 56.449527785945165,
+        "oracle_symbol_evm_pct": 25.668733846916933,
+        "oracle_ser": 0.0016791894353369763,
+        "oracle_ber": 0.0008395947176684882,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.821164743539654,
+          "1": 10.820032424847119,
+          "2": 10.681989278912289
+        }
+      }
+    },
+    "snr_20": {
+      "mixture": {
+        "si_sdr_db": -2.7235849920132646,
+        "waveform_evm_pct": 76.19131661572395,
+        "nmse_db": 2.6721932800806893,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 71.42116841996078,
+        "oracle_ser": 0.2573428961748634,
+        "oracle_ber": 0.20043545081967215,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -2.7235849920132646
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": -2.6436312267908417,
+        "waveform_evm_pct": 75.96479877237108,
+        "nmse_db": 2.5922705952260023,
+        "runtime_ms": 4.462564237959062,
+        "oracle_symbol_evm_pct": 71.4216455542574,
+        "oracle_ser": 0.2573428961748634,
+        "oracle_ber": 0.20043545081967215,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -2.6436312267908417
+        }
+      },
+      "matched": {
+        "si_sdr_db": -1.713772092015514,
+        "waveform_evm_pct": 72.78476813939949,
+        "nmse_db": 1.2243196682857143,
+        "runtime_ms": 12.392012290850593,
+        "oracle_symbol_evm_pct": 71.23820034994846,
+        "oracle_ser": 0.25623292349726773,
+        "oracle_ber": 0.19958162568306012,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -1.713772092015514
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 3.5523502053325147,
+        "waveform_evm_pct": 54.27288182901051,
+        "nmse_db": -4.656323012341989,
+        "runtime_ms": 11.722260290601602,
+        "oracle_symbol_evm_pct": 50.35066827461559,
+        "oracle_ser": 0.07496584699453551,
+        "oracle_ber": 0.048155737704918024,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 3.5523502053325147
+        }
+      },
+      "notch": {
+        "si_sdr_db": 9.04930497884195,
+        "waveform_evm_pct": 34.33417804740731,
+        "nmse_db": -9.4401249754425,
+        "runtime_ms": 12.379531200470714,
+        "oracle_symbol_evm_pct": 29.779243497418634,
+        "oracle_ser": 0.005806010928961748,
+        "oracle_ber": 0.0029456967213114756,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 9.04930497884195
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 7.1470139841311475,
+        "waveform_evm_pct": 41.62644408199018,
+        "nmse_db": -7.4931264240407325,
+        "runtime_ms": 48.028538752179074,
+        "oracle_symbol_evm_pct": 35.92656959510735,
+        "oracle_ser": 0.026639344262295084,
+        "oracle_ber": 0.01582422586520947,
+        "training_seed_mean_si_sdr_db": {
+          "0": 7.511218173344294,
+          "1": 6.35735570203238,
+          "2": 7.572468077016765
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 10.900962058236319,
+        "waveform_evm_pct": 28.244739807378224,
+        "nmse_db": -11.267114878248245,
+        "runtime_ms": 37.9314074024377,
+        "oracle_symbol_evm_pct": 25.959195103093982,
+        "oracle_ser": 0.0009392076502732241,
+        "oracle_ber": 0.0005122950819672131,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.90250621378624,
+          "1": 10.8386588652965,
+          "2": 10.961721095626222
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 10.753340917139756,
+        "waveform_evm_pct": 28.60327000247532,
+        "nmse_db": -11.060389398835136,
+        "runtime_ms": 37.122999494183915,
+        "oracle_symbol_evm_pct": 25.69324546651156,
+        "oracle_ser": 0.0009392076502732239,
+        "oracle_ber": 0.0005122950819672131,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.78757146804719,
+          "1": 10.734903645837738,
+          "2": 10.737547637534343
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 10.177597455326863,
+        "waveform_evm_pct": 30.201490159059784,
+        "nmse_db": -10.166910255822453,
+        "runtime_ms": 58.8434762369919,
+        "oracle_symbol_evm_pct": 27.43008094685838,
+        "oracle_ser": 0.0010530510018214936,
+        "oracle_ber": 0.0005692167577413479,
+        "training_seed_mean_si_sdr_db": {
+          "0": 9.76808594165661,
+          "1": 10.191433590407165,
+          "2": 10.573272833916812
+        }
+      },
+      "unet": {
+        "si_sdr_db": 10.803801578583432,
+        "waveform_evm_pct": 28.373198569606444,
+        "nmse_db": -11.163262663741673,
+        "runtime_ms": 60.46745834141297,
+        "oracle_symbol_evm_pct": 25.51110432735743,
+        "oracle_ser": 0.0009676684881602916,
+        "oracle_ber": 0.0005407559198542804,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.840083898204469,
+          "1": 10.944573844246186,
+          "2": 10.626746993299635
+        }
+      }
+    },
+    "snr_30": {
+      "mixture": {
+        "si_sdr_db": -1.1548544377064418,
+        "waveform_evm_pct": 71.52810406983299,
+        "nmse_db": 1.2121458977696813,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 65.76476022822459,
+        "oracle_ser": 0.17076502732240437,
+        "oracle_ber": 0.13861851092896174,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -1.1548544377064418
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": -1.0462705460723263,
+        "waveform_evm_pct": 71.31594768886127,
+        "nmse_db": 1.1032041777359616,
+        "runtime_ms": 2.6873976894421503,
+        "oracle_symbol_evm_pct": 65.76399294806984,
+        "oracle_ser": 0.17076502732240437,
+        "oracle_ber": 0.13866120218579236,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -1.0462705460723263
+        }
+      },
+      "matched": {
+        "si_sdr_db": 0.05185630294385102,
+        "waveform_evm_pct": 67.5102030425221,
+        "nmse_db": -0.4860686430167449,
+        "runtime_ms": 3.5326458261503526,
+        "oracle_symbol_evm_pct": 65.6865089815459,
+        "oracle_ser": 0.1715334699453552,
+        "oracle_ber": 0.13802083333333334,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 0.05185630294385102
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 2.0559176336011062,
+        "waveform_evm_pct": 60.89132236792665,
+        "nmse_db": -3.7112411957864624,
+        "runtime_ms": 3.7829826227001226,
+        "oracle_symbol_evm_pct": 55.74247092244119,
+        "oracle_ser": 0.085724043715847,
+        "oracle_ber": 0.06433572404371585,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 2.0559176336011062
+        }
+      },
+      "notch": {
+        "si_sdr_db": 8.134482992477663,
+        "waveform_evm_pct": 37.553678620723794,
+        "nmse_db": -8.523373890201555,
+        "runtime_ms": 3.869076414654652,
+        "oracle_symbol_evm_pct": 34.80370465613157,
+        "oracle_ser": 0.011441256830601092,
+        "oracle_ber": 0.007342896174863388,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 8.134482992477663
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 6.267544907208584,
+        "waveform_evm_pct": 44.88014504123185,
+        "nmse_db": -6.564777103130341,
+        "runtime_ms": 25.860697370565806,
+        "oracle_symbol_evm_pct": 39.54786007593796,
+        "oracle_ser": 0.023451730418943533,
+        "oracle_ber": 0.015582308743169397,
+        "training_seed_mean_si_sdr_db": {
+          "0": 6.607822593277405,
+          "1": 5.478529961214337,
+          "2": 6.716282167134011
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 10.985295456564408,
+        "waveform_evm_pct": 27.744320526388936,
+        "nmse_db": -11.319383172828996,
+        "runtime_ms": 29.55671643980572,
+        "oracle_symbol_evm_pct": 26.624248766995475,
+        "oracle_ser": 0.0005122950819672132,
+        "oracle_ber": 0.0003557604735883425,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.049467676864586,
+          "1": 10.905755046192155,
+          "2": 11.000663646636491
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 10.826825876183854,
+        "waveform_evm_pct": 28.24395892864744,
+        "nmse_db": -11.096941740082066,
+        "runtime_ms": 30.611560702608486,
+        "oracle_symbol_evm_pct": 26.73496004955571,
+        "oracle_ser": 0.0004269125683060109,
+        "oracle_ber": 0.00029883879781420766,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.855358300419248,
+          "1": 10.848478757477375,
+          "2": 10.77664057065494
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 10.514312901070051,
+        "waveform_evm_pct": 29.072221186499657,
+        "nmse_db": -10.405588157519425,
+        "runtime_ms": 27.13571589750548,
+        "oracle_symbol_evm_pct": 27.578368801104244,
+        "oracle_ser": 0.0004838342440801458,
+        "oracle_ber": 0.0002988387978142077,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.300823825252852,
+          "1": 10.504041264093763,
+          "2": 10.738073613863536
+        }
+      },
+      "unet": {
+        "si_sdr_db": 11.040456119911703,
+        "waveform_evm_pct": 27.54990641622962,
+        "nmse_db": -11.373169381455225,
+        "runtime_ms": 37.165853012185025,
+        "oracle_symbol_evm_pct": 26.37391594590723,
+        "oracle_ser": 0.00039845173041894356,
+        "oracle_ber": 0.0002988387978142077,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.189219840694848,
+          "1": 11.018816321563646,
+          "2": 10.91333219747662
+        }
+      }
+    },
+    "timing": {
+      "mixture": {
+        "si_sdr_db": -1.6732180765603342,
+        "waveform_evm_pct": 73.15201323783354,
+        "nmse_db": 1.6982490380057937,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": 71.0321061687072,
+        "oracle_ser": 0.28133538251366125,
+        "oracle_ber": 0.19326331967213115,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -1.6732180765603342
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": -1.5816194662383685,
+        "waveform_evm_pct": 72.7821452461605,
+        "nmse_db": 1.6062764619706507,
+        "runtime_ms": 2.445067667091886,
+        "oracle_symbol_evm_pct": 71.03262044873641,
+        "oracle_ser": 0.2814207650273224,
+        "oracle_ber": 0.19330601092896174,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -1.5816194662383685
+        }
+      },
+      "matched": {
+        "si_sdr_db": -1.4010472106298895,
+        "waveform_evm_pct": 72.2745073685249,
+        "nmse_db": 0.9744601046004592,
+        "runtime_ms": 3.954670197951297,
+        "oracle_symbol_evm_pct": 70.86153923039565,
+        "oracle_ser": 0.28116461748633875,
+        "oracle_ber": 0.19283640710382513,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -1.4010472106298895
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 2.9081817559675813,
+        "waveform_evm_pct": 57.204971815486005,
+        "nmse_db": -4.241315103755816,
+        "runtime_ms": 3.456175215736342,
+        "oracle_symbol_evm_pct": 54.84776723009761,
+        "oracle_ser": 0.10903346994535519,
+        "oracle_ber": 0.0741974043715847,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 2.9081817559675813
+        }
+      },
+      "notch": {
+        "si_sdr_db": 7.990042252934514,
+        "waveform_evm_pct": 37.694355203235155,
+        "nmse_db": -8.383990245878929,
+        "runtime_ms": 4.141451543546282,
+        "oracle_symbol_evm_pct": 35.05195757720065,
+        "oracle_ser": 0.014002732240437158,
+        "oracle_ber": 0.0077698087431694,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 7.990042252934514
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 6.795474426487,
+        "waveform_evm_pct": 42.91002725461111,
+        "nmse_db": -7.11983616182593,
+        "runtime_ms": 25.325525377411395,
+        "oracle_symbol_evm_pct": 39.86233611884278,
+        "oracle_ser": 0.03603142076502733,
+        "oracle_ber": 0.023537112932604732,
+        "training_seed_mean_si_sdr_db": {
+          "0": 7.09783155219311,
+          "1": 6.125650870163937,
+          "2": 7.162940857103954
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 10.366708734726767,
+        "waveform_evm_pct": 29.4223309624698,
+        "nmse_db": -10.753645987453593,
+        "runtime_ms": 26.15554454354828,
+        "oracle_symbol_evm_pct": 28.132087674725042,
+        "oracle_ser": 0.0007969034608378872,
+        "oracle_ber": 0.0004269125683060109,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.450902292573906,
+          "1": 10.299838017988291,
+          "2": 10.349385893618107
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 10.291186769535095,
+        "waveform_evm_pct": 29.648715660746536,
+        "nmse_db": -10.616311510463229,
+        "runtime_ms": 24.48604851088021,
+        "oracle_symbol_evm_pct": 27.918313006287903,
+        "oracle_ser": 0.000711520947176685,
+        "oracle_ber": 0.00036999089253187615,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.313051105401144,
+          "1": 10.331439861110715,
+          "2": 10.22906934209343
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 9.651032539144088,
+        "waveform_evm_pct": 31.765489538027502,
+        "nmse_db": -9.705346033275005,
+        "runtime_ms": 28.099655660399648,
+        "oracle_symbol_evm_pct": 30.353943645370958,
+        "oracle_ser": 0.0038422131147540983,
+        "oracle_ber": 0.002034949908925319,
+        "training_seed_mean_si_sdr_db": {
+          "0": 9.064907817163421,
+          "1": 9.76083033806385,
+          "2": 10.127359462204996
+        }
+      },
+      "unet": {
+        "si_sdr_db": 10.323651509126087,
+        "waveform_evm_pct": 29.502082369420503,
+        "nmse_db": -10.708905767242268,
+        "runtime_ms": 34.88634779932909,
+        "oracle_symbol_evm_pct": 27.983385248777058,
+        "oracle_ser": 0.0009107468123861566,
+        "oracle_ber": 0.00046960382513661206,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.559512717076947,
+          "1": 10.34376531606191,
+          "2": 10.067676494239395
+        }
+      }
+    },
+    "torchsig_independent_generator": {
+      "mixture": {
+        "si_sdr_db": -1.5674032017686652,
+        "waveform_evm_pct": 72.84792895586963,
+        "nmse_db": 1.5932339306350505,
+        "runtime_ms": 0.0,
+        "oracle_symbol_evm_pct": null,
+        "oracle_ser": null,
+        "oracle_ber": null,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -1.5674032017686652
+        }
+      },
+      "bandpass": {
+        "si_sdr_db": -1.5077503971636377,
+        "waveform_evm_pct": 72.57886394553317,
+        "nmse_db": 1.4750447650070535,
+        "runtime_ms": 2.2576874713801467,
+        "oracle_symbol_evm_pct": null,
+        "oracle_ser": null,
+        "oracle_ber": null,
+        "training_seed_mean_si_sdr_db": {
+          "-1": -1.5077503971636377
+        }
+      },
+      "matched": {
+        "si_sdr_db": 0.800819755950901,
+        "waveform_evm_pct": 64.98232227003486,
+        "nmse_db": -1.2408443492056478,
+        "runtime_ms": 2.9456996853696182,
+        "oracle_symbol_evm_pct": null,
+        "oracle_ser": null,
+        "oracle_ber": null,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 0.800819755950901
+        }
+      },
+      "wiener": {
+        "si_sdr_db": 5.86841462732567,
+        "waveform_evm_pct": 45.570565397173944,
+        "nmse_db": -6.102135633045261,
+        "runtime_ms": 3.3715921017574146,
+        "oracle_symbol_evm_pct": null,
+        "oracle_ser": null,
+        "oracle_ber": null,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 5.86841462732567
+        }
+      },
+      "notch": {
+        "si_sdr_db": 10.42523388822955,
+        "waveform_evm_pct": 29.739048771650015,
+        "nmse_db": -10.68506180597175,
+        "runtime_ms": 4.4508540934960665,
+        "oracle_symbol_evm_pct": null,
+        "oracle_ser": null,
+        "oracle_ber": null,
+        "training_seed_mean_si_sdr_db": {
+          "-1": 10.42523388822955
+        }
+      },
+      "pretrained": {
+        "si_sdr_db": 10.539871987371747,
+        "waveform_evm_pct": 29.507623061997908,
+        "nmse_db": -10.773011122681753,
+        "runtime_ms": 26.093386598707486,
+        "oracle_symbol_evm_pct": null,
+        "oracle_ser": null,
+        "oracle_ber": null,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.558186237650292,
+          "1": 10.404936281734312,
+          "2": 10.656493442730635
+        }
+      },
+      "hybrid": {
+        "si_sdr_db": 10.73308101720065,
+        "waveform_evm_pct": 28.866666326416446,
+        "nmse_db": -11.043226365600638,
+        "runtime_ms": 24.148032437854756,
+        "oracle_symbol_evm_pct": null,
+        "oracle_ser": null,
+        "oracle_ber": null,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.289249918719085,
+          "1": 11.57013075621645,
+          "2": 10.339862376666417
+        }
+      },
+      "no_dsp": {
+        "si_sdr_db": 10.77501543483319,
+        "waveform_evm_pct": 28.791504594676756,
+        "nmse_db": -11.021770677176917,
+        "runtime_ms": 30.80735178405626,
+        "oracle_symbol_evm_pct": null,
+        "oracle_ser": null,
+        "oracle_ber": null,
+        "training_seed_mean_si_sdr_db": {
+          "0": 11.237138388154113,
+          "1": 10.17696863163575,
+          "2": 10.910939284709704
+        }
+      },
+      "scratch": {
+        "si_sdr_db": 0.017105105109507815,
+        "waveform_evm_pct": 67.95822323867542,
+        "nmse_db": -0.9039395437270513,
+        "runtime_ms": 21.211230946290826,
+        "oracle_symbol_evm_pct": null,
+        "oracle_ser": null,
+        "oracle_ber": null,
+        "training_seed_mean_si_sdr_db": {
+          "0": -1.2212468466403332,
+          "1": -0.4398163385947733,
+          "2": 1.71237850056363
+        }
+      },
+      "unet": {
+        "si_sdr_db": 10.088111953406576,
+        "waveform_evm_pct": 31.083080289052287,
+        "nmse_db": -10.36644996937291,
+        "runtime_ms": 32.35522568542769,
+        "oracle_symbol_evm_pct": null,
+        "oracle_ser": null,
+        "oracle_ber": null,
+        "training_seed_mean_si_sdr_db": {
+          "0": 10.373199323110503,
+          "1": 10.873829204603553,
+          "2": 9.017307332505675
+        }
+      }
+    }
+  },
+  "evaluation_config": {
+    "training_seeds": [
+      0,
+      1,
+      2
+    ],
+    "examples_per_cell": 24,
+    "record_samples": 4096,
+    "inference_api": "etherglass.separation.separate",
+    "threads": 4,
+    "training_config_sha256": "1fa0744c0a97c1fcfa9e0012a007597e1691a929bda894cc47d7028fdefb2213"
+  },
+  "evaluated_checkpoints": [
+    {
+      "file": "models/seed0/hybrid.pt",
+      "sha256": "60acebe7402bed9e6bac740da7f3f73a09b25151037095c9040edfcb310925b6",
+      "parameter_count": 6865
+    },
+    {
+      "file": "models/seed0/pretrained.pt",
+      "sha256": "73ab29517edfa645310a6e37a639406a3fcc34e1c018832a3f2f3154ee4e2f97",
+      "parameter_count": 6865
+    },
+    {
+      "file": "models/seed0/no_dsp.pt",
+      "sha256": "881805c09c16b4ff5b435b7d5867aa402871b293add69bffa75210a7ba01c58d",
+      "parameter_count": 6865
+    },
+    {
+      "file": "models/seed0/scratch.pt",
+      "sha256": "b09164b24b20d9ca36c5fa48c6f6d5ed6a6c8c6b73ab9983b32cdc6269eb3e6f",
+      "parameter_count": 6865
+    },
+    {
+      "file": "models/seed0/unet.pt",
+      "sha256": "7723622ecd4bcdb9814b7581e664de296fc6620da6763ab38b71c55bf57c0efe",
+      "parameter_count": 27121
+    },
+    {
+      "file": "models/seed1/hybrid.pt",
+      "sha256": "571611cd77b6797f442b733a0a9c2c7273eaaad55bb6193e83adcd0c8c015f3a",
+      "parameter_count": 6865
+    },
+    {
+      "file": "models/seed1/pretrained.pt",
+      "sha256": "c436cf90515a677112ea312599c7044b7adfce9232881c0636cc75fc8d94377b",
+      "parameter_count": 6865
+    },
+    {
+      "file": "models/seed1/no_dsp.pt",
+      "sha256": "7177cba5b1ff73e5c474b27764eac759449a79484cc43f95835212aab2924f01",
+      "parameter_count": 6865
+    },
+    {
+      "file": "models/seed1/scratch.pt",
+      "sha256": "28d84808c6f2d953c9c27ce32347a889c4ed2a1a68c92e1f3bb60ccf31fcc941",
+      "parameter_count": 6865
+    },
+    {
+      "file": "models/seed1/unet.pt",
+      "sha256": "368c9b9bee6b73f31ce4a8da4ad5835f30c7f770284f82f75c1b7be8200f7837",
+      "parameter_count": 27121
+    },
+    {
+      "file": "models/seed2/hybrid.pt",
+      "sha256": "8d0ab27f21604508dad13b5b2d6677af81312bbd6c5eaecf0ca1b25de3926c57",
+      "parameter_count": 6865
+    },
+    {
+      "file": "models/seed2/pretrained.pt",
+      "sha256": "27a83c16ae6eeb7068a5c8e5240cba5a8c721de6efec671c74b8a9c67d088831",
+      "parameter_count": 6865
+    },
+    {
+      "file": "models/seed2/no_dsp.pt",
+      "sha256": "094472fe629a1f49204216e7ae5d3435fa8b0dd2f32d0c4dd925582bf71d79ef",
+      "parameter_count": 6865
+    },
+    {
+      "file": "models/seed2/scratch.pt",
+      "sha256": "55fee92fffa2bac02e2770187babd270a8ddf2f5f27b40d400a7143edf780f2d",
+      "parameter_count": 6865
+    },
+    {
+      "file": "models/seed2/unet.pt",
+      "sha256": "fee6543e3d663c3eaaa6e67d7b9bea168f14f753949384ff4b1fd948bcafa781",
+      "parameter_count": 27121
+    }
+  ],
+  "comparisons": {
+    "nominal:hybrid-scratch": {
+      "mean_si_sdr_delta_db": 9.546084215770115,
+      "paired_example_bootstrap_95_ci_db": [
+        7.615486554189717,
+        11.544537845616466
+      ],
+      "wins": 24,
+      "n": 24,
+      "note": "Examples are resampled after averaging training seeds; does not estimate population training-seed uncertainty."
+    },
+    "shift:hybrid-scratch": {
+      "mean_si_sdr_delta_db": 0.22053424217294296,
+      "paired_example_bootstrap_95_ci_db": [
+        0.001669105947041669,
+        0.5201004286432384
+      ],
+      "wins": 10,
+      "n": 24,
+      "note": "Examples are resampled after averaging training seeds; does not estimate population training-seed uncertainty."
+    },
+    "nominal:hybrid-pretrained": {
+      "mean_si_sdr_delta_db": -0.6282823890568326,
+      "paired_example_bootstrap_95_ci_db": [
+        -1.6254171117493734,
+        0.42066234117238727
+      ],
+      "wins": 9,
+      "n": 24,
+      "note": "Examples are resampled after averaging training seeds; does not estimate population training-seed uncertainty."
+    },
+    "shift:hybrid-pretrained": {
+      "mean_si_sdr_delta_db": 4.936884039924503,
+      "paired_example_bootstrap_95_ci_db": [
+        3.7968995907236933,
+        6.0519269809525325
+      ],
+      "wins": 24,
+      "n": 24,
+      "note": "Examples are resampled after averaging training seeds; does not estimate population training-seed uncertainty."
+    },
+    "nominal:hybrid-no_dsp": {
+      "mean_si_sdr_delta_db": -0.23849016310770857,
+      "paired_example_bootstrap_95_ci_db": [
+        -0.6840376109007433,
+        0.25489980505411125
+      ],
+      "wins": 7,
+      "n": 24,
+      "note": "Examples are resampled after averaging training seeds; does not estimate population training-seed uncertainty."
+    },
+    "shift:hybrid-no_dsp": {
+      "mean_si_sdr_delta_db": 0.09362473416674082,
+      "paired_example_bootstrap_95_ci_db": [
+        -0.0039137375961005895,
+        0.19475627591437772
+      ],
+      "wins": 17,
+      "n": 24,
+      "note": "Examples are resampled after averaging training seeds; does not estimate population training-seed uncertainty."
+    },
+    "nominal:hybrid-unet": {
+      "mean_si_sdr_delta_db": 0.5647749535553359,
+      "paired_example_bootstrap_95_ci_db": [
+        0.347157951324959,
+        0.7901720668316152
+      ],
+      "wins": 20,
+      "n": 24,
+      "note": "Examples are resampled after averaging training seeds; does not estimate population training-seed uncertainty."
+    },
+    "shift:hybrid-unet": {
+      "mean_si_sdr_delta_db": -0.08205408769039158,
+      "paired_example_bootstrap_95_ci_db": [
+        -0.2212045072740789,
+        0.05120670086103924
+      ],
+      "wins": 9,
+      "n": 24,
+      "note": "Examples are resampled after averaging training seeds; does not estimate population training-seed uncertainty."
+    },
+    "nominal:hybrid-wiener": {
+      "mean_si_sdr_delta_db": 4.546677279720825,
+      "paired_example_bootstrap_95_ci_db": [
+        3.6025761079855214,
+        5.647618793980551
+      ],
+      "wins": 23,
+      "n": 24,
+      "note": "Examples are resampled after averaging training seeds; does not estimate population training-seed uncertainty."
+    },
+    "shift:hybrid-wiener": {
+      "mean_si_sdr_delta_db": 8.7947409131823,
+      "paired_example_bootstrap_95_ci_db": [
+        7.0634318878386955,
+        10.57332873102397
+      ],
+      "wins": 24,
+      "n": 24,
+      "note": "Examples are resampled after averaging training seeds; does not estimate population training-seed uncertainty."
+    },
+    "nominal:hybrid-notch": {
+      "mean_si_sdr_delta_db": -0.5326169142311062,
+      "paired_example_bootstrap_95_ci_db": [
+        -1.4174619871013294,
+        0.3421791443102031
+      ],
+      "wins": 10,
+      "n": 24,
+      "note": "Examples are resampled after averaging training seeds; does not estimate population training-seed uncertainty."
+    },
+    "shift:hybrid-notch": {
+      "mean_si_sdr_delta_db": 2.3241771849319095,
+      "paired_example_bootstrap_95_ci_db": [
+        1.7047126343402326,
+        3.0316675152354615
+      ],
+      "wins": 24,
+      "n": 24,
+      "note": "Examples are resampled after averaging training seeds; does not estimate population training-seed uncertainty."
+    },
+    "nominal:hybrid-matched": {
+      "mean_si_sdr_delta_db": 9.463618838328834,
+      "paired_example_bootstrap_95_ci_db": [
+        7.227890219886278,
+        11.627704293810327
+      ],
+      "wins": 23,
+      "n": 24,
+      "note": "Examples are resampled after averaging training seeds; does not estimate population training-seed uncertainty."
+    },
+    "shift:hybrid-matched": {
+      "mean_si_sdr_delta_db": 13.402337793553817,
+      "paired_example_bootstrap_95_ci_db": [
+        11.635969042633956,
+        15.030560035281594
+      ],
+      "wins": 24,
+      "n": 24,
+      "note": "Examples are resampled after averaging training seeds; does not estimate population training-seed uncertainty."
+    }
+  }
+}

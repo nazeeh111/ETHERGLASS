@@ -1,0 +1,32 @@
+{
+  "reason": "native NNPACK CPU bottleneck; equivalent GEMM implementation independently output/gradient tested",
+  "preserved_completed_artifacts": [
+    {
+      "file": "models/seed0/pretrained.pt",
+      "sha256_before": "73ab29517edfa645310a6e37a639406a3fcc34e1c018832a3f2f3154ee4e2f97",
+      "sha256_after": "73ab29517edfa645310a6e37a639406a3fcc34e1c018832a3f2f3154ee4e2f97"
+    },
+    {
+      "file": "models/seed0/hybrid.pt",
+      "sha256_before": "60acebe7402bed9e6bac740da7f3f73a09b25151037095c9040edfcb310925b6",
+      "sha256_after": "60acebe7402bed9e6bac740da7f3f73a09b25151037095c9040edfcb310925b6"
+    },
+    {
+      "file": "models/seed0/no_dsp.pt",
+      "sha256_before": "881805c09c16b4ff5b435b7d5867aa402871b293add69bffa75210a7ba01c58d",
+      "sha256_after": "881805c09c16b4ff5b435b7d5867aa402871b293add69bffa75210a7ba01c58d"
+    },
+    {
+      "file": "research/training_logs/hybrid_seed0.json",
+      "sha256_before": "8e4b4a034367fd2e67241101a902c0f9ef4632d08ba66486388fc8b5674049e8",
+      "sha256_after": "8e4b4a034367fd2e67241101a902c0f9ef4632d08ba66486388fc8b5674049e8"
+    },
+    {
+      "file": "research/training_logs/no_dsp_seed0.json",
+      "sha256_before": "add882a742ec15fd2efddb52f7e66940e0b66fced6f0a5cf8f05c1033ed08672",
+      "sha256_after": "add882a742ec15fd2efddb52f7e66940e0b66fced6f0a5cf8f05c1033ed08672"
+    }
+  ],
+  "unfinished_attempt": "training_logs/aborted_native_attempt_seed0.json",
+  "replacement": "only incomplete U-Net restarted with originalseed0andfullbudget; all saved completedmodels unchanged"
+}

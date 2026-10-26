@@ -1,0 +1,11 @@
+{
+  "upstream": "https://github.com/TorchDSP/torchsig",
+  "commit": "1197261d4f0d4c93de18757ee2ceb368ac04104c",
+  "license": "MIT",
+  "source_file_sha256": {
+    "torchsig-dsp.py": "2b5a39ea65dbd1e435c69b81782711c286f0e7bab7ab68918ac1054839a1d830",
+    "torchsig-constellation.py": "9939a84f2ca90f39815661f954ff83989cc02436d7917b3d4d5e84ae3fad9490",
+    "torchsig-constellation-maps.py": "3109f1237040012738768e1b12678a9dc29d67b1fd489eaa58338582767c4e5c"
+  },
+  "extraction": "AST-selected unmodified function bodies and BPSK/QPSK/16QAM map expressions; imports reduced to NumPy, SciPy and copy."
+}

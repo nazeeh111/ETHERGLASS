@@ -1,0 +1,30 @@
+{
+  "video": {
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": 600,
+    "duration_seconds": 20,
+    "bytes": 1845219,
+    "sha256": "4f507bbc39e31adcdff60628d56fc92d084728dfe683e463f560262f8bb39a35"
+  },
+  "poster": {
+    "timestamp_seconds": 1.8,
+    "width": 1280,
+    "height": 720,
+    "bytes": 92289,
+    "sha256": "0f60cc3464df6e29c7546c4c53e54ae27971634488e8660d6f3593d95bf282f1",
+    "baked_frame_zero_rgb_mae_255": 3.319198857060185
+  },
+  "full_decode": "passed",
+  "audio": {
+    "codec": "aac",
+    "sample_rate_hz": 48000,
+    "channels": 2,
+    "mean_volume_db": -33.3,
+    "max_volume_db": -24.5,
+    "clipping": false,
+    "auditory_review": "not performed; deterministic original sine score and signal levels checked"
+  },
+  "public_copies_match": true
+}

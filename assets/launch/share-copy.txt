@@ -1,0 +1,2 @@
+ETHERGLASS: inspect a recording, test a target hypothesis, and carry the evidence with you. Local RF analysis with explicit priors, retained residuals, and source-bound exports.
+https://github.com/nazeeh111/ETHERGLASS

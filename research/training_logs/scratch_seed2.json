@@ -1,0 +1,32 @@
+[
+  {
+    "stage": "scratch/adapt/seed2",
+    "step": 1,
+    "loss": 4.820343494415283,
+    "elapsed_s": 0.21636358299292624
+  },
+  {
+    "stage": "scratch/adapt/seed2",
+    "step": 41,
+    "loss": 0.24159647524356842,
+    "elapsed_s": 6.738736332976259
+  },
+  {
+    "stage": "scratch/adapt/seed2",
+    "step": 81,
+    "loss": 0.1400987058877945,
+    "elapsed_s": 13.298392500029877
+  },
+  {
+    "stage": "scratch/adapt/seed2",
+    "step": 121,
+    "loss": 0.13460838794708252,
+    "elapsed_s": 19.138167583034374
+  },
+  {
+    "stage": "scratch/adapt/seed2",
+    "step": 160,
+    "loss": 0.10943415760993958,
+    "elapsed_s": 25.044090499985032
+  }
+]

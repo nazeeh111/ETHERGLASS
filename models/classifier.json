@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "feature_names": [
+    "symbol_c20",
+    "symbol_c40",
+    "symbol_c42",
+    "symbol_radial_cv",
+    "symbol_envelope_fourth",
+    "sample_c20",
+    "sample_c40",
+    "bandwidth_to_symbol_rate",
+    "spectral_flatness",
+    "peak_bin_fraction",
+    "lag_symbol_correlation",
+    "symbol_lag_correlation",
+    "raw_envelope_cv",
+    "cfo_to_symbol_rate"
+  ],
+  "mean": [
+    0.3258997605453936,
+    0.8691467175164751,
+    -1.0142125728323212,
+    0.20944834924936306,
+    1.25541337634156,
+    0.2925124645715654,
+    0.6848037405906728,
+    1.9554521484375,
+    0.10775472298694659,
+    0.0716636701118073,
+    0.1765877240017794,
+    0.19910616278933824,
+    0.33063513403000877,
+    0.056029937744140626
+  ],
+  "scale": [
+    0.4042465772895731,
+    0.690913105554662,
+    0.6338012125769212,
+    0.18320709138113392,
+    0.3780093395415472,
+    0.39403484802913796,
+    0.540041097892843,
+    2.2265084520302025,
+    0.21521143668651452,
+    0.1367831091782717,
+    0.2836582478045121,
+    0.29108162751079625,
+    0.13609670610589675,
+    0.07823676795134347
+  ],
+  "class_coef": [
+    -1.9225557841095995,
+    -1.1895528016254846,
+    1.2293619201885282,
+    -0.1550420048153233,
+    -0.08647729697183892,
+    -1.8879882249840991,
+    -1.0584013482086392,
+    -0.08979559287607597,
+    -0.11033035823537148,
+    -0.003287314824723525,
+    -0.05920418803398502,
+    -0.06581266146954026,
+    -0.6287350103000072,
+    -0.046086915241108334
+  ],
+  "class_intercept": 4.413377452176579,
+  "class_temperature": 0.15609537052538888,
+  "support_coef": [
+    -0.6357391458313433,
+    5.360066329466085,
+    -0.786635978921443,
+    -3.074368219487543,
+    -2.0636456933475653,
+    -0.24428188483726573,
+    2.332518202190035,
+    0.2792343108883746,
+    0.6414731058966795,
+    -2.0217337370876005,
+    -0.1317314817076912,
+    -0.1458307104873634,
+    -0.35082960143950787,
+    -1.4981344820678164
+  ],
+  "support_intercept": -0.769617281525795,
+  "support_calibration_slope": 2.4441106763036133,
+  "support_calibration_intercept": -0.07448905721755558,
+  "support_threshold": 0.5,
+  "confidence_threshold": 0.8,
+  "training": {
+    "generator": "etherglass.synthetic.generate_psk plus documented unknown probes",
+    "seed": 71,
+    "train_known_seed_start": 100000,
+    "train_unknown_seed_start": 200000,
+    "calibration_known_seed_start": 300000,
+    "calibration_unknown_seed_start": 400000,
+    "test_known_seed_start": 1100000,
+    "test_unknown_seed_start": 1200000,
+    "exploratory_evaluation_seeds_excluded_from_final": [
+      500000,
+      600000,
+      700000,
+      800000
+    ],
+    "n_train_per_group": 2000,
+    "n_calibration_per_group": 800,
+    "n_test_per_group": 1000,
+    "samples_per_example": 2048,
+    "snr_db": [
+      8,
+      30
+    ],
+    "sps": [
+      6,
+      8,
+      10,
+      12
+    ],
+    "rolloff": [
+      0.25,
+      0.45
+    ],
+    "common_channel_policy": "Same CFO, 25% multipath, SNR and RMS distributions for every family",
+    "threshold_policy": "max(.5, 99th percentile calibration unknown score), class confidence >= .8",
+    "unknown_train_families": [
+      "tone",
+      "chirp",
+      "noise",
+      "FSK",
+      "16QAM",
+      "8PSK",
+      "OFDM",
+      "PSK_mixture"
+    ],
+    "unknown_test_families": [
+      "tone",
+      "chirp",
+      "noise",
+      "FSK",
+      "16QAM",
+      "8PSK",
+      "OFDM",
+      "PSK_mixture",
+      "AM",
+      "32QAM"
+    ],
+    "test_only_families": [
+      "AM",
+      "32QAM"
+    ],
+    "no_recording_training": true,
+    "features_sha256": "298c212f4525e4efab9411b0b63e811fa0982faa730a8588b8ab7af0902b072d",
+    "source_sha256": {
+      "scripts/train_classifier.py": "6a3565c8a603816a08a3d79882ef505011f3cc0f3a0b0153ce0a1696b9538c22",
+      "src/etherglass/classification.py": "00bef0537059a7f25579746774dc6811b79d127f8eb763c5cab98fdc37990c8d",
+      "src/etherglass/synthetic.py": "505c4a079402d9b6675881706027b653104777ecf34256f9caa14d1f4ce6c06f"
+    },
+    "source_snapshots": {
+      "src/etherglass/classification.py": "research/provenance/classification-fit-source.py"
+    }
+  },
+  "limitations": [
+    "Finite synthetic probes do not establish open-world RF recognition.",
+    "Confidence is conditional on BPSK/QPSK; support probability depends on the balanced probe calibration prior.",
+    "Symbol-rate prior is supplied by caller; centered approximately isolated signal is required.",
+    "Real RF recordings are unlabeled in this release, so real recognition accuracy is unestablished.",
+    "Inference uses the first 2048 candidate samples; only 6/8/10/12 samples-per-symbol priors were calibrated."
+  ],
+  "runtime_provenance": {
+    "source_sha256": {
+      "src/etherglass/classification.py": "678014474d748f4a200bdf3fc2faf2e47d6f0d29ee122efdafaed800b2510544"
+    },
+    "change": "Post-fit artifact resolution/cache correction only: source-checkout models preferred; changed file bytes invalidate cache. Feature functions, fitted coefficients, calibration and test results unchanged. Exact fit source retained in training.source_snapshots."
+  }
+}
