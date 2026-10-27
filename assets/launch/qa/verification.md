@@ -13,4 +13,4 @@ Final files: `../brag.mp4`, `../brag.jpg`; public copies `../../launch.mp4`, `..
 - First UI scene uses the actual loaded reference capture before reconstruction. Last scene shows the actual export dialog after reconstruction. The film is an edited demonstration with still captures and measured plots, not an uninterrupted screen recording.
 - Numerical evidence is a single fixed synthetic reference demonstration. It is explicitly labeled on screen; not a held-out benchmark or general claim. Actual source values and alignment conditions are in `../PROVENANCE.md` and `../composition/assets/reference-vis.json`.
 
-Raw successful render is preserved as `../launch-source.mp4`. Failed/interrupted diagnostic runs, temporary transition frames, and raw browser/render logs are retained outside public outputs in the task's `work/launch-qa` directory. No Git commits, remote writes or publication were performed by the launch-film worker.
+Raw successful render is preserved as `../launch-source.mp4`.

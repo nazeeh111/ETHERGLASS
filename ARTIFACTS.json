@@ -31,8 +31,8 @@
       "bytes": 610
     },
     "README.md": {
-      "sha256": "0d79cd086d7ee117c6dd0c5f7c9a38b3f2e171e80d7b1dde664a0a030e18cb91",
-      "bytes": 9015
+      "sha256": "8abbd0f091248a543cdbf78314b233ad18c014195f60696893ed62e7a6c8b1b2",
+      "bytes": 8938
     },
     "assets/architecture.png": {
       "sha256": "75a64ca10142df235adbec10ac3beccb5034c77fdb554d2d0898aba6af5e58b2",
@@ -63,8 +63,8 @@
       "bytes": 3579
     },
     "assets/launch/TASK_STATE.md": {
-      "sha256": "a5b57aedec77574d9a62511dd86ef69cd85e8af8e920f2a559e945e072e6848f",
-      "bytes": 2291
+      "sha256": "0bb834c9b4f5eb102077ba34bb323ea482a3830107f7ef32312766041175efc1",
+      "bytes": 1858
     },
     "assets/launch/brag-plan.md": {
       "sha256": "35f95d55a1bab19f26cd3fd3902aa82737ed9f2e9b0e7bc11b83b0d5623a6d3f",
@@ -159,8 +159,8 @@
       "bytes": 791
     },
     "assets/launch/qa/verification.md": {
-      "sha256": "07774becd1638055c4bb96325c9ca4c6f1d6e2e3ac93fa8f284a9c5640d087d6",
-      "bytes": 2380
+      "sha256": "38ab9ee19ade59fcf008ada0fdeb3a3bcad033b1a133f8bcf0b75d061ba82cf0",
+      "bytes": 2122
     },
     "assets/launch/scripts/capture_ui.cjs": {
       "sha256": "e2b18543398cd9f3397282b5e37851cd1fdad8905e0d9842f88dc55dea19e4d0",
@@ -219,8 +219,8 @@
       "bytes": 5914
     },
     "docs/FOUNDATIONS.md": {
-      "sha256": "9475677d5ca194f632ac1d976e9089357a5913d8b78f3b38b308a9c68df21254",
-      "bytes": 4995
+      "sha256": "a4f9787109cfc38d4693ee04a9f4cb1417ceba6a0b9c775d3538f95c61190492",
+      "bytes": 4416
     },
     "docs/MODEL_CARD.md": {
       "sha256": "bb371ba6e64a7485c67abc4ed2ea3d6a0ff835b5772b27b2f58243a9abecdb2f",

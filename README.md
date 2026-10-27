@@ -168,8 +168,7 @@ recordings and clean references are CC0. The attributed TorchSig helper remains
 MIT and real recordings retain their individual CC-BY terms. See [licenses and
 attribution](docs/DATA_LICENSES.md). GNU Radio and the RF Challenge are research
 references; this project does not copy their GPL implementation or claim their
-published performance. PaperVizAgent was investigated; these editable figures
-use local vectors and measured data rather than billed generation services.
+published performance. Editable figures use local vectors and measured data.
 
 Use recordings you are permitted to analyze. ETHERGLASS has no transmitter,
 private-message recovery, or universal signal decoder. Its intended uses are

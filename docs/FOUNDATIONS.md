@@ -28,10 +28,6 @@ The inspected `constellation_modulator_baseband` helper accepts a constellation,
 
 [GNU Radio](https://github.com/gnuradio/gnuradio) is a mature DSP interoperability reference under GPL-3.0. Ordinary raw/SigMF file exchange does not require importing or copying its implementation. Live hardware support remains outside the initial offline release unless tested explicitly.
 
-## Technical illustrations
-
-[PaperVizAgent](https://github.com/google-research/papervizagent), formerly PaperBanana, is Apache-2.0 and uses planning, styling, generation, and critique stages. Its documented generation path requires externally configured model services. ETHERGLASS has no authorization for separately billed APIs, so this inspection does not authorize running those services. Editable local vector diagrams and plots computed from experiment outputs provide a feasible, verifiable route. Review labels against the actual implementation and retain their sources.
-
 ## Scope of evidence
 
 Synthetic holdouts show performance only under the declared simulator. Adaptation data must not reuse test symbols, channel realizations, or recording sessions. With generated symbols, report receiver assumptions beside EVM and BER. With real unknown signals, report what was measured and what was withheld. No universal decoding, transmitter identification, or over-the-air separation claim follows from a small synthetic study.
