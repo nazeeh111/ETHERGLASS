@@ -1,16 +1,14 @@
-<p align="center"><strong>E T H E R G L A S S</strong><br>RF Signal Observatory</p>
+# Etherglass
 
-# The structure beneath the interference.
+**Inspect radio recordings and test a proposed signal separation.**
 
-An offline research instrument for complex I/Q recordings: inspect the spectrum,
-test a target hypothesis, reconstruct a component, and export the evidence.
-Its compact trained model combines complex spectral features, classical signal
-priors, and interference-aware learning. Every trace is calculated from its input.
+Analyze complex I/Q samples, the two components of a recorded radio waveform. Compare classical and learned estimates, inspect the unassigned residual, and export samples with their evidence.
 
-![The ETHERGLASS observatory, analyzing an actual generated recording](assets/observatory.png)
+[Run on a CPU](#run-it-on-a-cpu) · [Recorded demonstration](https://github.com/nazeeh111/ETHERGLASS/releases/download/v0.1.0/launch.mp4) · [Measured comparison](#a-falsifiable-experiment) · [Tutorial](docs/QUICKSTART.md)
 
-**A specific research result, a useful instrument, and visible limits.** This first
-release extracts a known-rate root-raised-cosine BPSK/QPSK target amid overlapping
+![The Etherglass observatory, analyzing an actual generated recording](assets/observatory.png)
+
+The included study extracts a known-rate root-raised-cosine BPSK/QPSK target amid overlapping
 tones or chirps. It provides a target estimate and an unassigned residual, with
 classical/neural comparisons, separate unknown-signal abstention, and reproducible
 experiments. Arbitrary cochannel sources are not uniquely recoverable from a
@@ -33,8 +31,6 @@ Open the loopback URL printed in the terminal. If a port is occupied,
 first if desired: `pip install torch==2.9.1 --index-url https://download.pytorch.org/whl/cpu`.
 No radio hardware, GPU, account, model API, or training run is needed for replay.
 The trained weights are included.
-
-[Watch the 20-second measured demonstration](https://github.com/nazeeh111/ETHERGLASS/releases/download/v0.1.0/launch.mp4).
 
 Load the reference capture, leave its explicit 0 Hz target offset and 125 kbaud
 rate prior, and separate. Change the displayed trace to compare the mixture,
@@ -94,7 +90,7 @@ per-method measurements**. On the 24-record chirp/channel-shift holdout:
 |---|---:|---:|
 | Adaptive notch | 7.79 | 0 |
 | Small spectral U-Net | 10.19 | 27,121 |
-| ETHERGLASS hybrid | 10.11 | 6,865 |
+| Etherglass hybrid | 10.11 | 6,865 |
 
 The hybrid improves over adaptive notch by **2.32 dB** (paired-example 95% bootstrap
 interval 1.70–3.03 dB), with about 75% fewer parameters than the U-Net. Its mean score
@@ -170,7 +166,7 @@ attribution](docs/DATA_LICENSES.md). GNU Radio and the RF Challenge are research
 references; this project does not copy their GPL implementation or claim their
 published performance. Editable figures use local vectors and measured data.
 
-Use recordings you are permitted to analyze. ETHERGLASS has no transmitter,
+Use recordings you are permitted to analyze. Etherglass has no transmitter,
 private-message recovery, or universal signal decoder. Its intended uses are
 reproducible interference research, signal inspection, and honest RFML teaching.
 
