@@ -31,8 +31,8 @@
       "bytes": 610
     },
     "README.md": {
-      "sha256": "8abbd0f091248a543cdbf78314b233ad18c014195f60696893ed62e7a6c8b1b2",
-      "bytes": 8938
+      "sha256": "042f41fa6bee15fe345ae424f43b8a67eb6b2459026e2ce0c3db60d13020ba03",
+      "bytes": 8794
     },
     "assets/architecture.png": {
       "sha256": "75a64ca10142df235adbec10ac3beccb5034c77fdb554d2d0898aba6af5e58b2",
@@ -599,7 +599,7 @@
       "bytes": 861
     },
     "scripts/test_observatory.cjs": {
-      "sha256": "961af24bb4d4499b0380a0414f87f4304aa48716d2ba853f6ab1f62531bf8712",
+      "sha256": "2d00f878193c74194f121dde76449ebbb898e63bda1f853ca2da756d788fbba2",
       "bytes": 8282
     },
     "scripts/train_classifier.py": {
@@ -731,7 +731,7 @@
       "bytes": 24266
     },
     "src/etherglass/web/index.html": {
-      "sha256": "7b8ce898b8c06e4b10a7612aed31d08e345c2f23f085606c7bda10546331b68d",
+      "sha256": "d3b6e0bcb0ced794aa2d56dccbd7a4a61eb37fa8677d0c514d1b16b55377aa47",
       "bytes": 11675
     },
     "src/etherglass/web/style.css": {

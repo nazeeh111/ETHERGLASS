@@ -13,7 +13,7 @@ const root=path.resolve(__dirname,'..');
   const page=await browser.newPage();await page.setViewport({width:1600,height:1200,deviceScaleFactor:1});
   page.on('pageerror',e=>findings.page_errors.push(e.message));
   await page.goto(findings.url,{waitUntil:'networkidle0'});
-  assert.match(await page.title(),/ETHERGLASS/);
+  assert.match(await page.title(),/Etherglass/);
   await page.click('#demo-button');
   await page.waitForFunction(()=>document.querySelector('#capture-stats').textContent.includes('16,384')&&!document.querySelector('#separate-button').disabled,{timeout:90000});
   findings.checks.push('Actual fixed reference loaded:16,384samples');
