@@ -803,8 +803,8 @@
       "bytes": 4996
     },
     "tests/test_model_binding.py": {
-      "sha256": "f536847155cde7adfff018cf087f73ecef978948179173e519a8e58fab034a19",
-      "bytes": 12359
+      "sha256": "79ff709218cf72a2baa67a2b380d79eea3ce1db544fad757f82aa5e1afe71331",
+      "bytes": 12653
     },
     "tests/test_product_lifecycle.py": {
       "sha256": "4d29aac4dc62a2da3776c1dc23c0057ffe5246bf61379d15c46bbdd17f0bc627",

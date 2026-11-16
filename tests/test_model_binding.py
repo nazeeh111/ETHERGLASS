@@ -20,7 +20,13 @@ def checkpoints(tmp_path):
     pytest.importorskip('torch')
     folder = sep.DEFAULT_CHECKPOINT.parent
     canonical = tmp_path / 'hybrid.pt'
-    seed0, seed1 = folder/'seed0/hybrid.pt', folder/'seed1/hybrid.pt'
+    seed0, seed1 = tmp_path/'seed0.pt', tmp_path/'seed1.pt'
+    shutil.copy2(folder/'seed0/hybrid.pt', seed0)
+    shutil.copy2(folder/'seed1/hybrid.pt', seed1)
+    # Git checkouts do not preserve equal mtimes; construct the collision here.
+    stamp = 1_700_000_000_000_000_000
+    for checkpoint in (seed0, seed1):
+        os.utime(checkpoint, ns=(stamp, stamp))
     shutil.copy2(seed0, canonical)
     sep._load_model_cached.cache_clear()
     yield canonical, seed0, seed1
