@@ -1,0 +1,53 @@
+{
+  "version": "3",
+  "kind": "implementation-equivalence-controls",
+  "baseline_source_manifest_sha256": "f6d93789a16db6f0d93c572838bbe716e4f8364d36fd6a284a3b667895cff14c",
+  "historical_record_sha256": "9676136fdad9615c52741da051faba0f8c8c784106d072fd397b37a257a1a46d",
+  "runtime": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "torch": "2.6.0"
+  },
+  "cases": 21,
+  "neural_families": [
+    "hybrid",
+    "unet",
+    "pretrained",
+    "no_dsp",
+    "scratch"
+  ],
+  "additional_seed_checkpoints": [
+    1,
+    2
+  ],
+  "input_cases": [
+    {
+      "seed": 4411,
+      "samples": 4096
+    },
+    {
+      "seed": 29,
+      "samples": 7600
+    },
+    {
+      "seed": 910000,
+      "samples": 497
+    }
+  ],
+  "agreement": "Exact component bytes, model metadata and diagnostics excluding runtime_ms for all 21 cold original/successor comparisons.",
+  "original_receipt_sha256": "1084394fa261d7d1a487283d0cfe95188d3fbeda27245f212bf9cb80a0c257d5",
+  "successor_receipt_sha256": "1084394fa261d7d1a487283d0cfe95188d3fbeda27245f212bf9cb80a0c257d5",
+  "control_source_sha256": "2c738af783dcbe80887878d1d7eb4f608ec54ce682e056a7f8f133016cc4ab58",
+  "successor_source_sha256": {
+    "etherglass/models.py": "2d3fd43a933b6511e588c91d63654432e60612f5440be40945eeb1293726d967",
+    "etherglass/spectral.py": "28e4f6cf843edd659dbfaaec05d2c21c97c9ee5c68c2fa8eb69fb8da85815068",
+    "etherglass/separation.py": "0d63f994a8abccb100bf25732b71af31c4ac490d2b58e7ec3c6b8bea4d3c8448",
+    "etherglass/uncertainty.py": "b8af40c8f161dbeb4f612d1f2956b719853a649a2dcf94418ef7fbefd5c6d783",
+    "etherglass/synthetic.py": "505c4a079402d9b6675881706027b653104777ecf34256f9caa14d1f4ce6c06f",
+    "etherglass/calibrated_example.py": "3e3a34f4d60a9ca75a623cab7bdd0eb1089de6ad750c483697980eeffb8e2fe3"
+  },
+  "limitations": "Finite implementation controls, not new calibration, coverage estimation, held-out evaluation or physical RF evidence. Existing historical quantile remains conditional on the declared simulator and admitted runtime. Independent successor review is required before integration.",
+  "previous_equivalence_evidence_sha256": "8322c7b134292ac768815b44af286bef64f21916261c27b7ff786c4f8a760946",
+  "ownership_regression_source_sha256": "f536847155cde7adfff018cf087f73ecef978948179173e519a8e58fab034a19",
+  "ownership_contract": "Private decoded templates are never inferred or exposed by public load_model; every public return deeply owns its model, tensor state and nested metadata. One independent handle is pinned per separation; ordinary caller mutations cannot change later inference."
+}

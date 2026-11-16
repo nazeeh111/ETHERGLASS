@@ -10,6 +10,7 @@ import io
 import json
 import math
 import zipfile
+from . import __version__
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterator
@@ -179,7 +180,7 @@ def encode_sigmf(samples: np.ndarray, sample_rate: float, center_frequency: floa
     glob = {"core:datatype": "cf32_le", "core:sample_rate": sample_rate,
             "core:version": "1.2.6", "core:description": description,
             "core:sha512": hashlib.sha512(data).hexdigest(),
-            "core:recorder": "ETHERGLASS 0.1.0"}
+            "core:recorder": f"ETHERGLASS {__version__}"}
     if license:
         glob["core:license"] = license
     # Custom extension metadata is declared optional, never required to read I/Q.

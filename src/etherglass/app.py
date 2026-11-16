@@ -14,11 +14,12 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
+from . import __version__
 from .analysis import analyze, demo_capture, public_report
 from .io import Capture, MAX_BYTES, export_zip, load_bytes
 
 WEB = Path(__file__).parent / "web"
-app = FastAPI(title="ETHERGLASS", version="0.1.0", docs_url=None, redoc_url=None)
+app = FastAPI(title="ETHERGLASS", version=__version__, docs_url=None, redoc_url=None)
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=["127.0.0.1", "localhost", "[::1]", "testserver"])
 store: OrderedDict[str, dict] = OrderedDict()
 lock = threading.RLock()
@@ -31,13 +32,26 @@ async def validation_error_handler(request, exc):
     return JSONResponse(status_code=422, content={"detail": errors})
 
 
-def remember(capture: Capture, reference=None) -> str:
+def _checked_analysis(capture: Capture, reference=None, **kwargs):
+    try:
+        return analyze(capture, reference=reference, **kwargs)
+    except (ValueError, TypeError, KeyError) as e:
+        raise HTTPException(422, str(e)) from e
+    except FileNotFoundError as e:
+        raise HTTPException(503, "Trained model artifact is missing. See the reproducible setup instructions.") from e
+
+
+def remember(capture: Capture, reference=None, **kwargs) -> dict:
+    # Admission and eviction happen only after the first analysis succeeds.
     with lock:
+        result = _checked_analysis(capture, reference=reference, **kwargs)
         key = uuid.uuid4().hex
-        store[key] = {"capture": capture, "reference": reference, "result": None}
+        result["capture_id"] = key
+        result["analysis_id"] = uuid.uuid4().hex
+        store[key] = {"capture": capture, "reference": reference, "result": result}
         while len(store) > 4:
             store.popitem(last=False)
-        return key
+        return public_report(result)
 
 
 def lookup(key: str) -> dict:
@@ -49,18 +63,14 @@ def lookup(key: str) -> dict:
 
 
 def run_analysis(key, **kwargs):
-    item = lookup(key)
-    try:
-        # Store and export one coherent result even when users issue concurrent requests.
-        with lock:
-            result = analyze(item["capture"], reference=item["reference"], **kwargs)
-            result["capture_id"] = key
-            item["result"] = result
-            return public_report(result)
-    except (ValueError, TypeError, KeyError) as e:
-        raise HTTPException(422, str(e)) from e
-    except FileNotFoundError as e:
-        raise HTTPException(503, "Trained model artifact is missing. See the reproducible setup instructions.") from e
+    # Store and export one coherent result under the same capture lock.
+    with lock:
+        item = lookup(key)
+        result = _checked_analysis(item["capture"], reference=item["reference"], **kwargs)
+        result["capture_id"] = key
+        result["analysis_id"] = uuid.uuid4().hex
+        item["result"] = result
+        return public_report(result)
 
 
 @app.get("/")
@@ -70,14 +80,13 @@ def index():
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "version": "0.1.0", "mode": "offline-replay"}
+    return {"status": "ok", "version": __version__, "mode": "offline-replay"}
 
 
 @app.get("/api/demo")
 def demo():
     capture, reference = demo_capture()
-    key = remember(capture, reference)
-    return run_analysis(key, symbol_rate=125000)
+    return remember(capture, reference, symbol_rate=125000)
 
 
 @app.post("/api/import")
@@ -97,11 +106,10 @@ async def import_capture(data_file: UploadFile = File(...), meta_file: UploadFil
         capture = load_bytes(data, metadata=metadata, sample_rate=sample_rate,
                              center_frequency=center_frequency, datatype=datatype,
                              name=data_file.filename or "capture")
-        key = remember(capture)
         # A multi-tune file starts at its first segment; selection may inspect later ones.
         captures = capture.metadata.get("captures", [])
         stop = captures[1]["core:sample_start"] if len(captures) > 1 else None
-        return run_analysis(key, stop_sample=stop)
+        return remember(capture, stop_sample=stop)
     except (ValueError, TypeError, KeyError, UnicodeDecodeError) as e:
         raise HTTPException(422, str(e)) from e
     finally:
@@ -130,14 +138,17 @@ def reanalyze(request: AnalyzeRequest):
 
 
 @app.get("/api/export/{capture_id}")
-def export(capture_id: str, component: str = "mixture"):
+def export(capture_id: str, component: str = "mixture", expected_analysis_id: str | None = None):
     if component not in {"mixture", "target", "residual"}:
         raise HTTPException(422, "Choose mixture, target or residual.")
-    item = lookup(capture_id)
     with lock:
+        # Receipt, selected samples and report come from one locked result snapshot.
+        item = lookup(capture_id)
         result = item["result"]
         if result is None:
             raise HTTPException(409, "Analyze the capture before export.")
+        if expected_analysis_id is not None and expected_analysis_id != result["analysis_id"]:
+            raise HTTPException(409, "This analyzed result has changed. Inspect the current result before exporting.")
         cap = item["capture"]
         selection = result["selection"]
         if component == "mixture":

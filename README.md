@@ -4,9 +4,15 @@
 
 Analyze complex I/Q samples, the two components of a recorded radio waveform. Compare classical and learned estimates, inspect the unassigned residual, and export samples with their evidence.
 
-[Run on a CPU](#run-it-on-a-cpu) · [Recorded demonstration](https://github.com/nazeeh111/ETHERGLASS/releases/download/v0.1.0/launch.mp4) · [Measured comparison](#a-falsifiable-experiment) · [Tutorial](docs/QUICKSTART.md)
+[Run on a CPU](#run-it-on-a-cpu) · [Recorded v0.1.0 demonstration](https://github.com/nazeeh111/ETHERGLASS/releases/download/v0.1.0/launch.mp4) · [Measured comparison](#a-falsifiable-experiment) · [Tutorial](docs/QUICKSTART.md)
 
-![The Etherglass observatory, analyzing an actual generated recording](assets/observatory.png)
+![Current Etherglass observatory after Hybrid reconstruction of the synthetic reference capture](assets/observatory-current.png)
+
+Current source is **0.1.1.dev0**, an unreleased development build. The view above
+is an actual Hybrid reconstruction of the bundled synthetic QPSK/chirp reference;
+[capture provenance and source checksums](assets/observatory-current.md) identify it.
+The [earlier capture](assets/observatory.png), v0.1.0 recording, historical study,
+trained models and release assets keep their original identities.
 
 The included study extracts a known-rate root-raised-cosine BPSK/QPSK target amid overlapping
 tones or chirps. It provides a target estimate and an unassigned residual, with
@@ -16,13 +22,28 @@ single sensor; the stress tests include that failure case.
 
 ## Run it on a CPU
 
+The offline CLI and classical estimators need NumPy, SciPy and SigMF, not PyTorch
+or a web server. Start with a complete synthetic recording-to-export workflow:
+
 ```sh
 git clone https://github.com/nazeeh111/ETHERGLASS.git
 cd ETHERGLASS
 python3.12 -m venv .venv
 source .venv/bin/activate
-pip install -e '.[test]'
-pytest
+pip install -e .
+etherglass --version
+etherglass demo --output reference-run
+```
+
+The CLI demo defaults to **bandpass**. It saves the reference I/Q and metadata,
+analysis JSON, and separate target/residual evidence ZIPs. Other classical methods
+are `matched`, `wiener` and `notch`. They use the same explicit target priors;
+choosing them does not establish that an arbitrary recording is separable.
+
+For the local observatory and the included neural estimators:
+
+```sh
+pip install -e '.[all]'
 etherglass serve
 ```
 
@@ -33,15 +54,21 @@ No radio hardware, GPU, account, model API, or training run is needed for replay
 The trained weights are included.
 
 Load the reference capture, leave its explicit 0 Hz target offset and 125 kbaud
-rate prior, and separate. Change the displayed trace to compare the mixture,
+symbol-rate prior (125,000 symbols per second), and separate. These are supplied
+assumptions for the generated example, not inferred transmitter properties.
+Change the displayed trace to compare the mixture,
 target, and residual. Drag the waterfall or use numeric controls to inspect a
 selection. Export complex samples, SigMF metadata, and the source-bound report.
 
 ```sh
-etherglass demo --output reference-run
+etherglass demo --method hybrid --output neural-reference-run
 etherglass analyze examples/reference/mixture.sigmf-data --symbol-rate 125000 \
   --method hybrid --output analysis-run
 ```
+
+Use `.[neural]` for neural CLI/API inference without the web stack, or `.[web]`
+for a classical-only observatory. Missing optional capabilities produce an install
+hint; a requested neural method is never silently replaced by a classical one.
 
 [Complete tutorial and formats](docs/QUICKSTART.md) · [Scientific protocol](research/PROTOCOL.md)
 · [Research foundations](docs/FOUNDATIONS.md) · [Data and licenses](docs/DATA_LICENSES.md)
@@ -112,7 +139,30 @@ controlled final holdouts, adaptation effects, symbol-fidelity assumptions,
 and out-of-domain failures. [Model and scientific report](docs/MODEL_CARD.md)
 provides the release conclusions.
 
+## Conditional synthetic bound example
+
+`etherglass synthetic-bound-example --output /path/to/new-directory` draws a fresh
+4,096-sample shifted PSK/chirp example internally and reports a waveform RMS error
+bound alongside the known synthetic error. It uses the recorded 96-example
+calibration and fixed models. Its nominal 90% marginal coverage depends on
+exchangeability with that specific simulator distribution; it is not a guarantee
+for physical signals or a proof of source identifiability. The command accepts no
+input capture, crop or caller-selected seed. It checks source, checkpoint,
+calibration-record and numerical runtime identities before reporting a bound.
+The normal demo and imported recordings remain disagreement indicators only.
+The compatible numerical runtime is NumPy 2.5.4, SciPy 1.18.1 and PyTorch 2.6.0.
+
 ## Reproduce and challenge it
+
+The core regression suite does not install PyTorch or the web stack:
+
+```sh
+pip install -e '.[test-core]'
+pytest tests/test_core_runtime.py tests/test_io_dsp.py tests/test_classification.py tests/test_uncertainty.py
+```
+
+`.[test]` retains the complete neural/web test environment. The full scientific
+reproduction environment remains separate:
 
 ```sh
 pip install -e '.[research,test]'
@@ -155,7 +205,7 @@ assert len(target) == len(capture.samples)
 The interactive app accepts up to 64 MiB per capture and keeps four captures in
 memory. `iter_iq_blocks` provides bounded file iteration for larger recordings.
 The separator uses overlapping 2,048-sample frames. Live SDR acquisition and
-hardware performance are not implemented or claimed in v0.1.0.
+hardware performance are not implemented or claimed in this development build.
 
 ## Provenance and release
 

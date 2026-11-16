@@ -1,14 +1,19 @@
 """Prior-conditioned offline target extraction with mixture-consistent residual."""
 from __future__ import annotations
 from functools import lru_cache
+from copy import deepcopy
 import hashlib
 import io
 from pathlib import Path
 import time
 import numpy as np
 from scipy.ndimage import median_filter
-from .models import FRAME_SIZE, band_prior, spectral_features, make_model
+from .spectral import FRAME_SIZE, band_prior, spectral_features
 from .synthetic import rrc_taps
+
+CLASSICAL_METHODS=("bandpass","matched","wiener","notch")
+NEURAL_METHODS=("hybrid","unet","pretrained","no_dsp","scratch")
+METHODS=CLASSICAL_METHODS+NEURAL_METHODS
 
 _RESOURCE_MODELS=Path(__file__).resolve().parent/"resources"/"models"
 _SOURCE_MODELS=Path(__file__).resolve().parents[2]/"models"
@@ -17,33 +22,59 @@ _SOURCE_MODELS=Path(__file__).resolve().parents[2]/"models"
 DEFAULT_CHECKPOINT=(_SOURCE_MODELS if (_SOURCE_MODELS/"hybrid.pt").is_file() else _RESOURCE_MODELS)/"hybrid.pt"
 
 
+def _torch_runtime():
+    try:
+        import torch
+    except ModuleNotFoundError as error:
+        if error.name != "torch":
+            raise
+        raise ValueError(
+            "Neural separation requires PyTorch. Install 'etherglass[neural]' "
+            "or choose bandpass, matched, wiener or notch."
+        ) from error
+    return torch
+
+
 @lru_cache(maxsize=16)
-def _load_model_cached(path: str,mtime_ns:int,size_bytes:int):
-    import torch
-    payload=Path(path).read_bytes()
+def _load_model_cached(payload: bytes):
+    """Private decoded templates; never expose these objects or infer on them."""
+    torch=_torch_runtime()
+    from .models import make_model
     obj=torch.load(io.BytesIO(payload),map_location="cpu",weights_only=True)
     model=make_model(obj["architecture"])
     model.load_state_dict(obj["state_dict"])
     model.eval()
     obj["checkpoint_sha256"]=hashlib.sha256(payload).hexdigest()
-    obj["checkpoint_file"]=Path(path).name
     return model,obj
 
 
-def load_model(path:str):
-    """Reload when a checkpoint is replaced by a new local training run."""
-    stat=Path(path).stat()
-    return _load_model_cached(path,stat.st_mtime_ns,stat.st_size)
+def load_model(path:str, *, expected_sha256:str|None=None):
+    """Load the captured bytes, independent of mutable path metadata.
+
+    The immutable payload is the cache key and the deserialization input. A
+    bound caller's expected digest is checked before any inference can run.
+    Each caller owns an isolated model, tensor state and nested metadata; the
+    cached template is never used for inference or returned by this API.
+    """
+    payload=Path(path).read_bytes()
+    digest=hashlib.sha256(payload).hexdigest()
+    if expected_sha256 is not None and digest != expected_sha256:
+        raise ValueError("Checkpoint consumed for inference differs from the calibration record.")
+    model,info=deepcopy(_load_model_cached(payload))
+    info["checkpoint_file"]=Path(path).name
+    return model,info
 
 
-def frame_estimate(x: np.ndarray,sps:float=8.,method:str="hybrid",checkpoint=None):
+def frame_estimate(x: np.ndarray,sps:float=8.,method:str="hybrid",checkpoint=None, *, loaded_model=None):
     feat,spec,scale=spectral_features(x,sps)
     n=len(x)
-    if method in {"hybrid","unet","pretrained","no_dsp","scratch"}:
-        import torch
+    if method in NEURAL_METHODS:
+        torch=_torch_runtime()
         path=Path(checkpoint) if checkpoint else DEFAULT_CHECKPOINT.with_name(f"{method}.pt")
-        if not path.is_file(): raise FileNotFoundError(f"trained checkpoint unavailable: {path}")
-        model,info=load_model(str(path.resolve()))
+        if loaded_model is None:
+            if not path.is_file(): raise FileNotFoundError(f"trained checkpoint unavailable: {path}")
+            loaded_model=load_model(str(path.resolve()))
+        model,info=loaded_model
         with torch.inference_mode(): gain=model(torch.from_numpy(feat[None]))[0].numpy()
     elif method == "bandpass":
         gain=band_prior(n,sps)
@@ -69,15 +100,15 @@ def frame_estimate(x: np.ndarray,sps:float=8.,method:str="hybrid",checkpoint=Non
 
 
 def separate(x:np.ndarray,sample_rate:float,target_center:float=0.,
-             symbol_rate:float|None=None,method:str="hybrid",checkpoint:Path|None=None)->dict:
+             symbol_rate:float|None=None,method:str="hybrid",checkpoint:Path|None=None, *, expected_sha256:str|None=None)->dict:
     """Extract one PSK-like target using the user's rate/center prior.
 
     target_center is relative to capture center, in Hz. The second component
     is the exact residual, including interference, noise and target error.
     It is never labelled an independently identified transmitter.
     """
-    import torch
-    torch.set_num_threads(min(4,torch.get_num_threads()))
+    if method not in METHODS:
+        raise ValueError(f"unknown method: {method}")
     x=np.asarray(x,dtype=np.complex64)
     if x.ndim!=1 or x.size<128 or not np.all(np.isfinite(x)):
         raise ValueError("separation needs at least 128 finite complex samples")
@@ -89,6 +120,13 @@ def separate(x:np.ndarray,sample_rate:float,target_center:float=0.,
         raise ValueError("supported samples per symbol: 4..32; training nominal is 8")
     if not np.isfinite(target_center) or abs(target_center)+.8*symbol_rate>=sample_rate/2:
         raise ValueError("target support must fit within the sampled Nyquist band")
+    loaded_model=None
+    if method in NEURAL_METHODS:
+        path=Path(checkpoint) if checkpoint else DEFAULT_CHECKPOINT.with_name(f"{method}.pt")
+        if not path.is_file(): raise FileNotFoundError(f"trained checkpoint unavailable: {path}")
+        loaded_model=load_model(str(path.resolve()),expected_sha256=expected_sha256)
+        torch=_torch_runtime()
+        torch.set_num_threads(min(4,torch.get_num_threads()))
     started=time.perf_counter()
     n=len(x); size=FRAME_SIZE; hop=size//2
     phase=np.exp(-2j*np.pi*target_center*np.arange(n)/sample_rate)
@@ -101,7 +139,7 @@ def separate(x:np.ndarray,sample_rate:float,target_center:float=0.,
     # samples. Avoid computing the two wholly outside trailing frames.
     for start in range(0,hop+n,hop):
         frame=padded[start:start+size]*win
-        estimate,gain=frame_estimate(frame,sample_rate/symbol_rate,method,checkpoint)
+        estimate,gain=frame_estimate(frame,sample_rate/symbol_rate,method,checkpoint,loaded_model=loaded_model)
         out[start:start+size]+=estimate*win
         weight[start:start+size]+=win**2
         gains.append(gain)
@@ -128,9 +166,8 @@ def separate(x:np.ndarray,sample_rate:float,target_center:float=0.,
         "residual_label":"Unassigned residual (interference + noise + reconstruction error)",
         "uncertainty":"Separation quality is unknown without a clean reference; classification is independently gated."}
     modelinfo={"architecture":"classical DSP","trained":False}
-    if method in {"hybrid","unet","pretrained","no_dsp","scratch"}:
-        path=Path(checkpoint) if checkpoint else DEFAULT_CHECKPOINT.with_name(f"{method}.pt")
-        _,info=load_model(str(path.resolve()))
+    if method in NEURAL_METHODS:
+        _,info=loaded_model
         modelinfo={k:v for k,v in info.items() if k!="state_dict"}
         modelinfo["trained"]=True
     return {"components":[target,residual],"diagnostics":diagnostics,"model":modelinfo}

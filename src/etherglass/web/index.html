@@ -30,7 +30,7 @@
           <div class="or-divider"><span>OR IMPORT A RECORDING</span></div>
           <form id="import-form">
             <label class="file-zone" for="data-file"><span class="file-icon" aria-hidden="true">⊕</span><strong id="file-name">Choose I/Q data</strong><span>.sigmf-data · .cf32 · .iq · .bin</span><input id="data-file" name="data_file" type="file" accept=".sigmf-data,.cf32,.iq,.bin,.raw,.c64,.dat" required></label>
-            <label class="field-label" for="meta-file">SigMF metadata <span>optional</span></label>
+            <label class="field-label" for="meta-file">SigMF metadata <span>optional; supplied fields take precedence</span></label>
             <input id="meta-file" name="meta_file" type="file" accept=".sigmf-meta,.json">
             <div class="field-pair"><div><label class="field-label" for="sample-rate">Sample rate / Hz</label><input id="sample-rate" name="sample_rate" type="number" min="1" step="any" placeholder="1000000"></div><div><label class="field-label" for="center-frequency">RF center / Hz</label><input id="center-frequency" name="center_frequency" type="number" min="0" step="any" placeholder="0"></div></div>
             <label class="field-label" for="datatype">Sample encoding</label><select id="datatype" name="datatype"><option value="cf32_le">Complex float32 · little endian</option><option value="cf32_be">Complex float32 · big endian</option><option value="ci16_le">Complex int16 · little endian</option><option value="ci16_be">Complex int16 · big endian</option><option value="ci8">Complex signed int8</option><option value="cu8">Complex unsigned int8</option></select>
@@ -45,7 +45,7 @@
           <form id="separate-form">
             <label class="field-label" for="target-center">Target offset / Hz <span>from RF center</span></label><input id="target-center" type="number" value="0" step="any">
             <label class="field-label" for="symbol-rate">Target symbol rate / baud</label><input id="symbol-rate" type="number" value="125000" min="1" step="any" required>
-            <label class="field-label" for="method">Reconstruction method</label><select id="method"><option value="hybrid">Hybrid · learned I/Q + DSP</option><option value="matched">Matched filter</option><option value="wiener">PSD Wiener filter</option><option value="notch">Adaptive notch filter</option><option value="unet">Small spectral U-Net baseline</option></select>
+            <label class="field-label" for="method">Reconstruction method</label><select id="method"><option value="bandpass">Bandpass filter</option><option value="hybrid" selected>Hybrid · learned I/Q + DSP</option><option value="matched">Matched filter</option><option value="wiener">PSD Wiener filter</option><option value="notch">Adaptive notch filter</option><option value="unet">Small spectral U-Net baseline</option></select>
             <button id="separate-button" class="button button-dark" type="submit" disabled>Separate selected interval <span>↗</span></button>
           </form>
           <div class="prior-note"><span>↳</span><p>Identifiability is a condition,<br>not a promise of the model.</p></div>
@@ -70,6 +70,7 @@
           <div class="selection-strip"><div><span class="selection-symbol">⌖</span><span id="selection-summary">Drag the field to select an interval and target frequency</span></div><div class="selection-inputs"><label for="start-ms">START / ms</label><input id="start-ms" type="number" step="any" value="0" min="0" disabled><label for="stop-ms">STOP / ms</label><input id="stop-ms" type="number" step="any" value="0" min="0" disabled><button type="button" id="apply-selection" class="text-button" disabled>Apply</button></div></div>
         </section>
 
+        <p id="result-context" class="result-context" tabindex="-1" role="status" aria-live="polite" hidden></p>
         <div class="lower-grid">
           <section class="panel waveform-panel"><div class="panel-heading"><div><span class="panel-number">B</span><h2>Complex envelope</h2></div><div class="legend"><i class="legend-i"></i>I <i class="legend-q"></i>Q</div></div><div class="axis-top"><span id="waveform-time-caption">TIME / ms</span><span>SAMPLE AMPLITUDE</span></div><div class="waveform-frame"><canvas id="waveform" aria-label="In-phase and quadrature waveform of selected component" role="img"></canvas><span class="empty-plot" id="waveform-empty">NO SAMPLES</span></div><div class="trace-selector" role="group" aria-label="Displayed component"><button type="button" class="trace-button active" data-trace="mixture" aria-pressed="true">Original mixture</button><button type="button" class="trace-button" data-trace="target" aria-pressed="false" disabled>Recovered target</button><button type="button" class="trace-button" data-trace="residual" aria-pressed="false" disabled>Residual</button></div></section>
           <section class="panel constellation-panel"><div class="panel-heading"><div><span class="panel-number">C</span><h2>I/Q geometry</h2></div><span class="plot-tag">SAMPLE CLOUD</span></div><div class="constellation-frame"><canvas id="constellation" aria-label="I/Q sample cloud, not symbol-synchronized" role="img"></canvas><span class="empty-plot" id="constellation-empty">NO SAMPLES</span></div><p class="chart-note">Unsynchronized samples. A cloud is not a decoded constellation.</p></section>
@@ -86,7 +87,7 @@
     <footer class="page-footer"><span>Separation is evidence. Interpretation is a responsibility.</span><span>CPU-COMPATIBLE · NO HARDWARE REQUIRED</span></footer>
   </div>
 
-  <dialog id="export-dialog"><div class="dialog-heading"><span class="eyebrow">REPRODUCIBLE OUTPUTS</span><button type="button" id="close-export" class="icon-button" aria-label="Close export dialog">×</button></div><h2>Take the evidence with you.</h2><p>Each download contains complex I/Q samples, SigMF metadata, and an analysis report tied to this capture.</p><div id="export-links"></div><p class="dialog-note">Reconstructed outputs are estimates. Source attribution and method limitations travel with the export.</p></dialog>
+  <dialog id="export-dialog"><div class="dialog-heading"><span class="eyebrow">REPRODUCIBLE OUTPUTS</span><button type="button" id="close-export" class="icon-button" aria-label="Close export dialog">×</button></div><h2>Take the evidence with you.</h2><p>Each download contains the analyzed samples, SigMF metadata, and the matching completed analysis report.</p><p id="export-context"></p><div id="export-links"></div><p class="dialog-note">Reconstructed outputs are estimates. Source attribution and method limitations travel with the export.</p></dialog>
   <script src="/static/app.js" defer></script>
 </body>
 </html>

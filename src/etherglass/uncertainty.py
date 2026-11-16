@@ -18,16 +18,18 @@ def model_directory() -> Path:
 def source_fingerprints() -> dict:
     folder=Path(__file__).resolve().parent
     return {f'etherglass/{name}':hashlib.sha256((folder/name).read_bytes()).hexdigest()
-            for name in ['models.py','separation.py','uncertainty.py','synthetic.py']}
+            for name in ['models.py','spectral.py','separation.py','uncertainty.py','synthetic.py']}
 
 
-def ensemble_indicator(x, sample_rate, target_center, symbol_rate, estimate=None):
+def ensemble_indicator(x, sample_rate, target_center, symbol_rate, estimate=None, *, expected_digests=None):
     from .separation import separate
     folder = model_directory()
     paths = [folder / f"seed{s}" / "hybrid.pt" for s in [0, 1, 2]]
     if not all(p.exists() for p in paths):
         return {"status": "unavailable", "reason": "Three trained seed checkpoints are required for disagreement estimation."}
     digests = {str(s): hashlib.sha256(path.read_bytes()).hexdigest() for s,path in enumerate(paths)}
+    if expected_digests is not None and digests != expected_digests:
+        raise ValueError("Checkpoint consumed for inference differs from the calibration record.")
     if estimate is not None:
         canonical = folder / 'hybrid.pt'
         if not canonical.is_file() or hashlib.sha256(canonical.read_bytes()).hexdigest() != digests['0']:
@@ -38,7 +40,8 @@ def ensemble_indicator(x, sample_rate, target_center, symbol_rate, estimate=None
             outputs.append(np.asarray(estimate))
         else:
             outputs.append(separate(x, sample_rate, target_center, symbol_rate,
-                                    method="hybrid", checkpoint=path)["components"][0])
+                                    method="hybrid", checkpoint=path,
+                                    expected_sha256=expected_digests[str(i)] if expected_digests is not None else None)["components"][0])
     outputs = np.asarray(outputs, dtype=np.complex128)
     mean = outputs.mean(axis=0)
     disagreement = float(np.mean(np.abs(outputs - mean) ** 2))
@@ -51,18 +54,5 @@ def ensemble_indicator(x, sample_rate, target_center, symbol_rate, estimate=None
               "relative_disagreement_rms": float(np.sqrt(disagreement / max(power, 1e-20))),
               "error_scale_power": scale,
               "reason": "Training-seed disagreement can be small when every model is wrong."}
-    p = folder / "uncertainty.json"
-    if p.is_file():
-        calibration = json.loads(p.read_text())
-        if calibration.get('checkpoint_sha256') != digests:
-            result['reason'] = 'Checkpoint bytes changed after calibration. Disagreement is available; the previous error bound is invalid and must be recalibrated.'
-            return result
-        if calibration.get('inference_source_sha256') != source_fingerprints():
-            result['reason'] = 'Inference or simulator source changed after calibration. The previous error bound is invalid and must be recalibrated.'
-            return result
-        result.update({"status": "synthetic-calibrated", "nominal_coverage": calibration["nominal_coverage"],
-                       "waveform_error_rms_upper": float(np.sqrt(calibration["quantile"] * scale)),
-                       "calibration_examples": calibration["calibration_examples"],
-                       "scope": calibration["scope"],
-                       "reason": "Marginal error bound applies only to exchangeable examples from the declared synthetic calibration distribution. Unknown imported signals are unvalidated."})
+    # Arbitrary captures and selections never inherit synthetic coverage.
     return result

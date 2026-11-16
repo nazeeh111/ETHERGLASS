@@ -1,0 +1,38 @@
+{
+  "version": "1",
+  "nominal_coverage": 0.9,
+  "rank": 88,
+  "quantile": 5.835943190200677,
+  "calibration_examples": 96,
+  "calibration_seeds": [
+    900000,
+    900095
+  ],
+  "test_seeds": [
+    910000,
+    910095
+  ],
+  "test_covered": 93,
+  "source_sha256": {
+    "etherglass/models.py": "2d3fd43a933b6511e588c91d63654432e60612f5440be40945eeb1293726d967",
+    "etherglass/spectral.py": "28e4f6cf843edd659dbfaaec05d2c21c97c9ee5c68c2fa8eb69fb8da85815068",
+    "etherglass/separation.py": "077b59fa1065c23fc5207160452122f5def76932c4856b1618b793d346b29298",
+    "etherglass/uncertainty.py": "2cf3e34fda9da5bef6a99d89eca9539d34ed2b8ae7394c0f248fac139d32ff4f",
+    "etherglass/synthetic.py": "505c4a079402d9b6675881706027b653104777ecf34256f9caa14d1f4ce6c06f",
+    "etherglass/calibrated_example.py": "4605dbfc056f17a8f088edf6386069a636f11d6c2a9545c421b42bbe2490a368"
+  },
+  "checkpoint_sha256": {
+    "0": "60acebe7402bed9e6bac740da7f3f73a09b25151037095c9040edfcb310925b6",
+    "1": "571611cd77b6797f442b733a0a9c2c7273eaaad55bb6193e83adcd0c8c015f3a",
+    "2": "8d0ab27f21604508dad13b5b2d6677af81312bbd6c5eaecf0ca1b25de3926c57"
+  },
+  "runtime": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "torch": "2.6.0"
+  },
+  "protocol_sha256": "17ef10a02ddec8187e68900b374217dc56f1005a1057252ed9c371bab37b49df",
+  "replay_csv_sha256": "97858f924abc7f1b64ff5b32395b125a4f86abf72173dea92d8e8ee6dbdd6075",
+  "scope": "Internally generated 4096-sample full-frame shifted PSK+chirp; sample rate 1 MHz, symbol rate 125 kbaud, zero center; conditional marginal coverage under exchangeability; no real RF claim.",
+  "provenance_note": "Historical numerical replay; wrapper and indicator-only policy rebound by source review; no new calibration study."
+}
