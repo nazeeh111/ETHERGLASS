@@ -6,13 +6,18 @@ from pathlib import Path
 
 
 def main(argv=None):
+    from .separation import METHODS
+
     parser = argparse.ArgumentParser(prog="etherglass", description="Offline RF I/Q observatory. No radio hardware or network API required.")
     sub = parser.add_subparsers(dest="command", required=True)
     serve = sub.add_parser("serve", help="Open the loopback-only local observatory")
     serve.add_argument("--port", type=int, default=0, help="Loopback port;0 selects a free port (default)")
     demo = sub.add_parser("demo", help="Analyze an independently seeded reference capture")
     demo.add_argument("--output", type=Path, required=True, help="New directory for SigMF, report and reconstruction exports")
-    demo.add_argument("--method", default="hybrid")
+    demo.add_argument("--method", choices=METHODS, default="bandpass",
+                      help="Prior-conditioned estimator (default: bandpass; neural methods need [neural])")
+    bounded = sub.add_parser("synthetic-bound-example", help="Draw one internally generated full-frame synthetic bound example")
+    bounded.add_argument("--output", type=Path, required=True, help="New directory for a synthetic bound report")
     inspect = sub.add_parser("analyze", help="Analyze a SigMF or explicitly described raw I/Q capture")
     inspect.add_argument("path", type=Path)
     inspect.add_argument("--metadata", type=Path)
@@ -21,15 +26,31 @@ def main(argv=None):
     inspect.add_argument("--center-frequency", type=float)
     inspect.add_argument("--target-center", type=float, default=0)
     inspect.add_argument("--symbol-rate", type=float)
-    inspect.add_argument("--method", help="Optional prior-conditioned reconstruction: hybrid, matched, wiener, unet")
+    inspect.add_argument("--method", choices=METHODS, help="Optional prior-conditioned reconstruction")
     inspect.add_argument("--start", type=int, default=0)
     inspect.add_argument("--stop", type=int)
     inspect.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     if args.command == "serve":
-        import uvicorn
-        uvicorn.run("etherglass.app:app", host="127.0.0.1", port=args.port)
+        try:
+            import uvicorn
+            from .app import app
+        except ModuleNotFoundError as error:
+            if error.name not in {"uvicorn", "fastapi", "starlette", "pydantic", "multipart"}:
+                raise
+            parser.error("The local observatory needs optional web dependencies. Install 'etherglass[web]'.")
+        uvicorn.run(app, host="127.0.0.1", port=args.port)
         return 0
+    if args.command == "synthetic-bound-example":
+        from .calibrated_example import generated_example
+        try:
+            result = generated_example()
+            args.output.mkdir(parents=True, exist_ok=False)
+            (args.output / "synthetic-bound.json").write_text(json.dumps(result, indent=2, allow_nan=False) + "\n")
+            print(json.dumps(result, indent=2, allow_nan=False))
+            return 0
+        except (ValueError, FileExistsError, FileNotFoundError) as e:
+            parser.error(str(e))
     from .analysis import analyze, demo_capture, public_report
     from .io import load_capture, encode_sigmf, export_zip
     try:

@@ -7,8 +7,12 @@ from pathlib import Path
 import time
 import numpy as np
 from scipy.ndimage import median_filter
-from .models import FRAME_SIZE, band_prior, spectral_features, make_model
+from .spectral import FRAME_SIZE, band_prior, spectral_features
 from .synthetic import rrc_taps
+
+CLASSICAL_METHODS=("bandpass","matched","wiener","notch")
+NEURAL_METHODS=("hybrid","unet","pretrained","no_dsp","scratch")
+METHODS=CLASSICAL_METHODS+NEURAL_METHODS
 
 _RESOURCE_MODELS=Path(__file__).resolve().parent/"resources"/"models"
 _SOURCE_MODELS=Path(__file__).resolve().parents[2]/"models"
@@ -17,9 +21,23 @@ _SOURCE_MODELS=Path(__file__).resolve().parents[2]/"models"
 DEFAULT_CHECKPOINT=(_SOURCE_MODELS if (_SOURCE_MODELS/"hybrid.pt").is_file() else _RESOURCE_MODELS)/"hybrid.pt"
 
 
+def _torch_runtime():
+    try:
+        import torch
+    except ModuleNotFoundError as error:
+        if error.name != "torch":
+            raise
+        raise ValueError(
+            "Neural separation requires PyTorch. Install 'etherglass[neural]' "
+            "or choose bandpass, matched, wiener or notch."
+        ) from error
+    return torch
+
+
 @lru_cache(maxsize=16)
 def _load_model_cached(path: str,mtime_ns:int,size_bytes:int):
-    import torch
+    torch=_torch_runtime()
+    from .models import make_model
     payload=Path(path).read_bytes()
     obj=torch.load(io.BytesIO(payload),map_location="cpu",weights_only=True)
     model=make_model(obj["architecture"])
@@ -39,8 +57,8 @@ def load_model(path:str):
 def frame_estimate(x: np.ndarray,sps:float=8.,method:str="hybrid",checkpoint=None):
     feat,spec,scale=spectral_features(x,sps)
     n=len(x)
-    if method in {"hybrid","unet","pretrained","no_dsp","scratch"}:
-        import torch
+    if method in NEURAL_METHODS:
+        torch=_torch_runtime()
         path=Path(checkpoint) if checkpoint else DEFAULT_CHECKPOINT.with_name(f"{method}.pt")
         if not path.is_file(): raise FileNotFoundError(f"trained checkpoint unavailable: {path}")
         model,info=load_model(str(path.resolve()))
@@ -76,8 +94,8 @@ def separate(x:np.ndarray,sample_rate:float,target_center:float=0.,
     is the exact residual, including interference, noise and target error.
     It is never labelled an independently identified transmitter.
     """
-    import torch
-    torch.set_num_threads(min(4,torch.get_num_threads()))
+    if method not in METHODS:
+        raise ValueError(f"unknown method: {method}")
     x=np.asarray(x,dtype=np.complex64)
     if x.ndim!=1 or x.size<128 or not np.all(np.isfinite(x)):
         raise ValueError("separation needs at least 128 finite complex samples")
@@ -89,6 +107,9 @@ def separate(x:np.ndarray,sample_rate:float,target_center:float=0.,
         raise ValueError("supported samples per symbol: 4..32; training nominal is 8")
     if not np.isfinite(target_center) or abs(target_center)+.8*symbol_rate>=sample_rate/2:
         raise ValueError("target support must fit within the sampled Nyquist band")
+    if method in NEURAL_METHODS:
+        torch=_torch_runtime()
+        torch.set_num_threads(min(4,torch.get_num_threads()))
     started=time.perf_counter()
     n=len(x); size=FRAME_SIZE; hop=size//2
     phase=np.exp(-2j*np.pi*target_center*np.arange(n)/sample_rate)
@@ -128,7 +149,7 @@ def separate(x:np.ndarray,sample_rate:float,target_center:float=0.,
         "residual_label":"Unassigned residual (interference + noise + reconstruction error)",
         "uncertainty":"Separation quality is unknown without a clean reference; classification is independently gated."}
     modelinfo={"architecture":"classical DSP","trained":False}
-    if method in {"hybrid","unet","pretrained","no_dsp","scratch"}:
+    if method in NEURAL_METHODS:
         path=Path(checkpoint) if checkpoint else DEFAULT_CHECKPOINT.with_name(f"{method}.pt")
         _,info=load_model(str(path.resolve()))
         modelinfo={k:v for k,v in info.items() if k!="state_dict"}

@@ -68,7 +68,7 @@ def test_learned_checkpoint_and_nonoracle_real_input():
 
 
 def test_large_finite_iq_normalizes_without_power_overflow():
-    from etherglass.models import spectral_features
+    from etherglass.spectral import spectral_features
     x=generate_example(135,n=2048)["mixture"]*np.float32(1e30)
     with np.errstate(over="raise",invalid="raise"):
         features,spectrum,scale=spectral_features(x)

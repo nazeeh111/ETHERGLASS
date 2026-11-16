@@ -26,9 +26,9 @@ def test_classifier_provenance_and_report_denominators():
     assert model['training']['test_unknown_seed_start']==1200000
 
 
-def test_three_seed_uncertainty_is_finite_and_bound_is_explicitly_scoped():
+def test_three_seed_uncertainty_is_finite_and_bound_requires_current_sources():
     from etherglass.synthetic import generate_example
-    from etherglass.uncertainty import ensemble_indicator
+    from etherglass.uncertainty import ensemble_indicator, source_fingerprints
     from etherglass.separation import DEFAULT_CHECKPOINT
     from etherglass.classification import model_path
     assert DEFAULT_CHECKPOINT.parent==ROOT/'models'
@@ -40,8 +40,7 @@ def test_three_seed_uncertainty_is_finite_and_bound_is_explicitly_scoped():
     assert (folder/'uncertainty.json').is_file()
     x=generate_example(990711,n=4096,split='test')['mixture']
     u=ensemble_indicator(x,1e6,0,125000)
-    assert u['status']=='synthetic-calibrated'
     assert np.isfinite(u['relative_disagreement_rms'])
-    assert np.isfinite(u['waveform_error_rms_upper']) and u['waveform_error_rms_upper']>=0
-    assert 'synthetic' in u['scope'].lower()
-    assert u['nominal_coverage']==.9
+    # No generic input is eligible for the generated-only bound, even with a matching record.
+    assert u['status']=='indicator'
+    assert 'waveform_error_rms_upper' not in u

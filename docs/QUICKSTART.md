@@ -1,18 +1,41 @@
 # From samples to evidence
 
-ETHERGLASS runs entirely on a CPU. Python 3.12 is the reference environment. A GPU, an SDR, a network model service, and an API key are unnecessary. The checked-in models were actually trained; opening the observatory does not train them again.
+ETHERGLASS runs entirely on a CPU. Python 3.12 is the reference environment. A GPU, an SDR, a network model service, and an API key are unnecessary.
+
+## Offline scientific core
 
 ```sh
 git clone https://github.com/nazeeh111/ETHERGLASS.git
 cd ETHERGLASS
 python3.12 -m venv .venv
 source .venv/bin/activate
+pip install -e .
+etherglass demo --output reference-run
+etherglass analyze reference-run/mixture.sigmf-data --symbol-rate 125000 \
+  --method notch --output notch-run
+```
+
+This path needs only NumPy, SciPy and SigMF. The default demo uses bandpass, not a
+neural model. The export contains the original generated reference, an analysis
+report, and target/residual ZIPs with their own SigMF data and metadata. All four
+classical methods (`bandpass`, `matched`, `wiener`, `notch`) work without torch.
+
+## Optional observatory and neural methods
+
+```sh
 # Linux CPU-only installations can install torch first from its CPU wheel index:
 # pip install torch==2.9.1 --index-url https://download.pytorch.org/whl/cpu
-pip install -e '.[test]'
-pytest
+pip install -e '.[all]'
 etherglass serve
 ```
+
+The checked-in models were actually trained; opening the observatory does not
+train them again. Use `.[neural]` for neural CLI inference only, `.[web]` for a
+classical-only observatory, or `.[all]` for both. Explicitly request
+`etherglass demo --method hybrid --output neural-reference` for the neural demo.
+The full regression environment is `.[test]`; the lightweight suite is
+`.[test-core]` with `tests/test_core_runtime.py`, `tests/test_io_dsp.py` and
+`tests/test_classification.py`.
 
 Open the loopback address printed in the terminal. If the port is occupied, choose another port or `--port 0` to let the operating system select a free one. The server binds to `127.0.0.1` and stores up to four captures in memory. Restarting clears the session. It does not upload recordings anywhere.
 
@@ -37,7 +60,7 @@ Supported encodings are `cf32_le`, `cf32_be`, `cf64_le`, `cf64_be`, `ci16_le`, `
 etherglass analyze observation.sigmf-data --output result
 etherglass analyze observation.iq --datatype ci16_le --sample-rate 1000000 \
   --center-frequency 915000000 --target-center 0 --symbol-rate 125000 \
-  --method hybrid --output reconstruction
+  --method notch --output reconstruction
 etherglass demo --output reference-run
 ```
 
@@ -52,3 +75,9 @@ Exported data can be opened in SigMF-aware tools or a GNU Radio File Source conf
 The separator uses a known pulse-shape/rate prior. Unknown wideband and arbitrary overlapping digital inputs remain outside its validated domain. No messages are recovered. Imported recordings do not acquire redistribution permission through analysis; keep their original license and attribution.
 
 Numerical input support is 1e-9 to 1e15 samples/second. Values outside this broad range are rejected before plotting or duration calculations can overflow. This numeric range does not extend the model's scientifically validated domain.
+
+Moving numerical code changes its source identity even when the arithmetic is
+unchanged. Existing source-bound uncertainty calibration is not automatically
+reissued: neural seed disagreement can remain available while a stale calibrated
+bound is withheld until separately recalibrated. Classical estimates do not
+acquire a neural error guarantee.

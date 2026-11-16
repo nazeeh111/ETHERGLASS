@@ -40,8 +40,15 @@ The sample cloud is unsynchronized. Waveforms show contiguous samples, avoiding
 alias artifacts from arbitrary display decimation. Occupancy is a declared
 energy heuristic rather than a calibrated detection probability.
 
-`models.py` maps seven mixture-only spectral channels to a support-constrained
-gain. `separation.py` handles downmixing, frame overlap and synthesis. The model
+`spectral.py` owns the NumPy/SciPy-only frame size, analytic support prior and seven
+mixture-only spectral channels. Both the classical estimators and `models.py`
+depend on these stable numerical functions. `models.py` maps the channels to a
+support-constrained learned gain. It re-exports the helper names for existing
+research callers; checkpoint architectures and state-dictionary keys are unchanged.
+
+`separation.py` handles downmixing, frame overlap and synthesis. It imports torch
+and neural model classes only when a neural method is requested. A classical call
+does not configure torch's thread pool. The model
 does not emit a bitstream. Its nonnegative spectral gain cannot recover missing
 phase information or uniquely identify two arbitrary cochannel sources.
 
@@ -55,12 +62,23 @@ bound is split-calibrated on a separate synthetic population. Shared model bias
 can give low disagreement on wrong estimates; real unknown recordings do not
 inherit a coverage guarantee.
 
+The uncertainty source identity includes `spectral.py`; moving or changing a
+helper cannot accidentally preserve a calibration tied to earlier source bytes.
+An old calibration remains unavailable rather than being relabeled as current.
+
 ## Shared interfaces
 
 The CLI and FastAPI app call the same `analysis.analyze` function. Plot arrays
 are bounded views; full reconstructions remain available for export. Selection
 bounds are absolute source sample indices, while chart time coordinates are local
 to the selected interval. Selections cannot cross SigMF retuning boundaries.
+
+The base package contains the offline scientific path and SigMF interchange.
+`[neural]` adds torch; `[web]` adds FastAPI/uvicorn and upload support; `[all]`
+combines them. The CLI demo defaults to classical bandpass, while an explicitly
+requested neural method retains its own capability and checkpoint requirements.
+`[test-core]` verifies this boundary without installing the optional runtimes;
+`[test]` retains the complete test environment.
 
 The app binds to loopback and keeps a bounded in-memory store. No remote model
 calls, accounts, telemetry code, transmissions, or private-message recovery are
