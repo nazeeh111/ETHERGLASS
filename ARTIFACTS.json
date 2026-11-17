@@ -31,8 +31,8 @@
       "bytes": 610
     },
     "README.md": {
-      "sha256": "61e5c7da7cd4ac119ea8ee07451710266848e353f8b09936f3859e965c052e75",
-      "bytes": 11447
+      "sha256": "a6d1167d7e9356ae46e4d15714ec839b3900639de8b4f9fbcc7e0e16c1a4484f",
+      "bytes": 12608
     },
     "assets/architecture.png": {
       "sha256": "75a64ca10142df235adbec10ac3beccb5034c77fdb554d2d0898aba6af5e58b2",
@@ -241,6 +241,54 @@
     "docs/RELEASE_VERIFICATION.md": {
       "sha256": "abb2a78b7f24c632b26ab2088700e5269c3fefb619f1b85a3cd33030832514ea",
       "bytes": 2582
+    },
+    "docs/presentation/README.md": {
+      "sha256": "de7dae9abf1dbf9c5c751b7b53dd1cd6d8c8f2ebef9bc8dbb34cd25750f23088",
+      "bytes": 6752
+    },
+    "docs/presentation/analysis.json": {
+      "sha256": "20816908e68f9dea4728cdda5dc392ac9adcbf9930ae1bbce75e5091254f6b8d",
+      "bytes": 1502868
+    },
+    "docs/presentation/bandpass-control.json": {
+      "sha256": "91b75b8bf06f206a633c294b231980e816879b4c4ed0a749ed08541b695e72a5",
+      "bytes": 1506963
+    },
+    "docs/presentation/exported-components-mobile.png": {
+      "sha256": "50f14da4c7ecc6ed817f4085f27d0f1834547948800131b1b722746592af799b",
+      "bytes": 206873
+    },
+    "docs/presentation/exported-components-mobile.svg": {
+      "sha256": "b1faf41c00729ce75d4a316748bdf346d7226279362f6195043b7d8a55e72d36",
+      "bytes": 223456
+    },
+    "docs/presentation/exported-components.png": {
+      "sha256": "bd1e3d66a3eccd2a8fc8cf4db401464b83fd10ce9b5d94da50fe57bfeda1139c",
+      "bytes": 218603
+    },
+    "docs/presentation/exported-components.svg": {
+      "sha256": "a2c627bfaf1a89b2097cd41775130b9b7bc646371c95bbed16617fbf45899e7e",
+      "bytes": 223217
+    },
+    "docs/presentation/figure-data.npz": {
+      "sha256": "bb8c514320033b224fd9f7fb04cfaff764122bcd92a3e681f81bf4b331ba6a6d",
+      "bytes": 1212448
+    },
+    "docs/presentation/observatory-current.png": {
+      "sha256": "b8895e2668e0bbd2695d5e6510faf9222afcbfeae78db5223fe375376f6392a2",
+      "bytes": 500593
+    },
+    "docs/presentation/provenance.json": {
+      "sha256": "7a795ddc7272ed02a5d3442891b572a813321dac91a12874ad78ee771631ff42",
+      "bytes": 2761
+    },
+    "docs/presentation/reference-exports.zip": {
+      "sha256": "4a64b5f0dc8b51a3c31f6af5c20698f140773c40ac1ca4590fbfd129fd4035a5",
+      "bytes": 1773670
+    },
+    "docs/presentation/render.py": {
+      "sha256": "9e839d907a9e9c62da25d6874090b6358fb81d25b75a60afd3fa778555b72e28",
+      "bytes": 4363
     },
     "examples/LICENSE": {
       "sha256": "12e8f07cc9777d9048efc08014f9fe5b77aeab44797ad0dbdb531ada9bdbed8b",

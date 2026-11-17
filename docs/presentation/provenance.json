@@ -1,0 +1,70 @@
+{
+  "base_commit": "f0ed9e43dd065eff2b91e7e27b1ac4fc8e65958f",
+  "base_tree": "627439d7ba1f8385a59968897bc3a277efce8e80",
+  "reference_seed": 870001,
+  "sample_rate_hz": 1000000.0,
+  "samples": 16384,
+  "duration_ms": 16.384,
+  "target_offset_hz": 0,
+  "supplied_symbol_rate_baud": 125000,
+  "source_sha256": {
+    "src/etherglass/analysis.py": "9be7fdad2ae788fee38bf20932b6f30140d465ab2c5215837fb7b7409efb29ae",
+    "src/etherglass/dsp.py": "4a56e27a164577fe384a2fa162e62830e35513526ceb26aecd57dc25c372cf4a",
+    "src/etherglass/separation.py": "0d63f994a8abccb100bf25732b71af31c4ac490d2b58e7ec3c6b8bea4d3c8448",
+    "src/etherglass/models.py": "2d3fd43a933b6511e588c91d63654432e60612f5440be40945eeb1293726d967",
+    "src/etherglass/synthetic.py": "505c4a079402d9b6675881706027b653104777ecf34256f9caa14d1f4ce6c06f",
+    "src/etherglass/io.py": "2df41b50e82f6b53bc79bd60125b8702f5c706f8ee10c01ac7d26aa517d791d8"
+  },
+  "checkpoint_sha256": "60acebe7402bed9e6bac740da7f3f73a09b25151037095c9040edfcb310925b6",
+  "source_iq_sha256": "68dab3f2d14d693bc000e0c4f6cd627a14fe9b8e250b09a2a395d845eb521186",
+  "closure_complex64_exports": {
+    "maximum_absolute": 1.228781230931777e-07,
+    "rms": 5.0465987194140404e-08,
+    "relative_rms": 2.2676237317192868e-08
+  },
+  "independent_target_si_sdr_db": 15.553494730536581,
+  "si_sdr_scope": "Bundled synthetic capture only. Clean received target reference; complex scalar alignment, no delay search. Waveform EVM is not symbol EVM.",
+  "waterfall": {
+    "shape_time_frequency": [
+      127,
+      256
+    ],
+    "fft_size": 256,
+    "hop_samples": 128,
+    "frequency_spacing_hz": 3906.25,
+    "shared_reference": "maximum mixture STFT power density bin, used by all three panels",
+    "shared_reference_db_input_unit_squared_per_hz": -31.00308045437773,
+    "display_db_range": [
+      -55,
+      0
+    ],
+    "interpolation": "none; native finite STFT grids embedded in SVG"
+  },
+  "uncertainty": {
+    "status": "indicator",
+    "training_seeds": [
+      0,
+      1,
+      2
+    ],
+    "disagreement_rms": 0.018452004251573846,
+    "relative_disagreement_rms": 0.008291168976381845,
+    "error_scale_power": 0.04986902026850378,
+    "reason": "Training-seed disagreement can be small when every model is wrong."
+  },
+  "runtime": {
+    "python": "3.12.13 (main, Jun  2 2026, 22:42:28) [Clang 22.1.3 ]",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "torch": "2.6.0",
+      "sigmf": "1.14.0",
+      "fastapi": "0.163.1"
+    }
+  },
+  "licenses": {
+    "generated_signal_and_reference": "CC0",
+    "software_and_synthetic_trained_weights": "MIT"
+  },
+  "scope": "One fixed synthetic reference, not a new study, calibrated bound, physical RF performance or blind cochannel identification."
+}
