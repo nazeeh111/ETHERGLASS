@@ -6,13 +6,16 @@ Analyze complex I/Q samples, the two components of a recorded radio waveform. Co
 
 [Run on a CPU](#run-it-on-a-cpu) · [Recorded v0.1.0 demonstration](https://github.com/nazeeh111/ETHERGLASS/releases/download/v0.1.0/launch.mp4) · [Measured comparison](#a-falsifiable-experiment) · [Tutorial](docs/QUICKSTART.md)
 
-![Current Etherglass observatory after Hybrid reconstruction of the synthetic reference capture](assets/observatory-current.png)
+<picture>
+  <source media="(max-width: 600px)" srcset="docs/presentation/exported-components-mobile.png">
+  <img src="docs/presentation/exported-components.png" alt="Actual exported fixed synthetic I/Q mixture, Hybrid target estimate and unassigned residual on the same time-frequency coordinates and mixture-referenced dB scale. Target priors are supplied: 0 Hz offset and 125 kbaud. The residual includes interference, noise and reconstruction error; this ordinary demo reports an indicator, not a calibrated error bound.">
+</picture>
 
-Current source is **0.1.1.dev0**, an unreleased development build. The view above
-is an actual Hybrid reconstruction of the bundled synthetic QPSK/chirp reference;
-[capture provenance and source checksums](assets/observatory-current.md) identify it.
-The [earlier capture](assets/observatory.png), v0.1.0 recording, historical study,
-trained models and release assets keep their original identities.
+**An estimate is only part of the evidence.** These are the actual exported components of the existing fixed synthetic reference, with the same `0 Hz` target offset and `125 kbaud` prior. The target estimate and unassigned residual share one spectral reference. Recombining their samples checks arithmetic accounting; it does not establish correct separation or identify a second transmitter. Hybrid requires the optional neural runtime; the default CPU demo below uses Bandpass.
+
+[Reproduce and reopen the exports](docs/presentation/README.md) · [Complete synthetic export bundle](docs/presentation/reference-exports.zip) · [Raw arrays and provenance](docs/presentation/provenance.json) · [Vector figure](docs/presentation/exported-components.svg) · [Actual current observatory](docs/presentation/observatory-current.png)
+
+Current source is **0.1.1.dev0**, an unreleased development build. The bundled synthetic demo reports training-seed disagreement as an **indicator**, not a calibrated bound. The [earlier current-source capture](assets/observatory-current.md), v0.1.0 media, historical study, models and release assets keep their identities.
 
 The included study extracts a known-rate root-raised-cosine BPSK/QPSK target amid overlapping
 tones or chirps. It provides a target estimate and an unassigned residual, with
